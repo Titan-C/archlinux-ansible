@@ -1,0 +1,7 @@
+---
+- name: Install NetworkManager and dependencies
+  pacman: name={{ item }} state=present
+  with_items:
+      - networkmanager
+      - networkmanager-openvpn
+      - network-manager-applet

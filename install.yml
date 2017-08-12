@@ -1,0 +1,11 @@
+---
+- hosts: laptop
+  become: yes
+  roles:
+    - base
+    - networkmanager
+    - x
+    - awesome
+    - browsers
+    - editors
+    - office

@@ -1,0 +1,4 @@
+---
+- include: shell.yml
+- include: sudo.yml
+- include: packages.yml

@@ -1,0 +1,18 @@
+user:
+    name: me
+    uid: 1005
+    group: me
+    shell: /usr/bin/zsh
+
+base_packages:
+    - base-devel
+    - git
+    - rsync
+
+video_drivers:
+    - xf86-video-intel
+
+editors:
+    - neovim
+    - emacs
+    - the_silver_searcher

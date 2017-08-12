@@ -1,0 +1,18 @@
+---
+- name: Install awesome WM
+  pacman: name=awesome state=present
+
+- name: Install compton
+  pacman: name=compton state=present
+
+- name: Install filesystem packages
+  pacman: name={{ item }} state=present
+  with_items:
+    - thunar
+    - thunar-volman
+    - gvfs # automount usb storage
+    - gvfs-mtp # android storage
+    - ark # archive zip extract
+
+- name: Install screensaver
+  pacman: name=xscreensaver state=present
