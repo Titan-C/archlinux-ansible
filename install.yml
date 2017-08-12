@@ -5,6 +5,7 @@
     - base
     - networkmanager
     - x
+    - { role: ssh, tags: ['ssh'] }
     - awesome
     - browsers
     - editors
