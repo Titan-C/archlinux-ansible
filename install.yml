@@ -3,6 +3,7 @@
   become: yes
   roles:
     - base
+    - { role: cron, tags: ['cron'] }
     - networkmanager
     - x
     - { role: ssh, tags: ['ssh'] }
