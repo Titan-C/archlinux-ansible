@@ -16,3 +16,4 @@
     - python
     - secrets
     - yubikey
+    - { role: dotfiles, tags: ['dotfiles'] }
