@@ -10,6 +10,7 @@
     - editors
     - fonts
     - office
+    - { role: spell, tags: ['spell'] }
     - { role: sound, tags: ['sound'] }
     - python
     - secrets
