@@ -8,4 +8,7 @@
     - awesome
     - browsers
     - editors
+    - fonts
     - office
+    - { role: sound, tags: ['sound'] }
+    - python

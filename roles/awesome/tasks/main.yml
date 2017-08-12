@@ -16,3 +16,8 @@
 
 - name: Install screensaver
   pacman: name=xscreensaver state=present
+
+- name: Install termite
+  pacman: name=termite state=present
+  tags:
+    - termite
