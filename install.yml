@@ -12,3 +12,5 @@
     - office
     - { role: sound, tags: ['sound'] }
     - python
+    - secrets
+    - yubikey
