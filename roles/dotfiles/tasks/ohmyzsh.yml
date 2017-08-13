@@ -1,0 +1,16 @@
+---
+- name: Clone oh-my-zsh repo
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: /home/{{ user.name }}/.oh-my-zsh
+    update: no
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Clone powerlevel9k repo
+  git:
+    repo: https://github.com/bhilburn/powerlevel9k.git
+    dest: /home/{{ user.name }}/.oh-my-zsh/custom/themes/powerlevel9k
+    update: no
+  become: yes
+  become_user: "{{ user.name }}"

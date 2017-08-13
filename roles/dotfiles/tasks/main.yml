@@ -22,3 +22,5 @@
 - name: symlink awesome config
   file: path=/home/{{ user.name }}/.config/awesome src=/home/{{ user.name }}/{{ awesome_conf.destination }} state=link
   when: awesome_conf is defined
+
+- include: ohmyzsh.yml
