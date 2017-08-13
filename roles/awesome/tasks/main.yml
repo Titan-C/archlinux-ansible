@@ -19,6 +19,8 @@
     - gvfs # automount usb storage
     - gvfs-mtp # android storage
     - ark # archive zip extract
+    - tumbler # image thumbnails
+    - ffmpegthumbnailer
 
 - name: Install screensaver
   pacman: name=xscreensaver state=present
