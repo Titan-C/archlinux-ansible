@@ -8,6 +8,8 @@ base_packages:
     - base-devel
     - git
     - rsync
+    - tree
+    - mlocate
 
 editors:
     - neovim
