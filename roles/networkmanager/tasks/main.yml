@@ -3,5 +3,10 @@
   pacman: name={{ item }} state=present
   with_items:
       - networkmanager
-      - networkmanager-openvpn
       - network-manager-applet
+
+- name: Install VPN clients
+  pacman: name={{ item }} state=present
+  with_items:
+      - networkmanager-openvpn
+      - networkmanager-vpnc

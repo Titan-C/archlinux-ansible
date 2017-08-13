@@ -4,7 +4,7 @@
   roles:
     - base
     - { role: cron, tags: ['cron'] }
-    - networkmanager
+    - { role: networkmanager, tags: ['networkmanager'] }
     - x
     - { role: ssh, tags: ['ssh'] }
     - { role: awesome, tags: ['awesome'] }
