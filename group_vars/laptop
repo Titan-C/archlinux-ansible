@@ -9,9 +9,6 @@ base_packages:
     - git
     - rsync
 
-video_drivers:
-    - xf86-video-intel
-
 editors:
     - neovim
     - emacs
