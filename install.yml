@@ -9,7 +9,7 @@
     - { role: ssh, tags: ['ssh'] }
     - { role: backup, tags: ['backup'] }
     - { role: awesome, tags: ['awesome'] }
-    - browsers
+    - { role: browsers, tags: ['browsers'] }
     - editors
     - fonts
     - office

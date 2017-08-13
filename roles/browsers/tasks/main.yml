@@ -8,3 +8,8 @@
   pacman: name=chromium state=present
   tags:
     - chromium
+
+- name: Install bittorrent
+  pacman: name=transmission-qt state=present
+  tags:
+    - bittorrent
