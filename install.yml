@@ -7,7 +7,7 @@
     - networkmanager
     - x
     - { role: ssh, tags: ['ssh'] }
-    - awesome
+    - { role: awesome, tags: ['awesome'] }
     - browsers
     - editors
     - fonts

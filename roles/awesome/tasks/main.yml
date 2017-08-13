@@ -2,6 +2,12 @@
 - name: Install awesome WM
   pacman: name=awesome state=present
 
+- name: Install display manager SDDM
+  pacman: name=sddm state=present
+
+- name: Enable and start SDDM
+  service: name=sddm.service enabled=yes state=started
+
 - name: Install compton
   pacman: name=compton state=present
 
