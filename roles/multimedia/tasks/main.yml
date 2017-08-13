@@ -1,0 +1,29 @@
+---
+- name: Install imagemagick and dependencies
+  pacman: name={{ item }} state=present
+  with_items:
+    - libraw
+    - libpng
+    - librsvg
+    - openjpeg2
+    - imagemagick
+  tags:
+    - imagemagick
+
+- name: Install GIMP
+  pacman: name={{ item }} state=present
+  with_items:
+    - gimp
+    - gimp-plugin-gmic
+  tags:
+    - gimp
+
+- name: Install Inkscape
+  pacman: name=inkscape state=present
+  tags:
+    - inkscape
+
+- name: Install gThumb
+  pacman: name=gthumb state=present
+  tags:
+    - gthumb

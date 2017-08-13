@@ -14,8 +14,10 @@
     - office
     - { role: spell, tags: ['spell'] }
     - { role: sound, tags: ['sound'] }
+    - { role: multimedia, tags: ['multimedia'] }
     - python
     - secrets
     - yubikey
+
     - { role: dotfiles, tags: ['dotfiles'] }
     - { role: mail, tags: ['mail'] }
