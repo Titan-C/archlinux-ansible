@@ -1,0 +1,54 @@
+#+TITLE:  Provision a local archlinux install
+#+AUTHOR: Óscar Nájera
+
+After an incident with my personal PC I came to realize how complicated it
+was to restore from backup. No work data was lost, I think, but getting my
+PC into my work-tool is the hard an tedious part. Since I'm now forced to
+do/install everything again, I rather save the configuration like a system
+dotfiles. Luckily there exist nowadays configuration managers for this, I
+just chose ansible because that is the one I'm most familiar.
+
+This is massively inspired/stolen from
+[[https://github.com/pigmonkey/spark]]. It serves as my reference for now. That
+repo is very advanced for my use case, but maybe as I evolve in my
+configuration I'll understand why such repo is like that, for the moment
+mine is a simpler version for my use case.
+
+* Running the playbook
+** Set up the variables
+First edit the hosts file to contain the hosts information of the machines to workon
+
+#+BEGIN_SRC shell :tangle hosts
+  # hosts to configure see readme.org
+  [laptop]
+  localhost ansible_connection=local
+#+END_SRC
+
+Then edit the variables for that machine in *group_vars/host*
+
+Finally make sure that the *install.yml* playbook will run on the desired host.
+** Executing the playbook
+Run as user with sudo.
+#+BEGIN_SRC sh
+ansible-playbook install.yml -i hosts --ask-become-pass
+#+END_SRC
+
+Run as root
+#+BEGIN_SRC sh
+ansible-playbook install.yml -i hosts
+#+END_SRC
+
+For a specific tag, e.g. multimedia
+#+BEGIN_SRC sh
+ansible-playbook install.yml -i hosts --ask-become-pass  --tags=multimedia
+#+END_SRC
+* Troubleshooting
+This might not work in any clean/new machine yet as there are still some
+steps that where carried manually when setting up the system. So look
+around and try.
+
+* TODO User
+- chicken and egg. Install as root, to get user? Setup user manually with sudo then instal as sudo?
+- When to install the work user. Beginning?
+- Which user shall I install?
+- SSH key and other secrets?
