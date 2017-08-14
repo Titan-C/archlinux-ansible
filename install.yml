@@ -2,23 +2,23 @@
 - hosts: laptop
   become: yes
   roles:
-    - base
+    - { role: base, tags: ['base'] }
     - { role: cron, tags: ['cron'] }
     - { role: networkmanager, tags: ['networkmanager'] }
-    - x
+    - { role: x, tags: ['x'] }
     - { role: ssh, tags: ['ssh'] }
     - { role: backup, tags: ['backup'] }
     - { role: awesome, tags: ['awesome'] }
     - { role: browsers, tags: ['browsers'] }
-    - editors
-    - fonts
-    - office
+    - { role: editors, tags: ['editors'] }
+    - { role: fonts, tags: ['fonts'] }
+    - { role: office, tags: ['office'] }
     - { role: spell, tags: ['spell'] }
     - { role: sound, tags: ['sound'] }
     - { role: multimedia, tags: ['multimedia'] }
-    - python
-    - secrets
-    - yubikey
+    - { role: python, tags: ['python'] }
+    - { role: secrets, tags: ['secrets'] }
+    - { role: yubikey, tags: ['yubikey'] }
 
     - { role: dotfiles, tags: ['dotfiles'] }
     - { role: mail, tags: ['mail'] }
