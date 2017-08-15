@@ -1,0 +1,9 @@
+---
+- name: Install Dropbox
+  aur: name=dropbox user={{ user.name }} dir=/tmp
+
+- name: Install MEGA
+  aur: name=megasync user={{ user.name }} dir=/tmp
+
+- name: Install ownCloud
+  pacman: name=owncloud-client state=present
