@@ -15,6 +15,12 @@ configuration I'll understand why such repo is like that, for the moment
 mine is a simpler version for my use case.
 
 * Running the playbook
+** Cloning the repository
+Clone either with the recursive flag or afterwards use
+#+BEGIN_SRC shell
+git submodule init && git submodule update
+#+END_SRC
+
 ** Set up the variables
 First edit the hosts file to contain the hosts information of the machines to workon
 
