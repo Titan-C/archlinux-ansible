@@ -1,4 +1,9 @@
 ---
+- name: Full system upgrade
+  pacman:
+    update_cache: yes
+    upgrade: yes
+
 - include: shell.yml
 - include: sudo.yml
 - include: packages.yml
