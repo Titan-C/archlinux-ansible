@@ -7,3 +7,17 @@
 - include: shell.yml
 - include: sudo.yml
 - include: packages.yml
+
+- name: Install Power management
+  pacman: name={{ item }} state=present
+  with_items:
+    - acpid
+    - acpi
+    - powertop
+  tags:
+    - power
+
+- name: Enable ACPID
+  service: name=acpid.service enabled=yes
+  tags:
+    - power
