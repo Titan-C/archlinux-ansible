@@ -1,0 +1,28 @@
+- name: Install bluetooth libraries and tools
+  pacman: name={{ item }} state=present
+  with_items:
+      - bluez
+      - bluez-utils
+      - blueman
+      - pulseaudio-bluetooth
+      - bluez-libs
+      - rfkill
+      - pulseaudio-alsa
+      - bluez-firmware
+      # Have to restart pulseaudio
+
+- name: Unblock the bluetooth service
+  service: name="rfkill-block@bluetooth.service" enabled=no state=stopped
+  when: bluetooth.disable == False
+
+- name: Enable and start the bluetooth service
+  service: name=bluetooth.service enabled=yes state=started
+  when: bluetooth.disable == False
+
+- name: Disable and stop the bluetooth service
+  service: name=bluetooth.service enabled=no state=stopped
+  when: bluetooth.disable == True
+
+- name: Block the bluetooth service
+  service: name="rfkill-block@bluetooth.service" enabled=yes state=started
+  when: bluetooth.disable == True

@@ -24,3 +24,6 @@ dotfiles:
 awesome_conf:
     url: git@github.com:Titan-C/awesomerc.git
     destination: dev/awesomerc
+
+bluetooth:
+    disable: False
