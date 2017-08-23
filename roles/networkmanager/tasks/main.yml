@@ -10,3 +10,18 @@
   with_items:
       - networkmanager-openvpn
       - networkmanager-vpnc
+
+- name: Install ufw
+  pacman: name=ufw state=present
+
+- name: Deny everything
+  ufw: policy=deny
+  tags: ufw
+
+- name: Set firewall rules for SSH
+  ufw: rule=limit app=SSH
+  tags: ufw
+
+- name: Enable UFW
+  ufw: state=enabled
+  tags: ufw
