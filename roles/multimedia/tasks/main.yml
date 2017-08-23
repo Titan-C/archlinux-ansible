@@ -36,3 +36,6 @@
   with_items:
     - vlc
     - qt4
+
+- name: Install mpd
+  pacman: name=mpd state=present
