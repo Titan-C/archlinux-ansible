@@ -1,4 +1,7 @@
 ---
+- name: Copy pacman configuration file
+  template: src=pacman.conf.j2 dest=/etc/pacman.conf
+
 - name: Full system upgrade
   pacman:
     update_cache: yes
