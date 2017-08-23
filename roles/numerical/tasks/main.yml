@@ -1,0 +1,26 @@
+---
+- name: Install cmake
+  pacman: name=cmake state=present
+
+- name: Install boost
+  pacman: name=boost state=present
+
+- name: Install fortran
+  pacman: name=gcc-fortran state=present
+
+- name: Install clang
+  pacman: name={{ item }} state=present
+  with_items:
+    - clang
+
+- name: Install perl
+  pacman: name=perl state=present
+
+- name: Install OpenMPI
+  pacman: name=openmpi state=present
+
+- name: Install HDF5
+  pacman: name=hdf5 state=present
+
+- name: Install OpenBLAS
+  aur: name=openblas-lapack user={{ user.name }} dir=/tmp
