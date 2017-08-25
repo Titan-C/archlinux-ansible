@@ -1,7 +1,7 @@
 user:
-    name: me
-    uid: 1005
-    group: me
+    name: oscar
+    uid: 1000
+    group: users
     shell: /usr/bin/zsh
 
 base_packages:
