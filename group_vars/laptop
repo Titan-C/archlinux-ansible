@@ -10,6 +10,7 @@ base_packages:
     - rsync
     - tree
     - mlocate
+    - htop
 
 editors:
     - neovim
