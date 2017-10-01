@@ -21,6 +21,7 @@
     - { role: numerical, tags: ['numerical'] }
     - { role: secrets, tags: ['secrets'] }
     - { role: yubikey, tags: ['yubikey'] }
+    - { role: servers, tags: ['servers'] }
 
     - { role: dotfiles, tags: ['dotfiles'] }
     - { role: mail, tags: ['mail'] }
