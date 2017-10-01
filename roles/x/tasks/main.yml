@@ -16,6 +16,7 @@
   with_items:
     - xf86-video-intel
     - libva-intel-driver
+    - xorg-xbacklight
   when: ansible_product_name == "Aspire V3-572G"
 
 - name: Add user to video group
