@@ -60,3 +60,7 @@ around and try.
 - When to install the work user. Beginning?
 - Which user shall I install?
 - SSH key and other secrets?
+* TODO Python dev environment
+I just noticed my dev3 virtualenv did not had all packages I use while
+editing python code in emacs with elpy. See how I can create this default
+env from the start
