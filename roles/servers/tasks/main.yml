@@ -17,3 +17,11 @@
 
 - name: Install vagrant
   pacman: name=vagrant state=present
+
+- name: Install docker
+  pacman: name=docker state=present
+
+- name: Enable and start docker socket
+  service: name=docker.socket enabled=yes state=started
+
+# Don't put the user in docker group because is root equivalent
