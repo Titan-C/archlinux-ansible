@@ -7,9 +7,12 @@
     update_cache: yes
     upgrade: yes
 
-- include_tasks: shell.yml
-- include_tasks: sudo.yml
-- include_tasks: packages.yml
+- name: Install shells, base packages and config sudo
+  include_tasks: "{{ item }}"
+  with_items:
+    - shell.yml
+    - sudo.yml
+    - packages.yml
 
 - name: Install Power management
   pacman: name={{ item }} state=present

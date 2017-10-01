@@ -1,6 +1,8 @@
 #+TITLE:  Provision a local archlinux install
 #+AUTHOR: Óscar Nájera
 
+[[https://travis-ci.org/Titan-C/archlinux-ansible][https://travis-ci.org/Titan-C/archlinux-ansible.svg?branch=master]]
+
 After an incident with my personal PC I came to realize how complicated it
 was to restore from backup. No work data was lost, I think, but getting my
 PC into my work-tool is the hard an tedious part. Since I'm now forced to
