@@ -1,0 +1,10 @@
+---
+- name: Install ruby
+  pacman: name={{ item }} state=present
+  with_items:
+    - ruby
+
+- name: Install github_changelog_generator
+  gem: name=github_changelog_generator state=present user_install=yes
+  become: yes
+  become_user: "{{ user.name }}"

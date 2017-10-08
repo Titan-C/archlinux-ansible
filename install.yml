@@ -18,6 +18,7 @@
     - { role: bluetooth, tags: ['bluetooth'], when: "bluetooth is defined" }
     - { role: multimedia, tags: ['multimedia'] }
     - { role: python, tags: ['python'] }
+    - { role: ruby, tags: ['ruby'] }
     - { role: numerical, tags: ['numerical'] }
     - { role: secrets, tags: ['secrets'] }
     - { role: yubikey, tags: ['yubikey'] }
