@@ -13,6 +13,9 @@
   with_items:
     - clang
 
+- name: Install rtags
+  aur: name=rtags user={{ user.name }} dir=/tmp
+
 - name: Install perl
   pacman: name=perl state=present
 
