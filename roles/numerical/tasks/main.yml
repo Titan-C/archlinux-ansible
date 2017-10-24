@@ -16,6 +16,12 @@
 - name: Install rtags
   aur: name=rtags user={{ user.name }} dir=/tmp
 
+- name: Install universal-ctags-git
+  aur: name=universal-ctags-git user={{ user.name }} dir=/tmp
+
+- name: Install bear
+  aur: name=bear user={{ user.name }} dir=/tmp
+
 - name: Install perl
   pacman: name=perl state=present
 
