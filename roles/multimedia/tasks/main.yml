@@ -39,3 +39,6 @@
 
 - name: Install mpd
   pacman: name=mpd state=present
+
+- name: Install libtaginfo
+  pacman: name=libtaginfo state=present
