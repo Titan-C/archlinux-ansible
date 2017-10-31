@@ -26,4 +26,5 @@
 
     - { role: dotfiles, tags: ['dotfiles'] }
     - { role: mail, tags: ['mail'] }
+    - { role: publishing, tags: ['publishing'] }
     - { role: cloudservices, tags: ['cloudservices'] }
