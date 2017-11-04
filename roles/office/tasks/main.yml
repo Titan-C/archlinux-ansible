@@ -11,6 +11,9 @@
 - name: Install calibre
   pacman: name=calibre state=present
 
+- name: Install xournal
+  pacman: name=xournal state=present
+
 - name: Install LibreOffice
   pacman: name=libreoffice-fresh state=present
 
