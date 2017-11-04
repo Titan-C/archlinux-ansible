@@ -23,6 +23,14 @@
   tags:
     - inkscape
 
+- name: Install Digikam
+  pacman: name={{ item }} state=present
+  with_items:
+    - digikam
+    - kipi-plugins
+  tags:
+    - digikam
+
 - name: Install gThumb
   pacman: name=gthumb state=present
   tags:
