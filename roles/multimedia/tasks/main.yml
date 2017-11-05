@@ -50,3 +50,6 @@
 
 - name: Install libtaginfo
   pacman: name=libtaginfo state=present
+
+- name: Install amarok
+  pacman: name=amarok state=present
