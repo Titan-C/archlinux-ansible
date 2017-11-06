@@ -25,3 +25,6 @@
 - name: Enable UFW
   ufw: state=enabled
   tags: ufw
+
+- name: Enable UFW service
+  service: name=ufw.service enabled=yes state=started
