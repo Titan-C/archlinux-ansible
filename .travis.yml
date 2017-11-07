@@ -4,4 +4,5 @@ python:
 install:
   - pip install ansible ansible-lint
 script:
-  - ansible-lint -x ANSIBLE0004 install.yml
+  - ansible-playbook install.yml -i hosts --syntax-check
+  - ansible-lint -x ANSIBLE0004,ANSIBLE0009 install.yml
