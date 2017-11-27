@@ -19,6 +19,7 @@
     - { role: multimedia, tags: ['multimedia'] }
     - { role: python, tags: ['python'] }
     - { role: ruby, tags: ['ruby'] }
+    - { role: javascript, tags: ['javascript'] }
     - { role: numerical, tags: ['numerical'] }
     - { role: secrets, tags: ['secrets'] }
     - { role: yubikey, tags: ['yubikey'] }
