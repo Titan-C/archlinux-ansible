@@ -2,11 +2,19 @@
 - name: Install alsa-utils
   pacman: name=alsa-utils state=present
 
+- name: Install Gstreamer
+  pacman: name={{ item }} state=present
+  with_items:
+    - gstreamer
+    - gst-libav
+    - gst-plugins-base
+
 - name: Install PulseAudio
   pacman: name={{ item }} state=present
   with_items:
       - pulseaudio
       - pavucontrol
+      - gst-plugins-good
 
 - name: Switch output to newly connected devices
   lineinfile: dest=/etc/pulse/default.pa
