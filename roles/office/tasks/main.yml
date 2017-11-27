@@ -25,3 +25,6 @@
   with_items:
     - pandoc
     - python-pypandoc
+
+- name: Install languagetool
+  pacman: name=languagetool state=present
