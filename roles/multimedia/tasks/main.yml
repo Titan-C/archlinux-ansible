@@ -22,6 +22,8 @@
   pacman: name=inkscape state=present
   tags:
     - inkscape
+    - pstoedit # latex renderer
+    - pdf2svg
 
 - name: Install Digikam
   pacman: name={{ item }} state=present
