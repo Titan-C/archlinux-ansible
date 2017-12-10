@@ -1,6 +1,9 @@
 ---
 - name: Install awesome WM
-  pacman: name=awesome state=present
+  pacman: name={{ item }} state=present
+  with_items:
+    - awesome
+    - xorg-server-xephyr
 
 - name: Install display manager SDDM
   pacman: name=sddm state=present
