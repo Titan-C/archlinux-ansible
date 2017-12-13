@@ -29,3 +29,7 @@
   service: name=acpid.service enabled=yes
   tags:
     - power
+
+- name: Install Intel microcode
+  pacman: name=intel-ucode state=present
+  when: '"GenuineIntel" in ansible_processor'
