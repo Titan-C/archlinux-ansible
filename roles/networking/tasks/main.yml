@@ -1,0 +1,9 @@
+---
+- name: Setup networkmanager
+  include_tasks: networkmanager.yml
+
+- name: Setup firewall
+  include_tasks: firewall.yml
+
+- name: Install nmap
+  pacman: name=nmap state=present
