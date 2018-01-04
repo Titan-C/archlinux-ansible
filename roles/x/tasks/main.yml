@@ -6,7 +6,10 @@
   pacman: name=xorg-xinit state=present
 
 - name: Install xrandr
-  pacman: name=xorg-xrandr state=present
+  pacman: name={{ item }} state=present
+  with_items:
+    - xorg-xrandr
+    - arandr
 
 - name: Install xmodmap
   pacman: name=xorg-xmodmap state=present
