@@ -1,15 +1,15 @@
 - name: Install bluetooth libraries and tools
   pacman: name={{ item }} state=present
   with_items:
-      - bluez
-      - bluez-utils
       - blueman
-      - pulseaudio-bluetooth
-      - bluez-libs
-      - rfkill
-      - pulseaudio-alsa
+      - bluez
       - bluez-firmware
-      # Have to restart pulseaudio
+      - bluez-libs
+      - bluez-utils
+      - pulseaudio-alsa
+      - pulseaudio-bluetooth
+  notify:
+    - restart pulse as user
 
 - name: Unblock the bluetooth service
   service: name="rfkill-block@bluetooth.service" enabled=no state=stopped
