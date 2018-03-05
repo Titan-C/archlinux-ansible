@@ -1,0 +1,6 @@
+---
+- name: Install Arduino
+  pacman: name=arduino state=present
+
+- name: Add {{ user.name }} to uucp & lock groups
+  user: name={{ user.name }} groups=uucp,lock append=yes
