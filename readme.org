@@ -35,6 +35,13 @@ First edit the hosts file to contain the hosts information of the machines to wo
 Then edit the variables for that machine in *group_vars/host*
 
 Finally make sure that the *install.yml* playbook will run on the desired host.
+*** Backup
+For the moment you have to declare which directories have to be backed up
+in the *install.yml* for the backup role.
+#+BEGIN_SRC yaml
+- role: backup
+  backuped_directories: '~/dev ~/.mail/ ~/Documents/'
+#+END_SRC
 ** Executing the playbook
 Run as user with sudo.
 #+BEGIN_SRC sh

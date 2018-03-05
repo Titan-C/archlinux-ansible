@@ -1,5 +1,5 @@
 user:
-    name: oscar
+    name: me
     uid: 1000
     group: users
     shell: /usr/bin/zsh
