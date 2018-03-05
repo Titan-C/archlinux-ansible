@@ -7,9 +7,7 @@
     - { role: networking, tags: ['networking'] }
     - { role: x, tags: ['x'] }
     - { role: ssh, tags: ['ssh'] }
-    - role: backup
-      tags: ['backup']
-      backuped_directories: '~/dev ~/.mail/ ~/Documents/ ~/Dropbox/ ~/ownCloud/ ~/MEGA/'
+    - { role: backup, tags: ['backup'] }
     - { role: awesome, tags: ['awesome'] }
     - { role: browsers, tags: ['browsers'] }
     - { role: editors, tags: ['editors'] }

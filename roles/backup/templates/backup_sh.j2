@@ -1,15 +1,15 @@
 #! /bin/bash
 
 # external program to supply the passphrase:
-export BORG_PASSCOMMAND='pass show borgbackup'
+export BORG_PASSCOMMAND='pass show {{ backup.local.pass}}'
 
 # Create Local Backups
 echo $( date ) "Creating Local Backups ..."
-REPOSITORY=/scratch/Backups/code_dev
+REPOSITORY={{ backup.local.vault }}
 borg create --verbose --stats --compression=lz4 \
      --progress --exclude '*.pyc' \
     $REPOSITORY::'{hostname}-{user}-{utcnow:%Y-%m-%dT%H:%M:%S}' \
-    {{ backuped_directories }}
+    {{ backup.local.dirs }}
 
 # Prune Local Backups
 echo $( date ) "Pruning local repository ..."
@@ -21,9 +21,9 @@ borg prune --verbose --stats --list \
 
 # Pull Backup from alina
 echo $( date ) "Creating Backups from alina ..."
-pass=$(pass show alina/borgbackup)
+pass=$(pass show {{ backup.remote.pass }})
 
-REPOSITORY=ssh://me@localhost:10022//scratch/Backups/smal
+REPOSITORY=ssh://me@localhost:10022/{{ backup.remote.vault }}
 
 echo $( date ) "Opening connection ..."
 ssh -R 10022:localhost:22 alina "echo 'starting borg ...'; \
@@ -31,12 +31,12 @@ sudo BORG_PASSPHRASE=$pass \
 borg create --verbose --stats \
      --progress --exclude '*.pyc' \
     $REPOSITORY::'{hostname}-{user}-{utcnow:%Y-%m-%dT%H:%M:%S}' \
-     /decrypted /var/www /root /home /etc/letsencrypt"
+    {{ backup.remote.dirs }}
 
 
 # Prune alina Backups
-REPOSITORY=/scratch/Backups/smal
-export BORG_PASSCOMMAND='pass show alina/borgbackup'
+REPOSITORY={{ backup.remote.vault }}
+export BORG_PASSCOMMAND='pass show {{ backup.remote.pass }}'
 echo $( date ) "Pruning alina repository ..."
 borg prune --verbose --stats --list \
      --keep-daily 7 \

@@ -28,3 +28,13 @@ awesome_conf:
 
 bluetooth:
     disable: False
+
+backup:
+  local:
+    pass: borgbackup
+    vault: /scratch/Backups/code_dev
+    dirs: '~/dev ~/.mail/ ~/Documents/ ~/Dropbox/ ~/ownCloud/ ~/MEGA/'
+  remote:
+    pass: alina/borgbackup
+    vault: /scratch/Backups/smal
+    dirs: "/decrypted /var/www /root /home /etc/letsencrypt"
