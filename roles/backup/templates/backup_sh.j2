@@ -31,7 +31,7 @@ sudo BORG_PASSPHRASE=$pass \
 borg create --verbose --stats \
      --progress --exclude '*.pyc' \
     $REPOSITORY::'{hostname}-{user}-{utcnow:%Y-%m-%dT%H:%M:%S}' \
-    {{ backup.remote.dirs }}
+    {{ backup.remote.dirs }}"
 
 
 # Prune alina Backups
