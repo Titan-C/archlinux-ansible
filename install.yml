@@ -25,6 +25,7 @@
     - { role: secrets, tags: ['secrets'] }
     - { role: yubikey, tags: ['yubikey'] }
     - { role: servers, tags: ['servers'] }
+    - { role: arduino, tags: ['arduino'] }
 
     - { role: dotfiles, tags: ['dotfiles'] }
     - { role: mail, tags: ['mail'] }
