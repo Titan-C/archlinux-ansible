@@ -1,0 +1,40 @@
+* Acpi
+Because of this errors
+#+begin_example
+[    6.094574] ACPI Error: [\_SB_.PCI0.GFX0.DD02._BCL] Namespace lookup failure, AE_NOT_FOUND (20170831/psargs-364)
+[    6.094590] ACPI Error: Method parse/execution failed \_SB.PCI0.RP05.PEGP.DD02._BCL, AE_NOT_FOUND (20170831/psparse-550)
+#+end_example
+
+Solution is claimed in
+https://bbs.archlinux.org/viewtopic.php?pid=1716467#p1716467
+to add =libata.noacpi=1= into the grub options
+
+*Not true, it error is still there*
+
+* Crash on boot
+Setting up debug on the kernel parameters I see that the crash happens on
+#+BEGIN_EXAMPLE
+fb: switching to inteldrmfb from EFI VGA
+#+END_EXAMPLE
+one solution is from https://bbs.archlinux.org/viewtopic.php?id=234659
+claims as first explained from
+https://bbs.archlinux.org/viewtopic.php?id=234646 to blacklist nvidiafb.
+
+Change the boot parameters in =/etc/default/grub=
+#+BEGIN_SRC conf
+GRUB_CMDLINE_LINUX_DEFAULT="debug modprobe.blacklist=nvidiafb,nouveau"
+#+END_SRC
+This seems good, especially since I don't need nvidiafb as my chip is not supported
+https://cateee.net/lkddb/web-lkddb/FB_NVIDIA.html
+
+other alternative from reddit https://www.reddit.com/r/archlinux/comments/732hp4/arch_freezing_after_413_kernel_update/ is to use
+intel_iommu=igfx_off as a kernel option. This might not be my best option
+as I mostly use the intel chip for the graphics but experimenting on using
+the nvidia one is still something to configure correctly.
+* Crash on shutdown after suspend
+Like previous item. Something with the graphics card. Aparently the nouveau
+kernel driver once loaded is giving the crash on shutdown after
+suspend. Disabling the module seems to fix the problem.
+#+BEGIN_SRC conf
+GRUB_CMDLINE_LINUX_DEFAULT="debug modprobe.blacklist=nvidiafb,nouveau"
+#+END_SRC
