@@ -8,3 +8,9 @@
       - ttf-liberation
       - ttf-droid
       - ttf-ubuntu-font-family
+
+- name: Install Font-Awesome
+  pacman: name={{ item }} state=present
+  with_items:
+    - otf-font-awesome
+    - ttf-font-awesome
