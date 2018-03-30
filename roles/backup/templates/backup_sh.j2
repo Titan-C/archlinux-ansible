@@ -1,44 +1,61 @@
 #! /bin/bash
 
-# external program to supply the passphrase:
-export BORG_PASSCOMMAND='pass show {{ backup.local.pass}}'
+backup_local(){
+    # external program to supply the passphrase:
+    export BORG_PASSCOMMAND="pass show $1" # repo pass first arg
 
-# Create Local Backups
-echo $( date ) "Creating Local Backups ..."
-REPOSITORY={{ backup.local.vault }}
-borg create --verbose --stats --compression=lz4 \
-     --progress --exclude '*.pyc' \
-    $REPOSITORY::'{hostname}-{user}-{utcnow:%Y-%m-%dT%H:%M:%S}' \
-    {{ backup.local.dirs }}
+    # Create Local Backups
+    echo $( date ) "Creating Local Backups ..."
+    REPOSITORY=$2 # repo vault path second arg
+    shift 2 # consume the first 2 arguments
+    borg create --verbose --stats --compression=lz4 \
+        --progress --exclude '*.pyc' \
+        $REPOSITORY::'{hostname}-{user}-{utcnow:%Y-%m-%dT%H:%M:%S}' \
+        $@ # all the dirs to bac
 
-# Prune Local Backups
-echo $( date ) "Pruning local repository ..."
+    # Prune Local Backups
+    echo $( date ) "Pruning local repository ..."
 
-borg prune --verbose --stats --list \
-     --keep-daily 7 \
-     --keep-weekly 4 \
-     --keep-monthly 6 $REPOSITORY
+    borg prune --verbose --stats --list \
+        --keep-daily 7 \
+        --keep-weekly 4 \
+        --keep-monthly 6 $REPOSITORY
+}
 
-# Pull Backup from alina
-echo $( date ) "Creating Backups from alina ..."
-pass=$(pass show {{ backup.remote.pass }})
+backup_alina(){
+    # Pull Backup from alina
+    echo $( date ) "Creating Backups from alina ..."
+    pass=$(pass show {{ backup.remote.pass }})
 
-REPOSITORY=ssh://me@localhost:10022/{{ backup.remote.vault }}
+    REPOSITORY=ssh://{{ user.name }}@localhost:10022/{{ backup.remote.vault }}
 
-echo $( date ) "Opening connection ..."
-ssh -R 10022:localhost:22 alina "echo 'starting borg ...'; \
-sudo BORG_PASSPHRASE=$pass \
-borg create --verbose --stats \
-     --progress --exclude '*.pyc' \
-    $REPOSITORY::'{hostname}-{user}-{utcnow:%Y-%m-%dT%H:%M:%S}' \
-    {{ backup.remote.dirs }}"
+    echo $( date ) "Opening connection ..."
+    ssh -R 10022:localhost:22 alina "echo 'starting borg ...'; \
+    sudo -u postgres pg_dump nextcloud -f /tmp/nextcloud-sqlbkp.bak; \
+    sudo BORG_PASSPHRASE=$pass \
+    borg create --verbose --stats \
+        --progress --exclude '*.pyc' \
+        $REPOSITORY::'{hostname}-{user}-{utcnow:%Y-%m-%dT%H:%M:%S}' \
+        {{ backup.remote.dirs }}; \
+    sudo -u postgres rm /tmp/nextcloud-sqlbkp.bak"
 
+    # Prune alina Backups
+    REPOSITORY={{ backup.remote.vault }}
+    export BORG_PASSCOMMAND='pass show {{ backup.remote.pass }}'
+    echo $( date ) "Pruning alina repository ..."
+    borg prune --verbose --stats --list \
+        --keep-daily 7 \
+        --keep-weekly 4 \
+        --keep-monthly 6 $REPOSITORY
+}
 
-# Prune alina Backups
-REPOSITORY={{ backup.remote.vault }}
-export BORG_PASSCOMMAND='pass show {{ backup.remote.pass }}'
-echo $( date ) "Pruning alina repository ..."
-borg prune --verbose --stats --list \
-     --keep-daily 7 \
-     --keep-weekly 4 \
-     --keep-monthly 6 $REPOSITORY
+backup_everything(){
+    $0 home
+    $0 alina
+}
+
+case "$1" in
+    home) backup_local {{ backup.local.pass }} {{ backup.local.vault }} {{ backup.local.dirs }};;
+    alina) backup_alina ;;
+    *)  backup_everything
+esac
