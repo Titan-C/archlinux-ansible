@@ -4,6 +4,7 @@
 
 - name: Push OpenSSH daemon configuration file
   template: src=sshd_config.j2 dest=/etc/ssh/sshd_config
+  notify: restart ssh
 
 - name: Enable and start OpenSSH
   service: name=sshd.socket enabled=yes state=started
