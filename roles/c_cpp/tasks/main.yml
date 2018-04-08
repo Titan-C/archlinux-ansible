@@ -1,0 +1,6 @@
+---
+- name: Install GCC
+  pacman: name=gcc state=present
+
+- name: Install GNU Debugger
+  pacman: name=gdb state=present

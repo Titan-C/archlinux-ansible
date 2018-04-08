@@ -17,6 +17,7 @@
     - { role: sound, tags: ['sound'] }
     - { role: bluetooth, tags: ['bluetooth'], when: "bluetooth is defined" }
     - { role: multimedia, tags: ['multimedia'] }
+    - { role: c_cpp, tags: ['c_cpp'] }
     - { role: python, tags: ['python'] }
     - { role: ruby, tags: ['ruby'] }
     - { role: javascript, tags: ['javascript'] }
