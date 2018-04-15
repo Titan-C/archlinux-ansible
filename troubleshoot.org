@@ -38,3 +38,14 @@ suspend. Disabling the module seems to fix the problem.
 #+BEGIN_SRC conf
 GRUB_CMDLINE_LINUX_DEFAULT="debug modprobe.blacklist=nvidiafb,nouveau"
 #+END_SRC
+* Nvidia
+I was quite happy only using the intel chip for graphics. But when in need
+for the nvidia gpu is just hell to get it working. It looks stable if I add
+the config from https://wiki.archlinux.org/index.php/NVIDIA_Optimus#Lockup_issue_.28lspci_hangs.29
+
+Change the boot parameters in =/etc/default/grub=
+#+BEGIN_SRC conf
+GRUB_CMDLINE_LINUX_DEFAULT="debug modprobe.blacklist=nvidiafb,nouveau acpi_osi=! acpi_osi=\"Windows 2009\""
+#+END_SRC
+
+and keep the card in performance not adaptive config using nvidia-settings

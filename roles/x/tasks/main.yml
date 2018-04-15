@@ -26,6 +26,7 @@
   pacman: name={{ item }} state=present
   with_items:
     - nvidia
+    - nvidia-settings
   when: ansible_product_name == "Aspire V3-572G"
 
 - name: Nvidia Configuration
