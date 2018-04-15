@@ -22,6 +22,19 @@
     - xorg-xbacklight
   when: ansible_product_name == "Aspire V3-572G"
 
+- name: Install nvidia video hardware drivers
+  pacman: name={{ item }} state=present
+  with_items:
+    - nvidia
+  when: ansible_product_name == "Aspire V3-572G"
+
+- name: Nvidia Configuration
+  template: src=xorg-nvidia.conf.j2 dest=/etc/X11/xorg.conf.d/20-nvidia.conf
+  when: ansible_product_name == "Aspire V3-572G"
+
+- name: Install mesa demos
+  pacman: name=mesa-demos state=present
+
 - name: Install Wacom tablet drivers
   pacman: name=xf86-input-wacom state=present
 

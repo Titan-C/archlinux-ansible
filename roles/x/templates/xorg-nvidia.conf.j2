@@ -1,0 +1,12 @@
+## {{ ansible_managed }}
+
+Section "Module"
+	Load "modesetting"
+EndSection
+
+Section "Device"
+	Identifier "nvidia card"
+	Driver "nvidia"
+	BusID "3:0:0"
+	Option "AllowEmptyInitialConfiguration"
+EndSection
