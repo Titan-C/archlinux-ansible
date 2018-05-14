@@ -33,7 +33,7 @@ backup:
   local:
     pass: borgbackup
     vault: /scratch/Backups/code_dev
-    dirs: '~/dev ~/.mail/ ~/Documents/ ~/Dropbox/ ~/ownCloud/ ~/MEGA/'
+    dirs: '~/dev ~/.mail/ ~/Dropbox/ ~/nextcloud/ ~/MEGA/'
   remote:
     pass: alina/borgbackup
     vault: /scratch/Backups/smal
