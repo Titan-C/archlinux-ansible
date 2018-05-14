@@ -22,6 +22,7 @@
     - { role: ruby, tags: ['ruby'] }
     - { role: javascript, tags: ['javascript'] }
     - { role: clojure, tags: ['clojure'] }
+    - { role: scala, tags: ['scala'] }
     - { role: numerical, tags: ['numerical'] }
     - { role: secrets, tags: ['secrets'] }
     - { role: yubikey, tags: ['yubikey'] }
