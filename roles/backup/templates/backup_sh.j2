@@ -36,7 +36,7 @@ backup_alina(){
     borg create --verbose --stats \
         --progress --exclude '*.pyc' \
         $REPOSITORY::'{hostname}-{user}-{utcnow:%Y-%m-%dT%H:%M:%S}' \
-        {{ backup.remote.dirs }}; \
+        {{ backup.remote.dirs }} /tmp/nextcloud-sqlbkp.bak; \
     sudo -u postgres rm /tmp/nextcloud-sqlbkp.bak"
 
     # Prune alina Backups
