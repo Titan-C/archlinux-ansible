@@ -11,10 +11,6 @@
 - name: Enable and start SDDM
   service: name=sddm.service enabled=yes state=started
 
-- name: SDDM Nvidia Configuration
-  template: src=sddm.xsetup.j2 dest=/usr/share/sddm/scripts/Xsetup
-  when: ansible_product_name == "Aspire V3-572G"
-
 - name: Install compton
   pacman: name=compton state=present
 
