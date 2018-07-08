@@ -19,7 +19,10 @@
   pacman: name=vagrant state=present
 
 - name: Install docker
-  pacman: name=docker state=present
+  pacman: name={{ item }} state=present
+  with_items:
+    - docker
+    - docker-compose
 
 - name: Enable and start docker socket
   service: name=docker.socket enabled=yes state=started
