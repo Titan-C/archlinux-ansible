@@ -57,3 +57,9 @@
 
 - name: Install amarok
   pacman: name=amarok state=present
+
+- name: Install kdenlive
+  pacman: name={{ item }} state=present
+    with_items:
+      - kdenlive
+      - frei0r-plugins
