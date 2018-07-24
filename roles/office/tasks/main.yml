@@ -17,6 +17,9 @@
 - name: Install LibreOffice
   pacman: name=libreoffice-fresh state=present
 
+- name: Install console dictionary
+  pacman: name=sdcv state=present
+
 - name: Install dictionary
   pacman: name=goldendict state=present
 
