@@ -2,6 +2,7 @@
 - name: Install clojure
   pacman: name={{ item }} state=present
   with_items:
+    - jdk10-openjdk
     - clojure
 
 - name: Install leiningen
