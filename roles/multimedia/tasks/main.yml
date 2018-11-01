@@ -60,6 +60,6 @@
 
 - name: Install kdenlive
   pacman: name={{ item }} state=present
-    with_items:
-      - kdenlive
-      - frei0r-plugins
+  with_items:
+    - kdenlive
+    - frei0r-plugins
