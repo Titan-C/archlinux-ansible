@@ -1,3 +1,5 @@
 # hosts to configure see readme.org
 [laptop]
 localhost ansible_connection=local
+[raspberry]
+alarmpi.fritz.box

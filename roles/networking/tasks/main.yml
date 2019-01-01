@@ -1,9 +1,11 @@
 ---
 - name: Setup networkmanager
   include_tasks: networkmanager.yml
+  when: inventory_hostname in groups['laptop']
 
 - name: Setup firewall
   include_tasks: firewall.yml
+  tags: ufw
 
 - name: Install nmap
   pacman: name=nmap state=present

@@ -1,0 +1,6 @@
+---
+- hosts: raspberry
+  become: yes
+  user: alarm
+  roles:
+    - { role: networking, tags: ['networking'] }

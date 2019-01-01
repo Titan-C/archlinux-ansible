@@ -1,0 +1,19 @@
+user:
+    name: alarm
+    uid: 1000
+    group: alarm
+    shell: /usr/bin/bash
+
+base_packages:
+    - base-devel
+    - rsync
+    - tree
+    - mlocate
+    - htop
+
+editors:
+    - neovim
+    - the_silver_searcher
+
+bluetooth:
+    disable: False

@@ -1,6 +1,7 @@
 ---
 - name: Install ufw
   pacman: name=ufw state=present
+  tags: ufw
 
 - name: Deny everything
   ufw: policy=deny
@@ -9,6 +10,10 @@
 - name: Set firewall rules for SSH
   ufw: rule=limit app=SSH
   tags: ufw
+
+- name: Enable UFW logging
+  ufw:
+    logging: on
 
 - name: Enable UFW
   ufw: state=enabled

@@ -49,3 +49,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="debug modprobe.blacklist=nvidiafb,nouveau acpi_osi=!
 #+END_SRC
 
 and keep the card in performance not adaptive config using nvidia-settings
+- Unfortunately I can't load performance setting automatically and for the
+  moment I launch nvidia-settings to setup the performance
+- Surprisingly suspend works
+- Back-light is not working
