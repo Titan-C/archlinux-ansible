@@ -26,5 +26,6 @@
     - sudo
 
 - name: Install editors
-  pacman: name={{ item }} state=present
-  with_items: "{{ editors }}"
+  pacman:
+    state: present
+    name: "{{ editors }}"

@@ -1,9 +1,10 @@
 ---
 - name: Install poppler
-  pacman: name={{ item }} state=present
-  with_items:
-    - poppler
-    - poppler-glib
+  pacman:
+    state: present
+    name:
+      - poppler
+      - poppler-glib
 
 - name: Install latex
   pacman: name=texlive-most state=present
@@ -24,10 +25,11 @@
   pacman: name=goldendict state=present
 
 - name: Install pandoc
-  pacman: name={{ item }} state=present
-  with_items:
-    - pandoc
-    - python-pypandoc
+  pacman:
+    state: present
+    name:
+      - pandoc
+      - python-pypandoc
 
 - name: Install languagetool
   pacman: name=languagetool state=present
