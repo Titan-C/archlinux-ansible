@@ -24,6 +24,19 @@
   tags:
     - packages
 
+- name: Ensure locale en_US.UTF-8 locale is present
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+- name: Set local en_US.UTF-8 locale systemwide
+  copy:
+    dest: "/etc/locale.conf"
+    content: "LANG=en_US.UTF-8"
+
+- name: set timezone to Europe/Berlin
+  timezone:
+    name: Europe/Berlin
+
 - name: Install Power management
   pacman:
     state: present

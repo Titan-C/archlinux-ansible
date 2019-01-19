@@ -4,7 +4,6 @@
 
 - name: Push OpenSSH daemon configuration file
   template: src=sshd_config.j2 dest=/etc/ssh/sshd_config
-  notify: restart ssh
 
 - name: Enable and start OpenSSH
   service: name=sshd.socket enabled=yes state=started
@@ -14,3 +13,7 @@
 
 - name: Install Mosh
   pacman: name=mosh state=present
+
+- name: Set firewall rule for mosh
+  ufw: rule=allow port=60000:61000 proto=udp
+  tags: ufw

@@ -1,5 +1,5 @@
 # {{ ansible_managed }}
-#	$OpenBSD: sshd_config,v 1.102 2018/02/16 02:32:40 djm Exp $
+#	$OpenBSD: sshd_config,v 1.103 2018/04/09 20:41:22 tj Exp $
 # Following recomendations from https://infosec.mozilla.org/guidelines/openssh
 
 # This is the sshd server system-wide configuration file.  See
@@ -38,7 +38,7 @@ LogLevel VERBOSE
 # Authentication:
 
 LoginGraceTime 1m
-PermitRootLogin no
+#PermitRootLogin prohibit-password
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
@@ -100,7 +100,6 @@ UsePAM yes
 PrintMotd no # pam does that
 #PrintLastLog yes
 #TCPKeepAlive yes
-#UseLogin no
 #PermitUserEnvironment no
 #Compression delayed
 #ClientAliveInterval 0
