@@ -1,65 +1,77 @@
 ---
 - name: Install imagemagick and dependencies
-  pacman: name={{ item }} state=present
-  with_items:
-    - libraw
-    - libpng
-    - librsvg
-    - openjpeg2
-    - imagemagick
+  pacman:
+    state: present
+    name:
+      - libraw
+      - libpng
+      - librsvg
+      - openjpeg2
+      - imagemagick
   tags:
     - imagemagick
 
 - name: Install GIMP
-  pacman: name={{ item }} state=present
-  with_items:
-    - gimp
-    - gimp-plugin-gmic
+  pacman:
+    state: present
+    name:
+      - gimp
+      - gimp-plugin-gmic
   tags:
     - gimp
 
 - name: Install Inkscape
-  pacman: name=inkscape state=present
+  pacman:
+    name: inkscape
+    state: present
   tags:
-    - inkscape
-    - pstoedit # latex renderer
-    - pdf2svg
+      - inkscape
+      - pstoedit # latex renderer
+      - pdf2svg
 
 - name: Install Digikam
-  pacman: name={{ item }} state=present
-  with_items:
-    - digikam
-    - kipi-plugins
-    - enblend-enfuse # for image stacking
-    - hugin # panorama stitcher
+  pacman:
+    state: present
+    name:
+      - digikam
+      - kipi-plugins
+      - enblend-enfuse # for image stacking
+      - hugin # panorama stitcher
   tags:
     - digikam
 
 - name: Install gThumb
-  pacman: name=gthumb state=present
+  pacman:
+    name: gthumb
+    state: present
   tags:
     - gthumb
 
 - name: Install Okular
-  pacman: name=okular state=present
+  pacman:
+    name: okular
+    state: present
 
 - name: Install vlc
-  pacman: name={{ item }} state=present
-  with_items:
-    - vlc
-    - qt4
+  pacman:
+    state: present
+    name:
+      - vlc
+      - qt4
 
 - name: Install mpd
-  pacman: name=mpd state=present
+  pacman:
+    name: mpd
+    state: present
 
 - name: Install libtaginfo
-  pacman: name=libtaginfo state=present
-
-- name: Install amarok
-  pacman: name=amarok state=present
+  pacman:
+    name: libtaginfo
+    state: present
 
 - name: Install kdenlive
-  pacman: name={{ item }} state=present
-  with_items:
-    - kdenlive
-    - frei0r-plugins
+  pacman:
+    state: present
+    name:
+      - kdenlive
+      - frei0r-plugins
