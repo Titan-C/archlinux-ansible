@@ -4,14 +4,6 @@ user:
     group: users
     shell: /usr/bin/zsh
 
-base_packages:
-    - base-devel
-    - git
-    - rsync
-    - tree
-    - mlocate
-    - htop
-
 editors:
     - neovim
     - emacs

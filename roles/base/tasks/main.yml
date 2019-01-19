@@ -1,6 +1,7 @@
 ---
 - name: Copy pacman configuration file
   template: src=pacman.conf.j2 dest=/etc/pacman.conf
+  when: inventory_hostname in groups['laptop']
 
 - name: Full system upgrade
   pacman:
@@ -10,18 +11,26 @@
 - name: Install shells
   include_tasks: shell.yml
 
-- name: Install packages
-  include_tasks: packages.yml
-
-- name: Setup sudo
-  include_tasks: sudo.yml
+- name: Install universal base packages
+  pacman:
+    state: present
+    name:
+      - binutils
+      - python
+      - rsync
+      - tree
+      - mlocate
+      - htop
+  tags:
+    - packages
 
 - name: Install Power management
-  package: name={{ item }} state=present
-  with_items:
-    - acpid
-    - acpi
-    - powertop
+  pacman:
+    state: present
+    name:
+      - acpid
+      - acpi
+      - powertop
   tags:
     - power
 

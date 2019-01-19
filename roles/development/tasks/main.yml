@@ -1,4 +1,10 @@
 ---
+- name: Install development tools
+  pacman: name={{ item }} state=present
+  with_items:
+    - base-devel
+    - git
+
 - name: Install sudo
   pacman: name=sudo state=present
   tags:
@@ -13,3 +19,7 @@
   template: src=sudoers.j2 dest=/etc/sudoers mode=440 validate='visudo -cf %s'
   tags:
     - sudo
+
+- name: Install editors
+  pacman: name={{ item }} state=present
+  with_items: "{{ editors }}"

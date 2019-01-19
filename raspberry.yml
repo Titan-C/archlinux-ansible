@@ -1,6 +1,7 @@
 ---
 - hosts: raspberry
-  become: yes
-  user: alarm
+  user: root
   roles:
+    - { role: base, tags: ['base'] }
+    - { role: cron, tags: ['cron'] }
     - { role: networking, tags: ['networking'] }

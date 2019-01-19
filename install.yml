@@ -10,7 +10,7 @@
     - { role: backup, tags: ['backup'] }
     - { role: awesome, tags: ['awesome'] }
     - { role: browsers, tags: ['browsers'] }
-    - { role: editors, tags: ['editors'] }
+    - { role: development, tags: ['development'] }
     - { role: fonts, tags: ['fonts'] }
     - { role: office, tags: ['office'] }
     - { role: spell, tags: ['spell'] }

@@ -3,3 +3,4 @@
 localhost ansible_connection=local
 [raspberry]
 alarmpi.fritz.box
+alarm.fritz.box
