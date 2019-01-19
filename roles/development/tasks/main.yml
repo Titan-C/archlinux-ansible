@@ -1,9 +1,10 @@
 ---
 - name: Install development tools
-  pacman: name={{ item }} state=present
-  with_items:
-    - base-devel
-    - git
+  pacman:
+    state: present
+    name:
+      - base-devel
+      - git
 
 - name: Install sudo
   pacman: name=sudo state=present
@@ -16,7 +17,11 @@
     - sudo
 
 - name: Copy sudo configuration
-  template: src=sudoers.j2 dest=/etc/sudoers mode=440 validate='visudo -cf %s'
+  template:
+    src: sudoers.j2
+    dest: /etc/sudoers
+    mode: 0440
+    validate: 'visudo -cf %s'
   tags:
     - sudo
 

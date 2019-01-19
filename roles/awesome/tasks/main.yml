@@ -15,12 +15,13 @@
   pacman: name=compton state=present
 
 - name: Install RedShift and dependencies
-  pacman: name={{ item }} state=present
-  with_items:
-    - gtk3
-    - python-gobject
-    - python-xdg
-    - redshift
+  pacman:
+    state: present
+    name:
+      - gtk3
+      - python-gobject
+      - python-xdg
+      - redshift
 
 - name: Configure geoclue to allow redshift
   blockinfile:
@@ -39,15 +40,16 @@
     dest: /home/{{ user.name }}/.config/redshift/redshift.conf
 
 - name: Install filesystem packages
-  pacman: name={{ item }} state=present
-  with_items:
-    - thunar
-    - thunar-volman
-    - gvfs # automount usb storage
-    - gvfs-mtp # android storage
-    - ark # archive zip extract
-    - tumbler # image thumbnails
-    - ffmpegthumbnailer
+  pacman:
+    state: present
+    name:
+      - thunar
+      - thunar-volman
+      - gvfs # automount usb storage
+      - gvfs-mtp # android storage
+      - ark # archive zip extract
+      - tumbler # image thumbnails
+      - ffmpegthumbnailer
 
 - name: Install screensaver
   pacman: name=xscreensaver state=present
