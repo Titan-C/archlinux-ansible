@@ -1,17 +1,9 @@
 ---
-- name: Install cmake
-  pacman: name=cmake state=present
-
 - name: Install boost
   pacman: name=boost state=present
 
 - name: Install fortran
   pacman: name=gcc-fortran state=present
-
-- name: Install clang
-  pacman: name={{ item }} state=present
-  with_items:
-    - clang
 
 - name: Install rtags
   aur: name=rtags user={{ user.name }} dir=/tmp

@@ -1,9 +1,10 @@
 ---
 - name: Install logwatch
-  pacman: pkg={{ item }} state=present
-  with_items:
-    - logwatch
-    - perl-date-manip
+  pacman:
+    state: present
+    name:
+      - logwatch
+      - perl-date-manip
 
 - name: Configure logwatch
   template: src=logwatch.conf.j2 dest=/etc/logwatch/conf/logwatch.conf

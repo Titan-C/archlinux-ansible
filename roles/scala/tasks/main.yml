@@ -1,5 +1,4 @@
 ---
 - name: Install scala
-  pacman: name={{ item }} state=present
-  with_items:
-    - scala
+  pacman:
+    name: scala

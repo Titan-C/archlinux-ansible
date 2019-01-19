@@ -1,13 +1,14 @@
 ---
 - name: Install python
-  pacman: name={{ item }} state=present
-  with_items:
-    - ipython
-    - python-pip
-    - python2-pip
-    - python-virtualenv
-    - python-virtualenvwrapper
-    - python-ipdb
+  pacman:
+    state: present
+    name:
+      - ipython
+      - python-pip
+      - python2-pip
+      - python-virtualenv
+      - python-virtualenvwrapper
+      - python-ipdb
 
 - name: Prepare dev3 environment
   pip:

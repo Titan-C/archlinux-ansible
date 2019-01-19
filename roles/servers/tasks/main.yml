@@ -1,11 +1,12 @@
 ---
 - name: Install Virtualbox
-  pacman: name={{ item }} state=present
-  with_items:
-    - net-tools
-    - virtualbox-host-modules-arch
-    - virtualbox-guest-iso
-    - virtualbox
+  pacman:
+    state: present
+    name:
+      - net-tools
+      - virtualbox-host-modules-arch
+      - virtualbox-guest-iso
+      - virtualbox
 
 - name: Install VirtualBox extensions
   aur: name=virtualbox-ext-oracle user={{ user.name }} dir=/tmp
@@ -19,10 +20,11 @@
   pacman: name=vagrant state=present
 
 - name: Install docker
-  pacman: name={{ item }} state=present
-  with_items:
-    - docker
-    - docker-compose
+  pacman:
+    state: present
+    name:
+      - docker
+      - docker-compose
 
 - name: Enable and start docker socket
   service: name=docker.socket enabled=yes state=started

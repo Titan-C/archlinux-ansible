@@ -4,3 +4,11 @@
 
 - name: Install GNU Debugger
   pacman: name=gdb state=present
+
+- name: Install cmake
+  pacman: name=cmake state=present
+
+- name: Install clang
+  pacman:
+    name: clang
+    state: present
