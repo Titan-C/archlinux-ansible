@@ -8,3 +8,29 @@
 
 - name: Configure logwatch
   template: src=logwatch.conf.j2 dest=/etc/logwatch/conf/logwatch.conf
+
+- name: Install Collectd
+  pacman:
+    state: present
+    name:
+      - collectd
+      - rrdtool
+      - lm_sensors
+  tags:
+    - monitoring
+
+- name: Copy collectd configuration file
+  template: src=collectd.conf.j2 dest=/etc/collectd.conf
+  notify: restart collectd
+  tags:
+    - monitoring
+
+- name: Enable and start rrdcached
+  service: name=rrdcached.socket enabled=yes state=started
+  tags:
+    - monitoring
+
+- name: Enable and start collectd
+  service: name=collectd.service enabled=yes state=started
+  tags:
+    - monitoring
