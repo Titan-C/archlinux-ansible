@@ -2,7 +2,7 @@
 # Defines handlers applicable across all machines in the infrastructure.
 
 - name: restart rrdcached
-  service: name=rrdcached.socket state=restarted
+  service: name=rrdcached.service state=restarted
 
 - name: restart collectd
   service: name=collectd.service state=restarted

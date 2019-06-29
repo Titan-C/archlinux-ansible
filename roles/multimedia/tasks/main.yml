@@ -57,7 +57,6 @@
     state: present
     name:
       - vlc
-      - qt4
 
 - name: Install mpd
   pacman:
