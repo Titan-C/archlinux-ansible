@@ -955,9 +955,12 @@ LoadPlugin rrdcached
 
 <Plugin network>
 {% if inventory_hostname in groups['raspberry'] %}
-    Listen {{ monitoring_server }}
+    Listen "{{ monitoring_server }}"
+    <Listen "{{ monitoring_server }}" "25826">
+            Interface "wlan0"
+    </Listen>
 {% else %}
-    Server {{ monitoring_server }}
+    Server "{{ monitoring_server }}"
 {% endif %}
 
 #	# client setup:
