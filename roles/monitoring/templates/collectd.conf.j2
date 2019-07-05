@@ -59,16 +59,16 @@
 # accessed.                                                                  #
 ##############################################################################
 
-LoadPlugin syslog
-#LoadPlugin logfile
+#LoadPlugin syslog
+LoadPlugin logfile
 #LoadPlugin log_logstash
 
-#<Plugin logfile>
+<Plugin logfile>
 #	LogLevel info
-#	File STDOUT
+	File "/var/log/collectd.log"
 #	Timestamp true
 #	PrintSeverity false
-#</Plugin>
+</Plugin>
 
 #<Plugin log_logstash>
 #	LogLevel info
@@ -88,6 +88,9 @@ LoadPlugin syslog
 # Lines beginning with `##' belong to plugins which have not been built due  #
 # to missing dependencies or because they have been deactivated explicitly.  #
 ##############################################################################
+<LoadPlugin python>
+    Globals true
+</LoadPlugin>
 
 #LoadPlugin aggregation
 #LoadPlugin amqp
@@ -157,7 +160,7 @@ LoadPlugin memory
 #LoadPlugin mysql
 ##LoadPlugin netapp
 #LoadPlugin netlink
-#LoadPlugin network
+LoadPlugin network
 #LoadPlugin nfs
 #LoadPlugin nginx
 #LoadPlugin notify_desktop
@@ -950,7 +953,13 @@ LoadPlugin rrdcached
 #	IgnoreSelected false
 #</Plugin>
 
-#<Plugin network>
+<Plugin network>
+{% if inventory_hostname in groups['raspberry'] %}
+    Listen {{ monitoring_server }}
+{% else %}
+    Server {{ monitoring_server }}
+{% endif %}
+
 #	# client setup:
 #	Server "ff18::efc0:4a42" "25826"
 #	<Server "239.192.74.66" "25826">
@@ -979,7 +988,7 @@ LoadPlugin rrdcached
 #
 #	# "garbage collection"
 #	CacheFlush 1800
-#</Plugin>
+</Plugin>
 
 #<Plugin nfs>
 #	ReportV2 false
@@ -1219,7 +1228,18 @@ LoadPlugin rrdcached
 #	IgnoreSelected false
 #</Plugin>
 
-#<Plugin python>
+{% if inventory_hostname in groups['raspberry'] %}
+<Plugin python>
+Import "fritzcollectd"
+<Module fritzcollectd>
+    Address "fritz.box"
+#    Port 49000
+#    User "dslf-config"
+#    Password "pass"
+    Hostname "FritzBox"
+#    Instance "1"
+#    Verbose "False"
+</Module>
 #	ModulePath "/path/to/your/python/modules"
 #	LogTraces true
 #	Interactive true
@@ -1228,7 +1248,8 @@ LoadPlugin rrdcached
 #	<Module spam>
 #		spam "wonderful" "lovely"
 #	</Module>
-#</Plugin>
+</Plugin>
+{% endif %}
 
 #<Plugin redis>
 #   <Node example>

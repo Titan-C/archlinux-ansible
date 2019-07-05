@@ -19,6 +19,22 @@
   tags:
     - monitoring
 
+- name: Install python dependencies for collectd
+  pacman:
+    state: present
+    name:
+      - python-pip
+      - python-lxml
+      - python-requests
+  tags:
+    - monitoring
+
+- name: Install fritzbox monitoring for collectd
+  pip:
+    name:
+      - fritzcollectd
+  when: inventory_hostname in groups['raspberry']
+
 - name: Copy collectd configuration file
   template: src=collectd.conf.j2 dest=/etc/collectd.conf
   notify: restart collectd
@@ -34,3 +50,8 @@
   service: name=collectd.service enabled=yes state=started
   tags:
     - monitoring
+
+- name: Set firewall rule for collectd
+  ufw: rule=allow port=25826 proto=udp
+  tags: ufw
+  when: inventory_hostname in groups['raspberry']
