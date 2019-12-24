@@ -181,7 +181,7 @@ LoadPlugin network
 #LoadPlugin ping
 #LoadPlugin postgresql
 #LoadPlugin powerdns
-#LoadPlugin processes
+LoadPlugin processes
 #LoadPlugin protocols
 #LoadPlugin python
 ##LoadPlugin redis
@@ -1231,18 +1231,7 @@ LoadPlugin rrdcached
 #	IgnoreSelected false
 #</Plugin>
 
-{% if inventory_hostname in groups['raspberry'] %}
-<Plugin python>
-Import "fritzcollectd"
-<Module fritzcollectd>
-    Address "fritz.box"
-#    Port 49000
-#    User "dslf-config"
-#    Password "pass"
-    Hostname "FritzBox"
-#    Instance "1"
-#    Verbose "False"
-</Module>
+#<Plugin python>
 #	ModulePath "/path/to/your/python/modules"
 #	LogTraces true
 #	Interactive true
@@ -1251,8 +1240,7 @@ Import "fritzcollectd"
 #	<Module spam>
 #		spam "wonderful" "lovely"
 #	</Module>
-</Plugin>
-{% endif %}
+#</Plugin>
 
 #<Plugin redis>
 #   <Node example>
