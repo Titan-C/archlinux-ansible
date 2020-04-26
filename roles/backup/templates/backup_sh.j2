@@ -10,6 +10,11 @@ backup_local(){
     shift 2 # consume the first 2 arguments
     borg create --verbose --stats --compression=lz4 \
         --progress --exclude '*.pyc' \
+        --exclude '*/.notmuch' \
+        --exclude '*/node_modules' \
+        --exclude '*/mpd/log' \
+        --exclude '*/venv/' \
+        --exclude '*/.tox/' \
         $REPOSITORY::'{hostname}-{user}-{utcnow:%Y-%m-%dT%H:%M:%S}' \
         $@ # all the dirs to bac
 
