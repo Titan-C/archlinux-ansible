@@ -2,7 +2,7 @@ user:
     name: alarm
     uid: 1000
     group: alarm
-    shell: /usr/bin/bash
+    shell: /usr/bin/zsh
 
 editors:
     - neovim

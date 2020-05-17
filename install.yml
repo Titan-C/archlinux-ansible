@@ -33,4 +33,4 @@
     - { role: mail, tags: ['mail'] }
     - { role: publishing, tags: ['publishing'] }
     - { role: cloudservices, tags: ['cloudservices'] }
-    - { role: monitoring, tags: ['monitoring'], monitoring_server: "192.168.178.51" }
+    - { role: monitoring, tags: ['monitoring'], monitoring_server: "192.168.178.26" }
