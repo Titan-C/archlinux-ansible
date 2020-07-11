@@ -18,3 +18,12 @@
     virtualenv_python: python3.6
   become: yes
   become_user: "{{ user.name }}"
+
+- name: Install basic packages
+  pacman:
+    state: present
+    name:
+      - python-numpy
+      - python-pandas
+      - python-pillow
+      - python-tornado
