@@ -8,14 +8,6 @@
   become: yes
   become_user: "{{ user.name }}"
 
-- name: Setup cron for mail
-  cron:
-    name: Email sync and index
-    minute: '*/10'
-    user: "{{ user.name }}"
-    job: "/home/{{ user.name }}/{{ dotfiles.destination }}/tagmail.sh > /tmp/mail 2> /tmp/mailerr"
-
-
 - name: Clone awesome user dotfiles
   git:
     repo: "{{ awesome_conf.url }}"
