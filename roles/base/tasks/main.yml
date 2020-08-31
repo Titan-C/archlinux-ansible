@@ -36,27 +36,10 @@
   timezone:
     name: Europe/Berlin
 
-- name: Install Power management
-  pacman:
-    state: present
-    name:
-      - acpid
-      - acpi
-      - powertop
-  tags:
-    - power
+- name: Power saving setup
+  include_tasks: power.yml
+  when: inventory_hostname in groups['laptop']
 
-- name: Enable ACPID
-  service: name=acpid.service enabled=yes
-  tags:
-    - power
-
-- name: Enable fstrim for ssd
-  service: name=fstrim.timer enabled=yes
-
-- name: Install smartmontools
-  pacman: name=smartmontools state=present
-
-- name: Install Intel microcode
-  pacman: name=intel-ucode state=present
-  when: '"GenuineIntel" in ansible_processor'
+- name: Hardware
+  include_tasks: hardware.yml
+  when: inventory_hostname in groups['laptop']

@@ -1,0 +1,11 @@
+---
+- name: Install Power management
+  pacman:
+    state: present
+    name:
+      - acpid
+      - acpi
+      - powertop
+
+- name: Enable ACPID
+  service: name=acpid.service enabled=yes

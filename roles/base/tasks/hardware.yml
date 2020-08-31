@@ -1,0 +1,10 @@
+---
+- name: Enable fstrim for ssd
+  service: name=fstrim.timer enabled=yes
+
+- name: Install smartmontools
+  pacman: name=smartmontools state=present
+
+- name: Install Intel microcode
+  pacman: name=intel-ucode state=present
+  when: '"GenuineIntel" in ansible_processor'
