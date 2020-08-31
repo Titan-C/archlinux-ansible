@@ -1,4 +1,4 @@
-# {{ ansible_managed }}
+{{ ansible_managed | comment }}
 #	$OpenBSD: sshd_config,v 1.103 2018/04/09 20:41:22 tj Exp $
 # Following recomendations from https://infosec.mozilla.org/guidelines/openssh
 
@@ -12,14 +12,14 @@
 # possible, but leave them commented.  Uncommented options override the
 # default value.
 
-#Port 22
+Port 22
 #AddressFamily any
 #ListenAddress 0.0.0.0
 #ListenAddress ::
+Protocol 2
 
 HostKey /etc/ssh/ssh_host_ed25519_key
 HostKey /etc/ssh/ssh_host_rsa_key
-HostKey /etc/ssh/ssh_host_ecdsa_key
 
 # Ciphers and keying
 #RekeyLimit default none
@@ -32,18 +32,19 @@ MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@op
 
 
 # Logging
-#SyslogFacility AUTH
+SyslogFacility AUTH
 LogLevel VERBOSE
 
 # Authentication:
 
 LoginGraceTime 1m
+PermitRootLogin forced-commands-only
 #PermitRootLogin prohibit-password
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
 
-#PubkeyAuthentication yes
+PubkeyAuthentication yes
 
 # The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2
 # but this is overridden so installations will only check .ssh/authorized_keys

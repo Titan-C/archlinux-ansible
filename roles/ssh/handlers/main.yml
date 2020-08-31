@@ -2,4 +2,4 @@
 # Defines handlers applicable across all machines in the infrastructure.
 
 - name: restart sshd
-  service: name=sshd.socket state=restarted
+  service: name=sshd.service state=restarted
