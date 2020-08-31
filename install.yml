@@ -7,7 +7,6 @@
     - { role: networking, tags: ['networking'] }
     - { role: x, tags: ['x'] }
     - { role: ssh, tags: ['ssh'] }
-    - { role: backup, tags: ['backup'] }
     - { role: awesome, tags: ['awesome'] }
     - { role: browsers, tags: ['browsers'] }
     - { role: development, tags: ['development'] }

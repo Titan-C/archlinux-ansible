@@ -43,3 +43,10 @@
 - name: Hardware
   include_tasks: hardware.yml
   when: inventory_hostname in groups['laptop']
+
+- name: Install borg
+  pacman:
+    state: present
+    name:
+      - python-llfuse
+      - borg

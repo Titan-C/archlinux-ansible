@@ -34,3 +34,19 @@
 
 - name: configure Oh-My-Zsh
   include_tasks: ohmyzsh.yml
+
+- name: Install backup script
+  template:
+    src: backup_sh.j2
+    dest: "{{ backup_script_path }}"
+    mode: 0700
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+
+- name: Set up backup cron
+  cron:
+    name: Backupserver
+    hour: "10,14,18,22"
+    minute: "5"
+    job: "{{ backup_script_path }} > /tmp/borgbackup 2>&1"
+    user: "{{ user.name }}"
