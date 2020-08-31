@@ -4,3 +4,5 @@ localhost ansible_connection=local
 [raspberry]
 #alarmpi.fritz.box
 192.168.178.26
+[backup]
+najera.pw

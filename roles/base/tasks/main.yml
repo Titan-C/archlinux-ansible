@@ -50,3 +50,22 @@
     name:
       - python-llfuse
       - borg
+
+- name: Create backup user
+  user: name=borgbackup state=present
+  tags: back
+
+- name: Create backup repository
+  file: state=directory path=/home/borgbackup/repos mode="0750" owner=borgbackup group=borgbackup
+  tags: back
+
+- name: Set authorized key taken from file
+  authorized_key:
+    user: borgbackup
+    state: present
+    key: "{{ item }}"
+    key_options: 'command="borg serve --restrict-to-path /home/borgbackup/repos/",restrict'
+  with_file:
+    - nitro_smart.pub
+    - ingrid_root.pub
+  tags: back
