@@ -59,3 +59,6 @@
   pacman: name=termite state=present
   tags:
     - termite
+
+- name: Install rofi
+  pacman: name=rofi state=present
