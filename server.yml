@@ -7,3 +7,4 @@
     - { role: cron, tags: ['cron'] }
     - { role: networking, tags: ['networking'] }
     - { role: ssh, tags: ['ssh'] }
+    - { role: bitcoin, tags: ['bitcoin'] }

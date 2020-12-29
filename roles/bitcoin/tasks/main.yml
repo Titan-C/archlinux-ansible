@@ -1,0 +1,25 @@
+---
+- name: Install bitcoin core
+  pacman:
+    state: present
+    name:
+      - bitcoin-daemon
+      - bitcoin-cli
+
+- name: Directory permissions
+  file:
+    state: directory
+    mode: 0710
+    owner: bitcoin
+    group: bitcoin
+    path: '{{ item }}'
+  loop:
+      - /var/lib/bitcoind
+      - /etc/bitcoin
+
+- name: Push Bitcoin daemon configuration file
+  template: src=bitcoin.conf.j2 dest=/etc/bitcoin/bitcoin.conf
+  notify: restart bitcoind
+
+- name: Enable and start Bitcoin
+  service: name=bitcoind.service enabled=yes state=started
