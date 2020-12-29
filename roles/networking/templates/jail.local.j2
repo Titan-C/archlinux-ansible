@@ -1,0 +1,42 @@
+# {{ ansible_managed }}
+[DEFAULT]
+#
+# MISCELLANEOUS OPTIONS
+#
+
+# "ignoreip" can be an IP address, a CIDR mask or a DNS host. Fail2ban will not
+# ban a host which matches an address in this list. Several addresses can be
+# defined using space separator.
+ignoreip  = 127.0.0.1 {{ ansible_default_ipv4.address }}
+
+# "bantime" is the number of seconds that a host is banned.
+bantime   = 86400
+
+backend = systemd
+
+#
+# ACTIONS
+#
+
+# Some options used for actions
+
+# Sender email address used solely for some actions
+sender = root@localhost
+
+
+#
+# JAILS
+#
+
+#
+# SSH servers
+#
+
+[sshd]
+enabled   = true
+maxretry  = 3
+port    = ssh
+
+[pam-generic]
+enabled   = true
+banaction = iptables-allports
