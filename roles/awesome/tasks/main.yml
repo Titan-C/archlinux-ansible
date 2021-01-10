@@ -14,6 +14,7 @@
       - lightdm
       - lightdm-webkit-theme-litarvan
       - numlockx
+      - light-locker
 
 - name: Write lightdm config
   template:
