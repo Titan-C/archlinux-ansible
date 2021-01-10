@@ -6,11 +6,27 @@
       - awesome
       - xorg-server-xephyr
 
-- name: Install display manager SDDM
-  pacman: name=sddm state=present
+- name: Install display manager lightdm
+  pacman: name=lightdm state=present
+  pacman:
+    state: present
+    name:
+      - lightdm
+      - lightdm-webkit-theme-litarvan
+      - numlockx
 
-- name: Enable and start SDDM
-  service: name=sddm.service enabled=yes state=started
+- name: Write lightdm config
+  template:
+    src: lightdm.conf.j2
+    dest: /etc/lightdm/lightdm.conf
+
+- name: Write lightdm greeter config
+  template:
+    src: lightdm-webkit2-greeter.conf.j2
+    dest: /etc/lightdm/lightdm-webkit2-greeter.conf
+
+- name: Enable lightdm
+  service: name=lightdm.service enabled=yes
 
 - name: Install compton
   pacman: name=compton state=present
@@ -51,9 +67,6 @@
       - ark # archive zip extract
       - tumbler # image thumbnails
       - ffmpegthumbnailer
-
-- name: Install screensaver
-  pacman: name=xscreensaver state=present
 
 - name: Install termite
   pacman: name=termite state=present

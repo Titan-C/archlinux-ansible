@@ -1,5 +1,5 @@
 user:
-    name: me
+    name: titan
     uid: 1000
     group: users
     shell: /usr/bin/zsh
@@ -12,11 +12,6 @@ editors:
 dotfiles:
     url: git@github.com:Titan-C/helpful_scripts.git
     destination: dev/helpful_scripts
-
-
-awesome_conf:
-    url: git@github.com:Titan-C/awesomerc.git
-    destination: dev/awesomerc
 
 bluetooth:
     disable: False

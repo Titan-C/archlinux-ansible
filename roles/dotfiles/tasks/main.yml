@@ -8,22 +8,6 @@
   become: yes
   become_user: "{{ user.name }}"
 
-- name: Clone awesome user dotfiles
-  git:
-    repo: "{{ awesome_conf.url }}"
-    dest: /home/{{ user.name }}/{{ awesome_conf.destination }} accept_hostkey=yes
-    update: no
-  when: awesome_conf is defined
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: symlink awesome config
-  file:
-    path: /home/{{ user.name }}/.config/awesome
-    src: /home/{{ user.name }}/{{ awesome_conf.destination }}
-    state: link
-  when: awesome_conf is defined
-
 - name: configure Oh-My-Zsh
   include_tasks: ohmyzsh.yml
 
