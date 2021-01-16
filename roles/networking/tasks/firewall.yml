@@ -11,12 +11,10 @@
   ufw: rule=limit app=SSH
   tags: ufw
 
-- name: Enable UFW logging
+- name: Enable UFW with logging
   ufw:
-    logging: on
-
-- name: Enable UFW
-  ufw: state=enabled
+    state: enabled
+    logging: 'on'
   tags: ufw
 
 - name: Enable UFW service
