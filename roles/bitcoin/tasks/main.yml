@@ -23,3 +23,10 @@
 
 - name: Enable and start Bitcoin
   service: name=bitcoind.service enabled=yes state=started
+
+# Add or modify nofile soft limit
+- pam_limits:
+    domain: bitcoin
+    limit_type: soft
+    limit_item: nofile
+    value: 8192
