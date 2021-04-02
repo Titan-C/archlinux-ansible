@@ -1,0 +1,8 @@
+---
+- name: Install haskell
+  pacman:
+    state: present
+    name:
+      - ghc
+      - cabal-install
+      - hindent

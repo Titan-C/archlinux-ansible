@@ -18,6 +18,7 @@
     - { role: multimedia, tags: ['multimedia'] }
     - { role: c_cpp, tags: ['c_cpp'] }
     - { role: python, tags: ['python'] }
+    - { role: haskell, tags: ['haskell'] }
     - { role: ruby, tags: ['ruby'] }
     - { role: javascript, tags: ['javascript'] }
     - { role: clojure, tags: ['clojure'] }
