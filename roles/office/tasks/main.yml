@@ -6,17 +6,11 @@
       - poppler
       - poppler-glib
 
-- name: Install latex
-  pacman: name=texlive-most state=present
-
 - name: Install calibre
   pacman: name=calibre state=present
 
 - name: Install xournal
   pacman: name=xournalpp state=present
-
-- name: Install LibreOffice
-  pacman: name=libreoffice-fresh state=present
 
 - name: Install console dictionary
   pacman: name=sdcv state=present
@@ -24,12 +18,14 @@
 - name: Install dictionary
   pacman: name=goldendict state=present
 
-- name: Install pandoc
-  pacman:
-    state: present
-    name:
-      - pandoc
-      - python-pypandoc
-
 - name: Install languagetool
   pacman: name=languagetool state=present
+
+- name: Install LibreOffice
+  pacman: name=libreoffice-fresh state=present
+
+- name: Install latex
+  pacman: name=texlive-most state=present
+
+- name: Install hugo
+  pacman: name=hugo state=present

@@ -2,11 +2,6 @@
 - name: Install notmuch
   pacman: name=notmuch state=present
 
-- name: Install afew
-  pip:
-    name: afew
-    extra_args: --user
-
 - name: Install isync
   pacman: name=isync state=present
   tags:

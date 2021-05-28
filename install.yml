@@ -7,12 +7,12 @@
     - { role: networking, tags: ['networking'] }
     - { role: x, tags: ['x'] }
     - { role: ssh, tags: ['ssh'] }
+    - { role: secrets, tags: ['secrets'] }
     - { role: awesome, tags: ['awesome'] }
     - { role: browsers, tags: ['browsers'] }
     - { role: development, tags: ['development'] }
-    - { role: fonts, tags: ['fonts'] }
-    - { role: office, tags: ['office'] }
     - { role: spell, tags: ['spell'] }
+    - { role: fonts, tags: ['fonts'] }
     - { role: sound, tags: ['sound'] }
     - { role: bluetooth, tags: ['bluetooth'], when: "bluetooth is defined" }
     - { role: multimedia, tags: ['multimedia'] }
@@ -24,13 +24,13 @@
     - { role: clojure, tags: ['clojure'] }
     - { role: scala, tags: ['scala'] }
     - { role: numerical, tags: ['numerical'] }
-    - { role: secrets, tags: ['secrets'] }
     - { role: yubikey, tags: ['yubikey'] }
     - { role: servers, tags: ['servers'] }
     - { role: arduino, tags: ['arduino'] }
 
+    # User stuff maybe better as dotfiles
     - { role: dotfiles, tags: ['dotfiles'] }
     - { role: mail, tags: ['mail'] }
-    - { role: publishing, tags: ['publishing'] }
     - { role: cloudservices, tags: ['cloudservices'] }
+    - { role: office, tags: ['office'] }
     - { role: monitoring, tags: ['monitoring'], monitoring_server: "192.168.178.26" }
