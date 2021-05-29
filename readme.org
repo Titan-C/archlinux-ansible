@@ -54,16 +54,6 @@ ansible-playbook install.yml -i hosts --ask-become-pass  --tags=multimedia
 This might not work in any clean/new machine yet as there are still some
 steps that where carried manually when setting up the system. So look
 around and try.
-
-* TODO User
-- chicken and egg. Install as root, to get user? Setup user manually with sudo then instal as sudo?
-- When to install the work user. Beginning?
-- Which user shall I install?
-- SSH key and other secrets?
-* TODO Python dev environment
-I just noticed my dev3 virtualenv did not had all packages I use while
-editing python code in emacs with elpy. See how I can create this default
-env from the start
 * Raspberry
 ** Change default passwords
 The image came with default passwords for root and alarm. Change those.
