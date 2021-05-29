@@ -8,6 +8,7 @@ editors:
     - neovim
     - emacs
     - the_silver_searcher
+    - ripgrep
 
 dotfiles:
     url: git@github.com:Titan-C/helpful_scripts.git
