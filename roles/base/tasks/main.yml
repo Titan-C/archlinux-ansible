@@ -52,11 +52,7 @@
       - borg
 
 - name: Create backup user
-  user: name=borgbackup state=present
-  tags: back
-
-- name: Create backup repository
-  file: state=directory path=/home/borgbackup/repos mode="0750" owner=borgbackup group=borgbackup
+  user: name=borgbackup state=present 
   tags: back
 
 - name: Set authorized key taken from file

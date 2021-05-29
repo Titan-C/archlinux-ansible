@@ -10,15 +10,6 @@
       - python-virtualenvwrapper
       - python-ipdb
 
-- name: Prepare dev3 environment
-  pip:
-    name: ipython
-    virtualenv: /home/{{ user.name }}/.virtualenvs/dev3
-    virtualenv_site_packages: yes
-    virtualenv_python: python3.6
-  become: yes
-  become_user: "{{ user.name }}"
-
 - name: Install basic packages
   pacman:
     state: present

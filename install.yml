@@ -5,17 +5,18 @@
     - { role: base, tags: ['base'] }
     - { role: cron, tags: ['cron'] }
     - { role: networking, tags: ['networking'] }
-    - { role: x, tags: ['x'] }
     - { role: ssh, tags: ['ssh'] }
+    - { role: x, tags: ['x'] }
     - { role: secrets, tags: ['secrets'] }
     - { role: awesome, tags: ['awesome'] }
     - { role: browsers, tags: ['browsers'] }
     - { role: development, tags: ['development'] }
     - { role: spell, tags: ['spell'] }
     - { role: fonts, tags: ['fonts'] }
+    - { role: multimedia, tags: ['multimedia'] }
     - { role: sound, tags: ['sound'] }
     - { role: bluetooth, tags: ['bluetooth'], when: "bluetooth is defined" }
-    - { role: multimedia, tags: ['multimedia'] }
+
     - { role: c_cpp, tags: ['c_cpp'] }
     - { role: python, tags: ['python'] }
     - { role: haskell, tags: ['haskell'] }
@@ -30,7 +31,4 @@
 
     # User stuff maybe better as dotfiles
     - { role: dotfiles, tags: ['dotfiles'] }
-    - { role: mail, tags: ['mail'] }
-    - { role: cloudservices, tags: ['cloudservices'] }
     - { role: office, tags: ['office'] }
-    - { role: monitoring, tags: ['monitoring'], monitoring_server: "192.168.178.26" }

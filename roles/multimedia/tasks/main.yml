@@ -47,11 +47,6 @@
   tags:
     - gthumb
 
-- name: Install Okular
-  pacman:
-    name: okular
-    state: present
-
 - name: Install vlc
   pacman:
     state: present

@@ -1,4 +1,7 @@
 ---
+- name: Create main user
+  user: name={{ user.name }} state=present create_home=yes
+
 - name: Clone user dotfiles
   git:
     repo: "{{ dotfiles.url }}"
@@ -8,21 +11,10 @@
   become: yes
   become_user: "{{ user.name }}"
 
-- name: configure Oh-My-Zsh
-  include_tasks: ohmyzsh.yml
+- name: Clone oh-my-zsh repo
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: /home/{{ user.name }}/.oh-my-zsh
+  become: yes
+  become_user: "{{ user.name }}"
 
-- name: Install backup script
-  template:
-    src: backup_sh.j2
-    dest: "{{ backup_script_path }}"
-    mode: 0700
-    owner: "{{ user.name }}"
-    group: "{{ user.name }}"
-
-- name: Set up backup cron
-  cron:
-    name: Backupserver
-    hour: "10,14,18,22"
-    minute: "5"
-    job: "{{ backup_script_path }} > /tmp/borgbackup 2>&1"
-    user: "{{ user.name }}"

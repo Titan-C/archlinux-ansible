@@ -1,4 +1,16 @@
 ---
+- name: Install notmuch and isysc
+  pacman:
+    state: present
+    name:
+      - notmuch
+      - isync
+
+- name: Install Okular
+  pacman:
+    state: present
+    name: okular
+
 - name: Install poppler
   pacman:
     state: present
@@ -29,3 +41,6 @@
 
 - name: Install hugo
   pacman: name=hugo state=present
+
+- name: Install NextCloud
+  pacman: name=nextcloud-client state=present
