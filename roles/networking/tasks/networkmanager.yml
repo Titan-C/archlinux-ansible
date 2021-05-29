@@ -6,6 +6,9 @@
       - networkmanager
       - network-manager-applet
 
+- name: Enable and start NetworkManager
+  service: name=NetworkManager.service enabled=yes state=started
+
 - name: Install VPN clients
   pacman:
     state: present
