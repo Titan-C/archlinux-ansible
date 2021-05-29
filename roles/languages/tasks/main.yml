@@ -1,0 +1,34 @@
+---
+- name: Install nodejs
+  pacman:
+    state: present
+    name:
+      - nodejs
+      - npm
+      - eslint
+      - prettier
+  tags: javascript
+
+- name: Install python
+  pacman:
+    state: present
+    name:
+      - ipython
+      - python-pip
+      - python2-pip
+      - python-virtualenv
+      - python-virtualenvwrapper
+      - python-ipdb
+  tags: python
+
+- name: Install clojure
+  pacman:
+    state: present
+    name:
+      - jdk10-openjdk
+      - clojure
+  tags: clojure
+
+- name: Install leiningen
+  aur: name=leiningen user={{ user.name }} dir=/tmp
+  tags: clojure

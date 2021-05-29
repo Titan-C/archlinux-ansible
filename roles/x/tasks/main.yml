@@ -9,8 +9,8 @@
   pacman:
     state: present
     name:
-     - xorg-xrandr
-     - arandr
+      - xorg-xrandr
+      - arandr
 
 - name: Install xmodmap
   pacman: name=xorg-xmodmap state=present
@@ -29,3 +29,7 @@
 
 - name: Install Wacom tablet drivers
   pacman: name=xf86-input-wacom state=present
+
+- name: Install awesome WM
+  include_tasks: awesome.yml
+  tags: awesome

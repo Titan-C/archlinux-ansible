@@ -2,33 +2,27 @@
 - hosts: laptop
   become: yes
   roles:
-    - { role: base, tags: ['base'] }
-    - { role: cron, tags: ['cron'] }
-    - { role: networking, tags: ['networking'] }
-    - { role: ssh, tags: ['ssh'] }
-    - { role: x, tags: ['x'] }
-    - { role: secrets, tags: ['secrets'] }
-    - { role: awesome, tags: ['awesome'] }
-    - { role: browsers, tags: ['browsers'] }
-    - { role: development, tags: ['development'] }
-    - { role: spell, tags: ['spell'] }
-    - { role: fonts, tags: ['fonts'] }
-    - { role: multimedia, tags: ['multimedia'] }
-    - { role: sound, tags: ['sound'] }
-    - { role: bluetooth, tags: ['bluetooth'], when: "bluetooth is defined" }
-
-    - { role: c_cpp, tags: ['c_cpp'] }
-    - { role: python, tags: ['python'] }
-    - { role: haskell, tags: ['haskell'] }
-    - { role: ruby, tags: ['ruby'] }
-    - { role: javascript, tags: ['javascript'] }
-    - { role: clojure, tags: ['clojure'] }
-    - { role: scala, tags: ['scala'] }
-    - { role: numerical, tags: ['numerical'] }
-    - { role: yubikey, tags: ['yubikey'] }
-    - { role: servers, tags: ['servers'] }
-    - { role: arduino, tags: ['arduino'] }
+    - { role: base, tags: ["base"] }
+    - { role: cron, tags: ["cron"] }
+    - { role: networking, tags: ["networking"] }
+    - { role: ssh, tags: ["ssh"] }
+    - { role: x, tags: ["x"] }
+    - { role: secrets, tags: ["secrets"] }
+    - { role: development, tags: ["development"] }
+    - { role: spell, tags: ["spell"] }
+    - { role: fonts, tags: ["fonts"] }
+    - { role: multimedia, tags: ["multimedia"] }
+    - { role: sound, tags: ["sound"] }
+    - { role: bluetooth, tags: ["bluetooth"], when: "bluetooth is defined" }
 
     # User stuff maybe better as dotfiles
-    - { role: dotfiles, tags: ['dotfiles'] }
-    - { role: office, tags: ['office'] }
+    - { role: office, tags: ["office"] }
+    - { role: browsers, tags: ["browsers"] }
+    - { role: dotfiles, tags: ["dotfiles"] }
+
+    # User work stuff
+    #- { role: c_cpp, tags: ["c_cpp"] }
+    #- { role: numerical, tags: ["numerical"] }
+    - { role: languages, tags: ["languages"] }
+    - { role: servers, tags: ["servers"] }
+    - { role: arduino, tags: ["arduino"] }

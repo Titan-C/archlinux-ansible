@@ -1,8 +1,0 @@
----
-- name: Install nodejs
-  pacman:
-    state: present
-    name:
-      - nodejs
-      - npm
-      - eslint
