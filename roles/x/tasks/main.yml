@@ -29,6 +29,3 @@
 
 - name: Install Wacom tablet drivers
   pacman: name=xf86-input-wacom state=present
-
-- name: Add user to video group
-  user: name={{ user.name }} groups=video append=yes

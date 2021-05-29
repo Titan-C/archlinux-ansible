@@ -1,1 +1,0 @@
-backup_script_path: "/home/{{ user.name }}/.local/bin/backup.sh"

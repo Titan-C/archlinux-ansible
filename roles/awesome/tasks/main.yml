@@ -49,13 +49,6 @@
       allowed=true
       system=false
       users=
-- name: Ensure redshift config dir exists
-  file: path=/home/{{ user.name }}/.config/redshift state=directory
-
-- name: Write redshift config
-  template:
-    src: redshift.conf.j2
-    dest: /home/{{ user.name }}/.config/redshift/redshift.conf
 
 - name: Install filesystem packages
   pacman:

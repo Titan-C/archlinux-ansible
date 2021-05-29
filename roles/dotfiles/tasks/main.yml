@@ -1,28 +1,30 @@
 ---
 - name: Create main user
-  user: name={{ user.name }} state=present create_home=yes
+  user:
+    name: "{{ user.name }}"
+    state: present
+    create_home: yes
+    shell: /usr/bin/zsh
+    groups: video
+    append: yes
 
 - name: Clone Chemacs
   git:
     repo: https://github.com/plexus/chemacs2.git
-    dest: /home/{{ user.name }}/.emacs.d accept_hostkey=yes
+    dest: /home/{{ user.name }}/.emacs.d
+    accept_hostkey: yes
     update: no
+    depth: 1
   become: yes
   become_user: "{{ user.name }}"
 
-- name: Clone user helpful_scripts
+- name: Clone Doom-emacs
   git:
-    repo: git@github.com:Titan-C/helpful_scripts.git
-    dest: /home/{{ user.name }}/dev/helpful_scripts accept_hostkey=yes
+    repo: https://github.com/hlissner/doom-emacs.git
+    dest: /home/{{ user.name }}/dev/doom-emacs
+    accept_hostkey: yes
     update: no
-  become: yes
-  become_user: "{{ user.name }}"
-
-- name: Clone user dotfiles
-  git:
-    repo: git@git.oscarnajera.com:dotfiles
-    dest: /home/{{ user.name }}/dev/dotfiles accept_hostkey=yes
-    update: no
+    depth: 1
   become: yes
   become_user: "{{ user.name }}"
 
@@ -30,6 +32,7 @@
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh.git
     dest: /home/{{ user.name }}/.oh-my-zsh
+    depth: 1
   become: yes
   become_user: "{{ user.name }}"
 
