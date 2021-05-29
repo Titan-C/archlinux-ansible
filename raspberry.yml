@@ -2,9 +2,14 @@
 - hosts: raspberry
   user: root
   roles:
-    - { role: base, tags: ['base'] }
-    - { role: cron, tags: ['cron'] }
-    - { role: networking, tags: ['networking'] }
-    - { role: ssh, tags: ['ssh'] }
+    - { role: base, tags: ["base"] }
+    - { role: cron, tags: ["cron"] }
+    - { role: networking, tags: ["networking"] }
+    - { role: ssh, tags: ["ssh"] }
+    - { role: backup, tags: ["backup"] }
 
-    - { role: monitoring, tags: ['monitoring'], monitoring_server: "192.168.178.26" }
+    - {
+        role: monitoring,
+        tags: ["monitoring"],
+        monitoring_server: "192.168.178.26",
+      }
