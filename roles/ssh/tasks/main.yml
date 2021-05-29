@@ -3,7 +3,10 @@
   pacman: name=openssh state=present
 
 - name: Push OpenSSH daemon configuration file
-  template: src=sshd_config.j2 dest=/etc/ssh/sshd_config
+  template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    mode: u=rw,g=r,o=r
   notify: restart sshd
 
 - name: Enable and start OpenSSH

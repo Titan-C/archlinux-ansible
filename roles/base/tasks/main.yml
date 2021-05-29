@@ -1,6 +1,9 @@
 ---
 - name: Copy pacman configuration file
-  template: src=pacman.conf.j2 dest=/etc/pacman.conf
+  template:
+    src: pacman.conf.j2
+    dest: /etc/pacman.conf
+    mode: u=rw,g=r,o=r
 
 - name: Full system upgrade
   pacman:
@@ -27,10 +30,12 @@
   locale_gen:
     name: en_US.UTF-8
     state: present
+
 - name: Set local en_US.UTF-8 locale systemwide
   copy:
     dest: "/etc/locale.conf"
     content: "LANG=en_US.UTF-8"
+    mode: u=rw,g=r,o=r
 
 - name: set timezone to Europe/Berlin
   timezone:

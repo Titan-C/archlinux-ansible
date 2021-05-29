@@ -7,7 +7,6 @@
       - xorg-server-xephyr
 
 - name: Install display manager lightdm
-  pacman: name=lightdm state=present
   pacman:
     state: present
     name:
@@ -20,11 +19,13 @@
   template:
     src: lightdm.conf.j2
     dest: /etc/lightdm/lightdm.conf
+    mode: u=rw,g=r,o=r
 
 - name: Write lightdm greeter config
   template:
     src: lightdm-webkit2-greeter.conf.j2
     dest: /etc/lightdm/lightdm-webkit2-greeter.conf
+    mode: u=rw,g=r,o=r
 
 - name: Enable lightdm
   service: name=lightdm.service enabled=yes
