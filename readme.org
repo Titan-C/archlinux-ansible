@@ -86,3 +86,22 @@ chmod 400 .ssh/authorized_keys
 #+END_SRC
 put ssh keys on user and root, may need to do it manually
 Be sure you can login
+* Languages development environments
+I somehow feel it is better to have the script to install some dependencies
+compared to managing with ansible in the case where I can't install everything
+with pacman.
+** Nix
+#+begin_src bash
+curl -L https://nixos.org/nix/install | sh
+#+end_src
+** Haskell
+Just use ghcup https://www.haskell.org/ghcup/
+#+begin_src bash
+curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+#+end_src
+My basic packages
+#+begin_src bash
+cabal update
+cabal install git-annex hledger pandoc
+cabal install hlint stylish-haskell
+#+end_src
