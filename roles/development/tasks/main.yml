@@ -11,16 +11,13 @@
   tags:
     - sudo
 
-- name: Add user to wheel group
-  user: name={{ user.name }} groups=wheel append=yes
-  tags:
-    - sudo
-
-- name: Copy sudo configuration
-  template:
-    src: sudoers.j2
-    dest: /etc/sudoers
+- name: sudo configuration
+  lineinfile:
+    path: /etc/sudoers.d/{{ user.name }}
+    line: '{{ user.name }} ALL=(ALL) ALL'
+    state: present
     mode: 0440
+    create: yes
     validate: 'visudo -cf %s'
   tags:
     - sudo
