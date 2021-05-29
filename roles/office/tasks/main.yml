@@ -5,6 +5,7 @@
     name:
       - notmuch
       - isync
+      - bogofilter
 
 - name: Install Okular
   pacman:
