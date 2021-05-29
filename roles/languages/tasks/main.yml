@@ -25,10 +25,10 @@
   pacman:
     state: present
     name:
-      - jdk10-openjdk
       - clojure
   tags: clojure
 
 - name: Install leiningen
-  aur: name=leiningen user={{ user.name }} dir=/tmp
+  pacman:
+    name: leiningen
   tags: clojure
