@@ -2,12 +2,27 @@
 - name: Create main user
   user: name={{ user.name }} state=present create_home=yes
 
+- name: Clone Chemacs
+  git:
+    repo: https://github.com/plexus/chemacs2.git
+    dest: /home/{{ user.name }}/.emacs.d accept_hostkey=yes
+    update: no
+  become: yes
+  become_user: "{{ user.name }}"
+
+- name: Clone user helpful_scripts
+  git:
+    repo: git@github.com:Titan-C/helpful_scripts.git
+    dest: /home/{{ user.name }}/dev/helpful_scripts accept_hostkey=yes
+    update: no
+  become: yes
+  become_user: "{{ user.name }}"
+
 - name: Clone user dotfiles
   git:
-    repo: "{{ dotfiles.url }}"
-    dest: /home/{{ user.name }}/{{ dotfiles.destination }} accept_hostkey=yes
+    repo: git@git.oscarnajera.com:dotfiles
+    dest: /home/{{ user.name }}/dev/dotfiles accept_hostkey=yes
     update: no
-  when: dotfiles is defined
   become: yes
   become_user: "{{ user.name }}"
 
