@@ -1,4 +1,9 @@
 ---
+- name: ReiserFS
+  pacman:
+    name: reiserfsprogs
+    state: present
+
 - name: Enable fstrim for ssd
   service: name=fstrim.timer enabled=yes
 
