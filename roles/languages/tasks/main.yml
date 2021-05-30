@@ -53,3 +53,9 @@
       - guile
       - nyacc
   tags: guile
+
+- name: Install shell formatter
+  pacman:
+    name: shfmt
+    state: present
+  tags: sh
