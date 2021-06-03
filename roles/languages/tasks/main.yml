@@ -21,6 +21,18 @@
       - python-ipdb
   tags: python
 
+- name: Intall python dev
+  pacman:
+    state: present
+    name:
+      - python-black
+      - python-pytest
+      - python-isort
+      - python-pyflakes
+      - python-pipenv
+      - python-nose
+  tags: python
+
 - name: Install clojure
   pacman:
     state: present
@@ -59,3 +71,9 @@
     name: shfmt
     state: present
   tags: sh
+
+- name: Install SBCL
+  pacman:
+    state: present
+    name: sbcl
+  tags: common-lisp

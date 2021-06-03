@@ -43,5 +43,8 @@
 - name: Install hugo
   pacman: name=hugo state=present
 
+- name: Install ledger
+  pacman: name=ledger state=present
+
 - name: Install NextCloud
   pacman: name=nextcloud-client state=present

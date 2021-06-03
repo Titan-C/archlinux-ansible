@@ -102,6 +102,6 @@ curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 My basic packages
 #+begin_src bash
 cabal update
-cabal install git-annex hledger pandoc
-cabal install hlint stylish-haskell
+cabal install git-annex hledger pandoc ShellCheck
+cabal install hlint stylish-haskell stack
 #+end_src
