@@ -1,4 +1,9 @@
 ---
+- name: Install passlib
+  pacman:
+    state: present
+    name: python-passlib # Need this for ansible pass management on remotes
+
 - name: Install Virtualbox
   pacman:
     state: present
