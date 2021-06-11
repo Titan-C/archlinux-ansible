@@ -1,8 +1,10 @@
 ---
-- name: Install passlib
+- name: Install ansible tools
   pacman:
     state: present
-    name: python-passlib # Need this for ansible pass management on remotes
+    name:
+      - python-passlib # pass management on remotes
+      - python-netaddr # ipwrap filter for remotes
 
 - name: Install Virtualbox
   pacman:
