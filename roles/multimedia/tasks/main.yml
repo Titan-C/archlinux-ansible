@@ -64,3 +64,8 @@
     name:
       - kdenlive
       - frei0r-plugins
+
+- name: Install OBS
+  pacman:
+    state: present
+    name: obs-studio
