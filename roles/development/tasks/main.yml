@@ -5,6 +5,7 @@
     name:
       - base-devel
       - git
+      - jq
 
 - name: Install sudo
   pacman: name=sudo state=present
@@ -14,11 +15,11 @@
 - name: sudo configuration
   lineinfile:
     path: /etc/sudoers.d/{{ user.name }}
-    line: '{{ user.name }} ALL=(ALL) ALL'
+    line: "{{ user.name }} ALL=(ALL) ALL"
     state: present
     mode: 0440
     create: yes
-    validate: 'visudo -cf %s'
+    validate: "visudo -cf %s"
   tags:
     - sudo
 
