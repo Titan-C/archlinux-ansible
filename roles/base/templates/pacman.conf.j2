@@ -16,7 +16,7 @@
 #GPGDir      = /etc/pacman.d/gnupg/
 #HookDir     = /etc/pacman.d/hooks/
 HoldPkg     = pacman glibc
-#XferCommand = /usr/bin/curl -C - -f %u > %o
+#XferCommand = /usr/bin/curl -L -C - -f -o %o %u
 #XferCommand = /usr/bin/wget --passive-ftp -c -O %o %u
 #CleanMethod = KeepInstalled
 #UseDelta    = 0.7
@@ -36,9 +36,10 @@ Architecture = auto
 # Misc options
 #UseSyslog
 Color
-#TotalDownload
+#NoProgressBar
 CheckSpace
 VerbosePkgLists
+ParallelDownloads = 5
 
 # By default, pacman accepts packages signed by keys that its local keyring
 # trusts (see pacman-key and its man page), as well as unsigned packages.
@@ -46,6 +47,9 @@ SigLevel    = Required DatabaseOptional
 LocalFileSigLevel = Optional
 #RemoteFileSigLevel = Required
 
+# NOTE: You must run `pacman-key --init` before first using pacman; the local
+# keyring can then be populated with the keys of all official Arch Linux
+# packagers with `pacman-key --populate archlinux`.
 
 #
 # REPOSITORIES
@@ -78,6 +82,9 @@ Include = /etc/pacman.d/mirrorlist
 
 [extra]
 Include = /etc/pacman.d/mirrorlist
+
+#[community-testing]
+#Include = /etc/pacman.d/mirrorlist
 
 [community]
 Include = /etc/pacman.d/mirrorlist
