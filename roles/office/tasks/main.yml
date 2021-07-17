@@ -48,3 +48,6 @@
 
 - name: Install NextCloud
   pacman: name=nextcloud-client state=present
+
+- name: Install keybase
+  pacman: name=keybase-gui state=present
