@@ -25,3 +25,6 @@
     mode: u=rw,g=r,o=r
   notify: restart fail2ban
   when: inventory_hostname in groups['backup']
+
+- name: Install wget
+  pacman: name=wget state=present
