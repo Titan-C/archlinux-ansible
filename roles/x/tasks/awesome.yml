@@ -63,10 +63,10 @@
       - tumbler # image thumbnails
       - ffmpegthumbnailer
 
-- name: Install termite
-  pacman: name=termite state=present
+- name: Install alacritty
+  pacman: name=alacritty state=present
   tags:
-    - termite
+    - alacritty
 
 - name: Install rofi
   pacman: name=rofi state=present
