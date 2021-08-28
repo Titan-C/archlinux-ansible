@@ -47,7 +47,11 @@
   pacman: name=ledger state=present
 
 - name: Install NextCloud
-  pacman: name=nextcloud-client state=present
+  pacman:
+    state: present
+    name:
+      - nextcloud-client
+      - gnome-keyring
 
 - name: Install keybase
   pacman: name=keybase-gui state=present
