@@ -25,9 +25,9 @@
     name: inkscape
     state: present
   tags:
-      - inkscape
-      - pstoedit # latex renderer
-      - pdf2svg
+    - inkscape
+    - pstoedit # latex renderer
+    - pdf2svg
 
 - name: Install Digikam
   pacman:
@@ -68,4 +68,14 @@
 - name: Install OBS
   pacman:
     state: present
-    name: obs-studio
+    name:
+      - obs-studio
+      - linux-headers
+      - v4l2loopback-dkms
+
+- name: Install tools for webcam
+  pacman:
+    state: present
+    name:
+      - bc
+      - zenity
