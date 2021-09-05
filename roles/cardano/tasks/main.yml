@@ -1,0 +1,89 @@
+---
+- name: Download cardano-node
+  get_url:
+    url: "https://hydra.iohk.io/build/{{ node_build }}/download/1/cardano-node-{{ node_version }}-linux.tar.gz"
+    dest: /home/orchest/cardano-node-{{ node_version }}-linux.tar.gz
+    checksum: "{{ node_build_checksum }}"
+
+- name: Decompress cardano-node source
+  unarchive:
+    src: /home/orchest/cardano-node-{{ node_version }}-linux.tar.gz
+    dest: /home/orchest
+    creates: /home/orchest/cardano-node
+    remote_src: yes
+
+- name: Copy cardano-node binaries
+  copy:
+    src: /home/orchest/{{ item }}
+    dest: /usr/bin/
+    owner: root
+    group: root
+    mode: 0755
+    remote_src: yes
+  with_items:
+    - cardano-node
+    - cardano-cli
+
+- name: Create cardano group
+  group:
+    name: "{{ cardano_user }}"
+    state: present
+    system: yes
+
+- name: Create cardano user
+  user:
+    name: "{{ cardano_user }}"
+    group: "{{ cardano_user }}"
+    system: yes
+    state: present
+    home: /var/lib/{{ cardano_user }}-node
+
+- name: Set authorized key
+  authorized_key:
+    user: cardano
+    state: present
+    key: "{{ lookup('file', 'roles/base/files/nitro_smart.pub') }}"
+
+- name: Create cardano directories
+  file:
+    path: "{{ item }}"
+    mode: 0755
+    state: directory
+    owner: "{{ cardano_user }}"
+    group: "{{ cardano_user }}"
+  with_items:
+    - /var/lib/{{ cardano_user }}-node/config
+    - /var/lib/{{ cardano_user }}-node/db-mainnet
+    - /var/lib/{{ cardano_user }}-node/db-testnet
+    - /var/lib/{{ cardano_user }}-node/db-alonzo-purple
+
+- name: Copy Cardano config files
+  copy:
+    src: "{{ item[0].name }}-{{ item[1] }}.json"
+    dest: "/var/lib/{{ cardano_user }}-node/config/{{ item[0].name }}-{{ item[1] }}.json"
+    mode: 0644
+  notify: restart {{ item[0].name }}
+  with_nested:
+    - "{{ networks }}"
+    - [
+        "config",
+        "byron-genesis",
+        "shelley-genesis",
+        "alonzo-genesis",
+        "topology",
+      ]
+
+- name: Cardano network config
+  template:
+    src: cardano-node.service.j2
+    dest: /usr/lib/systemd/system/cardano-node-{{ item.name }}.service
+  with_items: "{{ networks }}"
+  notify:
+    - reload systemd daemon
+    - restart {{ item.name }}
+
+- name: Enable cardano networks
+  service:
+    name: "cardano-node-{{ item.name }}.service"
+    enabled: yes
+  with_items: "{{ networks }}"

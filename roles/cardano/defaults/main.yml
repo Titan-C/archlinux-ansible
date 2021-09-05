@@ -1,0 +1,9 @@
+cardano_user: cardano
+node_version: 1.29.0
+node_build: 7408438
+node_build_checksum: sha256:5b15b65dead36e9cfb1bf0fdafe76c4d374988ca5b56270a00cdcc66815b08e0
+
+networks:
+  - { desc: "Alonzo Purple", name: "alonzo-purple", port: "3003" }
+  - { desc: "Testnet", name: "testnet", port: "3002" }
+  - { desc: "Mainnet", name: "mainnet", port: "3001" }
