@@ -5,16 +5,21 @@
     dest: /home/orchest/cardano-node-{{ node_version }}-linux.tar.gz
     checksum: "{{ node_build_checksum }}"
 
+- name: Create directory to unpack
+  file:
+    path: /home/orchest/cardano
+    state: directory
+
 - name: Decompress cardano-node source
   unarchive:
     src: /home/orchest/cardano-node-{{ node_version }}-linux.tar.gz
-    dest: /home/orchest
-    creates: /home/orchest/cardano-node
+    dest: /home/orchest/cardano
+    creates: /home/orchest/cardano/cardano-node
     remote_src: yes
 
 - name: Copy cardano-node binaries
   copy:
-    src: /home/orchest/{{ item }}
+    src: /home/orchest/cardano/{{ item }}
     dest: /usr/bin/
     owner: root
     group: root
