@@ -3,7 +3,17 @@
     {
       "addr": "3.11.242.179",
       "port": 3001,
-      "valency": 2
+      "valency": 0
+    },
+    {
+      "addr": "node1.cardano.gratis",
+      "port": 9001,
+      "valency": 1
+    },
+    {
+      "addr": "alonzo-relays.onyxstakepool.com",
+      "port": 3001,
+      "valency": 1
     }
   ]
 }
