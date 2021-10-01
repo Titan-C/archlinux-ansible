@@ -23,6 +23,7 @@
       - tree
       - mlocate
       - htop
+      - ntp
   tags:
     - packages
 
