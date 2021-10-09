@@ -1,5 +1,5 @@
 {{ ansible_managed | comment }}
-#	$OpenBSD: sshd_config,v 1.103 2018/04/09 20:41:22 tj Exp $
+#	$OpenBSD: sshd_config,v 1.104 2021/07/02 05:11:21 dtucker Exp $
 # Following recomendations from https://infosec.mozilla.org/guidelines/openssh
 
 # This is the sshd server system-wide configuration file.  See
@@ -12,11 +12,10 @@
 # possible, but leave them commented.  Uncommented options override the
 # default value.
 
-Port 22
+#Port 22
 #AddressFamily any
 #ListenAddress 0.0.0.0
 #ListenAddress ::
-Protocol 2
 
 HostKey /etc/ssh/ssh_host_ed25519_key
 HostKey /etc/ssh/ssh_host_rsa_key
@@ -68,7 +67,7 @@ PasswordAuthentication no
 #PermitEmptyPasswords no
 
 # Change to no to disable s/key passwords
-ChallengeResponseAuthentication no
+KbdInteractiveAuthentication no
 
 # Kerberos options
 #KerberosAuthentication no
