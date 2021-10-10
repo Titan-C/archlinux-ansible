@@ -9,43 +9,26 @@
 - name: Configure logwatch
   template: src=logwatch.conf.j2 dest=/etc/logwatch/conf/logwatch.conf
 
-- name: Install Collectd
-  pacman:
+- name: Checkmk-agent
+  get_url:
+    url: http://git.oscarnajera.com/ingrid/check_mk/agents/check_mk_agent.linux
+    dest: /usr/bin/check_mk_agent
+    checksum: sha256:a0ff92019038bfd4f5a133370fdcc769d75820860c7d06fc71111a0cee3aa333
+    mode: 0755
+
+- name: Create Checkmk dirs
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  with_items:
+    - /usr/lib/check_mk_agent
+    - /etc/check_mk
+    - /var/lib/check_mk_agent
+
+- name: Set authorized key
+  authorized_key:
+    user: root
     state: present
-    name:
-      - collectd
-      - rrdtool
-      - lm_sensors
-  tags:
-    - monitoring
-
-- name: Install python dependencies for collectd
-  pacman:
-    state: present
-    name:
-      - python-pip
-      - python-lxml
-      - python-requests
-  tags:
-    - monitoring
-
-- name: Copy collectd configuration file
-  template: src=collectd.conf.j2 dest=/etc/collectd.conf
-  notify: restart collectd
-  tags:
-    - monitoring
-
-- name: Enable and start rrdcached
-  service: name=rrdcached.service enabled=yes state=started
-  tags:
-    - monitoring
-
-- name: Enable and start collectd
-  service: name=collectd.service enabled=yes state=started
-  tags:
-    - monitoring
-
-- name: Set firewall rule for collectd
-  ufw: rule=allow port=25826 proto=udp
-  tags: ufw
-  when: inventory_hostname in groups['raspberry']
+    key: "{{ lookup('file', 'roles/base/files/ingrid_cmk.pub') }}"
+    key_options: 'command="/usr/bin/check_mk_agent"'

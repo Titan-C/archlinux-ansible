@@ -1,5 +1,7 @@
 ---
-- hosts: backup
+- hosts:
+    - backup
+    - cardano
   user: orchest
   become: True
   roles:
@@ -7,5 +9,16 @@
     - { role: cron, tags: ["cron"] }
     - { role: networking, tags: ["networking"] }
     - { role: ssh, tags: ["ssh"] }
+    - { role: monitoring, tags: ["monitoring"] }
+
+- hosts: backup
+  user: orchest
+  become: True
+  roles:
     - { role: bitcoin, tags: ["bitcoin"] }
+    - { role: cardano, tags: ["cardano"] }
+- hosts: cardano
+  user: orchest
+  become: True
+  roles:
     - { role: cardano, tags: ["cardano"] }
