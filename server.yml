@@ -16,7 +16,12 @@
   become: True
   roles:
     - { role: bitcoin, tags: ["bitcoin"] }
-    - { role: cardano, tags: ["cardano"] }
+    - {
+        role: cardano,
+        tags: ["cardano"],
+        networks: [{ desc: "Testnet", name: "testnet", port: "3002" }],
+      }
+
 - hosts: cardano
   user: orchest
   become: True

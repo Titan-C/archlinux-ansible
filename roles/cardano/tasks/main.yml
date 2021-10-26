@@ -7,19 +7,19 @@
 
 - name: Create directory to unpack
   file:
-    path: /home/orchest/cardano
+    path: /home/orchest/cardano-{{ node_version }}
     state: directory
 
 - name: Decompress cardano-node source
   unarchive:
     src: /home/orchest/cardano-node-{{ node_version }}-linux.tar.gz
-    dest: /home/orchest/cardano
-    creates: /home/orchest/cardano/cardano-node
+    dest: /home/orchest/cardano-{{ node_version }}
+    creates: /home/orchest/cardano-{{ node_version }}/cardano-node
     remote_src: yes
 
 - name: Copy cardano-node binaries
   copy:
-    src: /home/orchest/cardano/{{ item }}
+    src: /home/orchest/cardano-{{ node_version }}/{{ item }}
     dest: /usr/bin/
     owner: root
     group: root
@@ -28,6 +28,8 @@
   with_items:
     - cardano-node
     - cardano-cli
+  notify:
+    - restart all nodes
 
 - name: Create cardano group
   group:
@@ -91,4 +93,5 @@
   service:
     name: "cardano-node-{{ item.name }}.service"
     enabled: yes
+    state: started
   with_items: "{{ networks }}"
