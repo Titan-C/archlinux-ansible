@@ -1,9 +1,32 @@
 cardano_user: cardano
-node_version: 1.30.1
-node_build: 7739415
-node_build_checksum: sha256:8c72f818986680d1075b0784bff5013096b68c7c600c724fb39446a1270c1b54
+node_version: 1.31.0
+node_build: 8113349
+node_build_checksum: sha256:0e815d2c8cd4fc096eda9e9e1fa9f5090091619dbe5ea2092f20dcf491983add
 
 networks:
-  - { desc: "Alonzo Purple", name: "alonzo-purple", port: "3003" }
+  # - { desc: "Alonzo Purple", name: "alonzo-purple", port: "3003" }
   - { desc: "Testnet", name: "testnet", port: "3002" }
-  # - { desc: "Mainnet", name: "mainnet", port: "3001" }
+  - { desc: "Mainnet", name: "mainnet", port: "3001" }
+
+postgresql_data_dir: "/var/lib/postgres/data"
+postgresql_user: "postgres"
+postgresql_group: "postgres"
+
+# Host based authentication (hba) entries to be added to the pg_hba.conf. This
+# variable's defaults reflect the defaults that come with a fresh installation.
+postgresql_hba_entries:
+  - { type: local, database: all, user: postgres, auth_method: peer }
+  - {
+      type: host,
+      database: all,
+      user: all,
+      address: "127.0.0.1/32",
+      auth_method: "scram-sha-256",
+    }
+  - {
+      type: host,
+      database: all,
+      user: all,
+      address: "::1/128",
+      auth_method: "scram-sha-256",
+    }

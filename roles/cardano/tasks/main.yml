@@ -3,6 +3,7 @@
   get_url:
     url: "https://hydra.iohk.io/build/{{ node_build }}/download/1/cardano-node-{{ node_version }}-linux.tar.gz"
     dest: /home/orchest/cardano-node-{{ node_version }}-linux.tar.gz
+    timeout: 300
     checksum: "{{ node_build_checksum }}"
 
 - name: Create directory to unpack
@@ -28,8 +29,6 @@
   with_items:
     - cardano-node
     - cardano-cli
-  notify:
-    - restart all nodes
 
 - name: Create cardano group
   group:
@@ -95,3 +94,6 @@
     enabled: yes
     state: started
   with_items: "{{ networks }}"
+
+- import_tasks: postgres.yml
+  tags: postgres

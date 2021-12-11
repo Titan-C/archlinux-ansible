@@ -3,11 +3,6 @@
   systemd:
     daemon_reload: yes
 
-- name: Restart all nodes
-  notify:
-    - restart {{ item.name }}
-  with_items: "{{ networks }}"
-
 - name: restart alonzo-purple
   service:
     name: cardano-node-alonzo-purple
@@ -22,3 +17,9 @@
   service:
     name: cardano-node-mainnet
     state: restarted
+
+- name: restart postgresql
+  service:
+    name: postgresql
+    state: restarted
+    sleep: 5
