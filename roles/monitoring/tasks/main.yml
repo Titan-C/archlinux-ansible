@@ -13,7 +13,7 @@
   get_url:
     url: http://git.oscarnajera.com/ingrid/check_mk/agents/check_mk_agent.linux
     dest: /usr/bin/check_mk_agent
-    checksum: sha256:a0ff92019038bfd4f5a133370fdcc769d75820860c7d06fc71111a0cee3aa333
+    checksum: sha256:1a6d2b0df9dcfe9fdbc16d3e4c70772b7f018a2c218092b46ac8420a0f19e282
     mode: 0755
 
 - name: Create Checkmk dirs
@@ -23,6 +23,7 @@
     mode: 0755
   with_items:
     - /usr/lib/check_mk_agent
+    - /usr/lib/check_mk_agent/plugins
     - /etc/check_mk
     - /var/lib/check_mk_agent
 
@@ -32,3 +33,16 @@
     state: present
     key: "{{ lookup('file', 'roles/base/files/ingrid_cmk.pub') }}"
     key_options: 'command="/usr/bin/check_mk_agent"'
+
+- name: Install Checkmk plugin dependencies
+  pacman:
+    state: present
+    name:
+      - which
+
+- name: Checkmk plugins. PostgreSQL
+  get_url:
+    url: http://git.oscarnajera.com/ingrid/check_mk/agents/plugins/mk_postgres.py
+    dest: /usr/lib/check_mk_agent/plugins
+    checksum: sha256:514d22ffc95a8c3d6d9106cab37a60c8abdee592918a3cc3de0c891000b01ed4
+    mode: 0755
