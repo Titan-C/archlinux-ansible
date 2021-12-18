@@ -13,6 +13,11 @@
     name: cardano-node-testnet
     state: restarted
 
+- name: restart db-sync testnet
+  service:
+    name: cardano-db-sync-testnet
+    state: restarted
+
 - name: restart mainnet
   service:
     name: cardano-node-mainnet

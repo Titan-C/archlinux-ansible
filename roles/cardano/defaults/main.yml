@@ -8,6 +8,7 @@ networks:
   - { desc: "Testnet", name: "testnet", port: "3002" }
   - { desc: "Mainnet", name: "mainnet", port: "3001" }
 
+cardano_db_pwd: "{{ lookup( 'password', 'pass/pgsql_cardano.pwd' ) }}"
 postgresql_data_dir: "/var/lib/postgres/data"
 postgresql_user: "postgres"
 postgresql_group: "postgres"

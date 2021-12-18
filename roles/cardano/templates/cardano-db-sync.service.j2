@@ -1,0 +1,32 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Cardano DB sync {{ item.desc }}
+Requires=cardano-node-{{ item.name }}.service
+
+[Service]
+Type=simple
+Environment="PGPASSFILE=/var/lib/{{ cardano_user }}-node/config/pgpass-{{item.name}}"
+ExecStart=cardano-db-sync-extended \
+    --config "/var/lib/{{ cardano_user }}-node/config/{{item.name}}-db-config.yml" \
+    --socket-path "/run/{{ cardano_user }}-node-{{ item.name }}/socket" \
+    --state-dir "/var/lib/{{ cardano_user }}-node/db-{{ item.name }}/ledger-state" \
+    --schema-dir "/var/lib/{{ cardano_user }}-node/schema/"
+KillSignal=SIGINT
+Restart=always
+RestartSec=60
+TimeoutStopSec=600
+
+# Directory creation and permissions
+####################################
+
+# Run as {{ cardano_user }}:{{ cardano_user }}
+User={{ cardano_user }}
+Group={{ cardano_user }}
+
+# /var/lib/{{ cardano_user }}
+StateDirectory={{ cardano_user }}-node
+StateDirectoryMode=0710
+
+[Install]
+WantedBy=multi-user.target

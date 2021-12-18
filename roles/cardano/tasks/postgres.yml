@@ -4,6 +4,7 @@
   package:
     name:
       - postgresql
+      - python-psycopg2
     state: present
   tags:
     - dependencies
@@ -22,7 +23,7 @@
   register: pgdata_dir_version
 
 - name: Ensure PostgreSQL database is initialized.
-  command: "initdb -D {{ postgresql_data_dir }}"
+  command: "initdb --locale=en_US.UTF-8 -E UTF8 -D {{ postgresql_data_dir }}"
   when: not pgdata_dir_version.stat.exists
   become: true
   become_user: "{{ postgresql_user }}"
@@ -45,7 +46,23 @@
     name: postgresql.service
     state: started
     enabled: yes
-# - name: Set password for PostgreSQL admin user
-#   become: true
-#   become_user: "{{ postgresql_user }}"
-#   postgresql_user: name={{ db_admin_username }} password={{ db_admin_password }}
+
+- name: "Postgresql cardano role is created."
+  postgresql_user:
+    name: "{{ cardano_user }}"
+    password: "{{ cardano_db_pwd }}"
+    encrypted: yes
+    state: present
+    role_attr_flags: CREATEDB
+  become_user: postgres
+  become: yes
+
+- name: "[PostgreSQL] - Cardano db sync database is created."
+  postgresql_db:
+    name: "{{ item }}"
+    state: present
+    owner: "{{ cardano_user }}"
+  become_user: postgres
+  become: yes
+  with_items:
+    - testnet

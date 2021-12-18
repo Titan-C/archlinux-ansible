@@ -79,7 +79,7 @@
         "topology",
       ]
 
-- name: Cardano network config
+- name: Cardano network service
   template:
     src: cardano-node.service.j2
     dest: /usr/lib/systemd/system/cardano-node-{{ item.name }}.service
@@ -97,3 +97,47 @@
 
 - import_tasks: postgres.yml
   tags: postgres
+
+- name: Upload cardano-db-sync
+  copy:
+    # src: /home/titan/dev/cardano/cardano-db-sync/db-sync-node/bin/cardano-db-sync-extended
+    src: /home/titan/.cabal/store/ghc-8.10.5/cardano-db-sync-extended-12.0.0-82ca88b5ea55c571eef56b6ca4774fb696d7b8ea8217ae4ecb24063498a02dcc/bin/cardano-db-sync-extended
+    dest: /usr/bin/
+    owner: root
+    group: root
+    mode: 0755
+  tags: sync
+
+- name: Upload cardano-db-sync config
+  copy:
+    src: testnet-db-config.yml
+    dest: /var/lib/{{ cardano_user }}-node/config
+    mode: 0755
+  tags: sync
+
+- name: Upload cardano-db-sync schemas
+  copy:
+    src: /home/titan/dev/cardano/cardano-db-sync/schema
+    dest: /var/lib/{{ cardano_user }}-node/
+    mode: 0755
+    directory_mode: yes
+  tags: sync
+
+- name: Create db-pg-pass file
+  copy:
+    dest: /var/lib/{{ cardano_user }}-node/config/pgpass-testnet
+    content: "/var/run/postgresql:5432:testnet:{{ cardano_user }}:{{ cardano_db_pwd }}"
+    owner: "{{ cardano_user }}"
+    group: "{{ cardano_user }}"
+    mode: 0400
+  tags: sync
+
+- name: Cardano DB sync service
+  template:
+    src: cardano-db-sync.service.j2
+    dest: /usr/lib/systemd/system/cardano-db-sync-{{ item.name }}.service
+  with_items: "{{ networks }}"
+  notify:
+    - reload systemd daemon
+    - restart db-sync {{ item.name }}
+  tags: sync
