@@ -1,7 +1,7 @@
 cardano_user: cardano
-node_version: 1.31.0
-node_build: 8113349
-node_build_checksum: sha256:0e815d2c8cd4fc096eda9e9e1fa9f5090091619dbe5ea2092f20dcf491983add
+node_version: 1.33.0
+node_build: 9941151
+node_build_checksum: sha256:eb7fbc652f79bcb8f56699ed7fee174a4ed321307c7086838d44972136795543
 
 networks:
   # - { desc: "Alonzo Purple", name: "alonzo-purple", port: "3003" }

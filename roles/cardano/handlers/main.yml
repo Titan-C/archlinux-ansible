@@ -23,6 +23,11 @@
     name: cardano-node-mainnet
     state: restarted
 
+- name: restart db-sync mainnet
+  service:
+    name: cardano-db-sync-mainnet
+    state: restarted
+
 - name: restart postgresql
   service:
     name: postgresql

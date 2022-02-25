@@ -64,15 +64,14 @@
     encrypted: yes
     state: present
     role_attr_flags: CREATEDB
-  become_user: postgres
+  become_user: "{{ postgresql_user }}"
   become: yes
 
 - name: "[PostgreSQL] - Cardano db sync database is created."
   postgresql_db:
-    name: "{{ item }}"
+    name: "{{ item.name }}"
     state: present
     owner: "{{ cardano_user }}"
-  become_user: postgres
+  become_user: "{{ postgresql_user }}"
   become: yes
-  with_items:
-    - testnet
+  with_items: "{{ networks }}"

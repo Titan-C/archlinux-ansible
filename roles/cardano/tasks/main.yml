@@ -61,7 +61,7 @@
     - /var/lib/{{ cardano_user }}-node/config
     - /var/lib/{{ cardano_user }}-node/db-mainnet
     - /var/lib/{{ cardano_user }}-node/db-testnet
-    - /var/lib/{{ cardano_user }}-node/db-alonzo-purple
+    - /var/lib/{{ cardano_user }}-node/schema
 
 - name: Copy Cardano config files
   copy:
@@ -98,6 +98,14 @@
 - import_tasks: postgres.yml
   tags: postgres
 
+- name: Install libsodium
+  package:
+    name:
+      - libsodium
+    state: present
+  tags:
+    - dependencies
+
 - name: Upload cardano-db-sync
   copy:
     # src: /home/titan/dev/cardano/cardano-db-sync/db-sync-node/bin/cardano-db-sync-extended
@@ -109,28 +117,34 @@
   tags: sync
 
 - name: Upload cardano-db-sync config
-  copy:
-    src: testnet-db-config.yml
-    dest: /var/lib/{{ cardano_user }}-node/config
+  template:
+    src: db-config.yml.j2
+    dest: /var/lib/{{ cardano_user }}-node/config/{{ item.name }}-db-config.yml
     mode: 0755
+  with_items: "{{ networks }}"
   tags: sync
 
 - name: Upload cardano-db-sync schemas
   copy:
-    src: /home/titan/dev/cardano/cardano-db-sync/schema
+    src: "{{ item }}"
     dest: /var/lib/{{ cardano_user }}-node/
-    mode: 0755
+    mode: a+r
+    owner: "{{ cardano_user }}"
+    group: "{{ cardano_user }}"
     directory_mode: yes
+  with_fileglob:
+    - /home/titan/dev/cardano/cardano-db-sync/schema/*
   tags: sync
 
 - name: Create db-pg-pass file
   copy:
-    dest: /var/lib/{{ cardano_user }}-node/config/pgpass-testnet
-    content: "/var/run/postgresql:5432:testnet:{{ cardano_user }}:{{ cardano_db_pwd }}"
+    dest: /var/lib/{{ cardano_user }}-node/config/pgpass-{{ item.name }}
+    content: "/var/run/postgresql:5432:{{ item.name }}:{{ cardano_user }}:{{ cardano_db_pwd }}"
     owner: "{{ cardano_user }}"
     group: "{{ cardano_user }}"
     mode: 0400
   tags: sync
+  with_items: "{{ networks }}"
 
 - name: Cardano DB sync service
   template:
@@ -141,3 +155,10 @@
     - reload systemd daemon
     - restart db-sync {{ item.name }}
   tags: sync
+
+- name: Cardano DB sync service enable
+  service:
+    name: "cardano-db-sync-{{ item.name }}.service"
+    enabled: yes
+    state: started
+  with_items: "{{ networks }}"
