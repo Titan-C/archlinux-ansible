@@ -75,3 +75,11 @@
   become_user: "{{ postgresql_user }}"
   become: yes
   with_items: "{{ networks }}"
+
+- name: Vaccum db sync database
+  postgresql_query:
+    db: "{{ item.name }}"
+    query: VACUUM
+    autocommit: yes
+  become_user: "{{ postgresql_user }}"
+  with_items: "{{ networks }}"
