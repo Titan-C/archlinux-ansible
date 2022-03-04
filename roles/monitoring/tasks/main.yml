@@ -13,7 +13,7 @@
   get_url:
     url: http://git.oscarnajera.com/ingrid/check_mk/agents/check_mk_agent.linux
     dest: /usr/bin/check_mk_agent
-    checksum: sha256:1a6d2b0df9dcfe9fdbc16d3e4c70772b7f018a2c218092b46ac8420a0f19e282
+    checksum: sha256:07beec03730e071569703b09aa4e3cd78d43ed03b6eb5a2c91ad02fc83b11771
     mode: 0755
 
 - name: Create Checkmk dirs
@@ -44,5 +44,5 @@
   get_url:
     url: http://git.oscarnajera.com/ingrid/check_mk/agents/plugins/mk_postgres.py
     dest: /usr/lib/check_mk_agent/plugins
-    checksum: sha256:514d22ffc95a8c3d6d9106cab37a60c8abdee592918a3cc3de0c891000b01ed4
+    checksum: sha256:728105e773d7a67e4ea530e176276918e71946a81def7df444791ef33cb05542
     mode: 0755

@@ -127,7 +127,7 @@
 - name: Upload cardano-db-sync schemas
   copy:
     src: "{{ item }}"
-    dest: /var/lib/{{ cardano_user }}-node/
+    dest: /var/lib/{{ cardano_user }}-node/schema
     mode: a+r
     owner: "{{ cardano_user }}"
     group: "{{ cardano_user }}"

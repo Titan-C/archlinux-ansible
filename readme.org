@@ -105,3 +105,16 @@ cabal update
 cabal install git-annex hledger pandoc ShellCheck
 cabal install hlint stylish-haskell stack
 #+end_src
+* Servers
+SSH over root and change password and create user
+#+begin_src bash
+passwd
+useradd --create-home deploy
+passwd deploy
+# Set the new account for a passwordless `sudo`.
+echo 'deploy ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/deploy
+#+end_src
+
+#+begin_src bash
+ssh-copy-id -f -i ~/path/to/pubkep.pub deploy@server
+#+end_src
