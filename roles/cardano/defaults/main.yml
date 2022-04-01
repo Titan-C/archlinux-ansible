@@ -4,7 +4,6 @@ node_build: 12997298
 node_build_checksum: sha256:1c5e04459a406baad58378c112611bbb6f982f85d41d8bf9c9b13d8b990aac85
 
 networks:
-  # - { desc: "Alonzo Purple", name: "alonzo-purple", port: "3003" }
   - { desc: "Testnet", name: "testnet", port: "3002" }
   - { desc: "Mainnet", name: "mainnet", port: "3001" }
 

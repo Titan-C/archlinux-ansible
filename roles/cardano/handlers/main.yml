@@ -3,11 +3,6 @@
   systemd:
     daemon_reload: yes
 
-- name: restart alonzo-purple
-  service:
-    name: cardano-node-alonzo-purple
-    state: restarted
-
 - name: restart testnet
   service:
     name: cardano-node-testnet

@@ -2,6 +2,7 @@
 - hosts:
     - backup
     - cardano
+    - nina
   user: orchest
   become: True
   roles:
@@ -21,12 +22,17 @@
   user: orchest
   become: True
   roles:
+    - { role: cardano, tags: ["cardano"], networks: [
+            # { desc: "Mainnet", name: "mainnet", port: "3001" },
+            { desc: "Testnet", name: "testnet", port: "3002" },
+          ] }
+
+- hosts: nina
+  user: orchest
+  become: True
+  roles:
     - {
         role: cardano,
         tags: ["cardano"],
-        networks:
-          [
-            { desc: "Mainnet", name: "mainnet", port: "3001" },
-            { desc: "Testnet", name: "testnet", port: "3002" },
-          ],
+        networks: [{ desc: "Mainnet", name: "mainnet", port: "3001" }],
       }

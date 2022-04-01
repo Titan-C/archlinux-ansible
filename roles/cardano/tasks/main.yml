@@ -109,7 +109,7 @@
 - name: Upload cardano-db-sync
   copy:
     # src: /home/titan/dev/cardano/cardano-db-sync/db-sync-node/bin/cardano-db-sync-extended
-    src: /home/titan/.cabal/store/ghc-8.10.5/cardano-db-sync-extended-12.0.0-82ca88b5ea55c571eef56b6ca4774fb696d7b8ea8217ae4ecb24063498a02dcc/bin/cardano-db-sync-extended
+    src: /home/titan/.cabal/store/ghc-8.10.7/cardano-db-sync-extended-12.0.2-deb8273c5f5822ba87dea5d36a37a2d96872e4be75e89104709b27e9792d4783/bin/cardano-db-sync-extended
     dest: /usr/bin/
     owner: root
     group: root
