@@ -2,7 +2,7 @@ user:
     name: titan
     uid: 1000
     group: users
-    shell: /usr/bin/zsh
+    shell: /usr/bin/bash
 
 editors:
     - neovim
