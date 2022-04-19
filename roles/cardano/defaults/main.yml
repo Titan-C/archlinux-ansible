@@ -30,8 +30,3 @@ postgresql_hba_entries:
       address: "::1/128",
       auth_method: "scram-sha-256",
     }
-
-# Global configuration options that will be set in postgresql.conf.
-postgresql_global_config_options:
-  - option: password_encryption
-    value: scram-sha-256
