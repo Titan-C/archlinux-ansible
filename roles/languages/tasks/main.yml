@@ -15,7 +15,6 @@
     name:
       - ipython
       - python-pip
-      - python2-pip
       - python-virtualenv
       - python-virtualenvwrapper
       - python-ipdb

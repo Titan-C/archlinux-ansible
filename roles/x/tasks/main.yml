@@ -19,18 +19,12 @@
   pacman:
     state: present
     name:
-      - libva-intel-driver
-      - xorg-xbacklight
-  when: ansible_product_name == "Aspire V3-572G"
-
-- name: Install intel video hardware drivers
-  pacman:
-    state: present
-    name:
-      - vulkan-intel
       - intel-media-driver
-      - libva-utils
       - intel-media-sdk
+      - libva-intel-driver
+      - libva-utils
+      - vulkan-intel
+      - xorg-xbacklight
 
 - name: Install mesa demos
   pacman: name=mesa-demos state=present

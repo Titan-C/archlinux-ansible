@@ -28,9 +28,6 @@
 - name: Install console dictionary
   pacman: name=sdcv state=present
 
-- name: Install dictionary
-  pacman: name=goldendict state=present
-
 - name: Install languagetool
   pacman: name=languagetool state=present
 
