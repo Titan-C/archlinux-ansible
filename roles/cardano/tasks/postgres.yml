@@ -33,8 +33,10 @@
 
 - name: Configure global settings.
   template:
-    src: "postgresql.conf"
+    src: "postgresql.conf.j2"
     dest: "{{ postgresql_data_dir }}/postgresql.conf"
+    owner: "{{ postgresql_user }}"
+    group: "{{ postgresql_group }}"
     mode: 0644
   notify: restart postgresql
 
