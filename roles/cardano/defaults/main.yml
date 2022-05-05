@@ -1,7 +1,11 @@
 cardano_user: cardano
-node_version: 1.34.0
-node_build: 12997298
-node_build_checksum: sha256:1c5e04459a406baad58378c112611bbb6f982f85d41d8bf9c9b13d8b990aac85
+node_version: 1.34.1
+node_build: 13065769
+node_build_checksum: sha256:5621ca7229d1e4c0eeb2e8eb1230b7620eabe1788e3de43d88c1e86c68b341aa
+
+db_sync_version: 12.0.2
+db_sync_build: 12591418
+db_sync_build_checksum: sha256:112e444965f99702262bc9e91bf96bddade17d1938c5f22a7d8ad875ef91c287
 
 networks:
   - { desc: "Testnet", name: "testnet", port: "3002" }
