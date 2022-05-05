@@ -1,6 +1,7 @@
 ---
 - hosts: laptop
   become: yes
+  gather_facts: True
   roles:
     - { role: base, tags: ["base"] }
     - { role: cron, tags: ["cron"] }

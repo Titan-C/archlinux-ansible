@@ -13,6 +13,10 @@
 - name: Install shells
   include_tasks: shell.yml
 
+- name: Install pikaur
+  aur: name=pikaur user={{ user.name }} dir=/tmp
+  when: inventory_hostname in groups['laptop']
+
 - name: Install universal base packages
   pacman:
     state: present

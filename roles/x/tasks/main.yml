@@ -25,6 +25,16 @@
       - libva-utils
       - vulkan-intel
       - xorg-xbacklight
+  when: '"GenuineIntel" in ansible_processor'
+
+- name: Install intel video hardware drivers
+  pacman:
+    state: present
+    name:
+      - xf86-video-amdgpu
+      - vulkan-radeon
+      - libva-mesa-driver
+  when: '"AuthenticAMD" in ansible_processor'
 
 - name: Install mesa demos
   pacman: name=mesa-demos state=present
