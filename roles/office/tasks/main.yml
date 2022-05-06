@@ -1,16 +1,13 @@
 ---
-- name: Install notmuch and isysc
-  pacman:
-    state: present
-    name:
-      - notmuch
-      - isync
-      - bogofilter
-
 - name: Install Okular
   pacman:
     state: present
     name: okular
+
+- name: Install SQLiteBrowser
+  pacman:
+    state: present
+    name: sqlitebrowser
 
 - name: Install poppler
   pacman:
