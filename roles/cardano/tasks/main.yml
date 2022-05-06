@@ -2,25 +2,25 @@
 - name: Download cardano-node
   get_url:
     url: "https://hydra.iohk.io/build/{{ node_build }}/download/1/cardano-node-{{ node_version }}-linux.tar.gz"
-    dest: /home/orchest/cardano-node-{{ node_version }}-linux.tar.gz
+    dest: "{{ ansible_env.HOME }}/cardano-node-{{ node_version }}-linux.tar.gz"
     timeout: 300
     checksum: "{{ node_build_checksum }}"
 
 - name: Create directory to unpack
   file:
-    path: /home/orchest/cardano-{{ node_version }}
+    path: "{{ ansible_env.HOME }}/cardano-{{ node_version }}"
     state: directory
 
 - name: Decompress cardano-node source
   unarchive:
-    src: /home/orchest/cardano-node-{{ node_version }}-linux.tar.gz
-    dest: /home/orchest/cardano-{{ node_version }}
-    creates: /home/orchest/cardano-{{ node_version }}/cardano-node
+    src: "{{ ansible_env.HOME }}/cardano-node-{{ node_version }}-linux.tar.gz"
+    dest: "{{ ansible_env.HOME }}/cardano-{{ node_version }}"
+    creates: "{{ ansible_env.HOME }}/cardano-{{ node_version }}/cardano-node"
     remote_src: yes
 
 - name: Copy cardano-node binaries
   copy:
-    src: /home/orchest/cardano-{{ node_version }}/{{ item }}
+    src: "{{ ansible_env.HOME }}/cardano-{{ node_version }}/{{ item }}"
     dest: /usr/bin/
     owner: root
     group: root
@@ -109,25 +109,25 @@
 - name: Download cardano-db-sync
   get_url:
     url: "https://hydra.iohk.io/build/{{ db_sync_build }}/download/1/cardano-db-sync-{{ db_sync_version }}-linux.tar.gz"
-    dest: /home/orchest/cardano-db-sync-{{ node_version }}-linux.tar.gz
+    dest: "{{ ansible_env.HOME }}/cardano-db-sync-{{ db_sync_version }}-linux.tar.gz"
     timeout: 300
     checksum: "{{ db_sync_build_checksum }}"
 
 - name: Create directory to unpack
   file:
-    path: /home/orchest/cardano-db-sync-{{ db_sync_version }}
+    path: "{{ ansible_env.HOME }}/cardano-db-sync-{{ db_sync_version }}"
     state: directory
 
 - name: Decompress cardano-db-sync source
   unarchive:
-    src: /home/orchest/cardano-db-sync-{{ db_sync_version }}-linux.tar.gz
-    dest: /home/orchest/cardano-db-sync-{{ db_sync_version }}
-    creates: /home/orchest/cardano-db-sync-{{ db_sync_version }}/cardano-db-sync-extended
+    src: "{{ ansible_env.HOME }}/cardano-db-sync-{{ db_sync_version }}-linux.tar.gz"
+    dest: "{{ ansible_env.HOME }}/cardano-db-sync-{{ db_sync_version }}"
+    creates: "{{ ansible_env.HOME }}/cardano-db-sync-{{ db_sync_version }}/cardano-db-sync-extended"
     remote_src: yes
 
 - name: Copy cardano-db_sync binaries
   copy:
-    src: /home/orchest/cardano-db-sync-{{ db_sync_version }}/{{ item }}
+    src: "{{ ansible_env.HOME }}/cardano-db-sync-{{ db_sync_version }}/{{ item }}"
     dest: /usr/bin/
     owner: root
     group: root
