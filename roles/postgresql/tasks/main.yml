@@ -92,7 +92,7 @@
 #   with_items: "{{ dbs }}"
 
 - name: Set firewall rules for PostgreSQL
-  ufw: rule=limit port=5432
+  ufw: rule=allow port=5432
   tags: ufw
 # - name: Checkmk plugins. PostgreSQL
 #   get_url:
