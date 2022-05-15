@@ -1,0 +1,6 @@
+#!/bin/bash
+DOMAIN=db.arsmagna.xyz
+DATA_DIR=/var/lib/postgres/data
+cp /etc/letsencrypt/live/$DOMAIN/fullchain.pem $DATA_DIR
+cp /etc/letsencrypt/live/$DOMAIN/privkey.pem $DATA_DIR
+chown postgres:postgres $DATA_DIR/fullchain.pem $DATA_DIR/privkey.pem

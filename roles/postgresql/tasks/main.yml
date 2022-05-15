@@ -22,6 +22,10 @@
     path: "{{ postgresql_data_dir }}/PG_VERSION"
   register: pgdata_dir_version
 
+- import_tasks: letsencrypt.yml
+  tags:
+    - letsencrypt
+
 - name: Ensure PostgreSQL database is initialized.
   command: "initdb --locale=en_US.UTF-8 -E UTF8 -D {{ postgresql_data_dir }}"
   when: not pgdata_dir_version.stat.exists
@@ -56,7 +60,7 @@
     state: started
     enabled: yes
 
-- name: "Postgresql cardano role is created."
+- name: "[PostgreSQL] cardano role is created."
   postgresql_user:
     name: "{{ cardano_user }}"
     password: "{{ cardano_db_pwd }}"
@@ -68,17 +72,28 @@
 
 - name: "[PostgreSQL] - Cardano db sync database is created."
   postgresql_db:
-    name: "{{ item.name }}"
+    name: "{{ item }}"
     state: present
     owner: "{{ cardano_user }}"
   become_user: "{{ postgresql_user }}"
   become: yes
-  with_items: "{{ networks }}"
+  with_items: "{{ dbs }}"
 
-- name: Vaccum db sync database
-  postgresql_query:
-    db: "{{ item.name }}"
-    query: VACUUM
-    autocommit: yes
-  become_user: "{{ postgresql_user }}"
-  with_items: "{{ networks }}"
+# - name: Vaccum db sync database
+#   postgresql_query:
+#     db: "{{ item }}"
+#     query: VACUUM
+#     autocommit: yes
+#   become_user: "{{ postgresql_user }}"
+#   with_items: "{{ dbs }}"
+
+- name: Set firewall rules for PostgreSQL
+  ufw: rule=limit app=postgresql
+  tags: ufw
+
+- name: Checkmk plugins. PostgreSQL
+  get_url:
+    url: http://git.oscarnajera.com/ingrid/check_mk/agents/plugins/mk_postgres.py
+    dest: /usr/lib/check_mk_agent/plugins
+    checksum: sha256:16da3907e9360aa232c8d2040b113b5ac110aa737c45f261c2a6c7a7d956d084
+    mode: 0755

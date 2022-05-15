@@ -1,0 +1,35 @@
+- name: Install certbot
+  pacman:
+    state: present
+    name:
+      - certbot
+      - certbot-dns-cloudflare
+
+- name: Check if certificate already exists.
+  stat:
+    path: "/etc/letsencrypt/live/{{ postgres_host }}/cert.pem"
+  register: letsencrypt_cert
+
+- name: Ensure pre and post hook folders exist.
+  file:
+    path: /etc/letsencrypt/renewal-hooks/{{ item }}
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+  with_items:
+    - pre
+    - post
+    - deploy
+
+- name: Create deploy hook postgresql
+  template:
+    src: postgresql.deploy.j2
+    dest: /etc/letsencrypt/renewal-hooks/deploy/postgresql.deploy
+    owner: root
+    group: root
+    mode: 0750
+
+- name: Generate new certificate if one doesn't exist.
+  command: "certbot certonly --dns-cloudflare --dns-cloudflare-credentials /root/.store/cf-api-token.ini -d {{ postgres_host }}"
+  when: not letsencrypt_cert.stat.exists

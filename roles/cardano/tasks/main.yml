@@ -95,9 +95,6 @@
     state: started
   with_items: "{{ networks }}"
 
-- import_tasks: postgres.yml
-  tags: postgres
-
 - name: Install libsodium
   package:
     name:
@@ -140,7 +137,7 @@
   template:
     src: db-config.yml.j2
     dest: /var/lib/{{ cardano_user }}-node/config/{{ item.name }}-db-config.yml
-    mode: 0755
+    mode: 0644
   with_items: "{{ networks }}"
   tags: sync
 
@@ -159,7 +156,7 @@
 - name: Create db-pg-pass file
   copy:
     dest: /var/lib/{{ cardano_user }}-node/config/pgpass-{{ item.name }}
-    content: "/var/run/postgresql:5432:{{ item.name }}:{{ cardano_user }}:{{ cardano_db_pwd }}"
+    content: "{{ postgres_host }}:5432:{{ item.name }}:{{ cardano_user }}:{{ cardano_db_pwd }}"
     owner: "{{ cardano_user }}"
     group: "{{ cardano_user }}"
     mode: 0400

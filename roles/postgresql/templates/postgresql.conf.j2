@@ -178,11 +178,11 @@ dynamic_shared_memory_type = posix	# the default is the first option
 
 effective_io_concurrency = 2		# 1-1000; 0 disables prefetching
 #maintenance_io_concurrency = 10	# 1-1000; 0 disables prefetching
-max_worker_processes = 6		# (change requires restart)
-max_parallel_maintenance_workers = 3	# taken from max_parallel_workers
-max_parallel_workers_per_gather = 3	# taken from max_parallel_workers
+max_worker_processes = {{ ansible_processor_cores }}		# (change requires restart)
+max_parallel_maintenance_workers = {{ ansible_processor_cores / 2 }}	# taken from max_parallel_workers
+max_parallel_workers_per_gather = {{ ansible_processor_cores / 2 }}	# taken from max_parallel_workers
 #parallel_leader_participation = on
-max_parallel_workers = 6		# maximum number of max_worker_processes that
+max_parallel_workers = {{ ansible_processor_cores }}	# maximum number of max_worker_processes that
 					# can be used in parallel operations
 #old_snapshot_threshold = -1		# 1min-60d; -1 disables; 0 is immediate
 					# (change requires restart)

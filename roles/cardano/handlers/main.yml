@@ -22,9 +22,3 @@
   service:
     name: cardano-db-sync-mainnet
     state: restarted
-
-- name: restart postgresql
-  service:
-    name: postgresql
-    state: restarted
-    sleep: 5
