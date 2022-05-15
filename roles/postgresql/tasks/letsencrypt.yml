@@ -1,3 +1,4 @@
+---
 - name: Install certbot
   pacman:
     state: present

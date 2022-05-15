@@ -27,3 +27,14 @@
     - { role: languages, tags: ["languages"] }
     - { role: servers, tags: ["servers"] }
     # - { role: arduino, tags: ["arduino"] }
+    - {
+        role: postgresql,
+        tags: ["postgres"],
+        dbs: ["mainnet", "testnet"],
+        postgres_tls_method: "self-signed",
+      }
+    - {
+        role: cardano,
+        tags: ["cardano"],
+        networks: [{ desc: "Mainnet", name: "mainnet", port: "3001" }],
+      }

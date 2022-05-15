@@ -23,8 +23,12 @@
   register: pgdata_dir_version
 
 - import_tasks: letsencrypt.yml
+  when: postgres_tls_method == "letsencrypt"
   tags:
     - letsencrypt
+
+- import_tasks: self-signed.yml
+  when: postgres_tls_method == "self-signed"
 
 - name: Ensure PostgreSQL database is initialized.
   command: "initdb --locale=en_US.UTF-8 -E UTF8 -D {{ postgresql_data_dir }}"
@@ -88,12 +92,11 @@
 #   with_items: "{{ dbs }}"
 
 - name: Set firewall rules for PostgreSQL
-  ufw: rule=limit app=postgresql
+  ufw: rule=limit port=5432
   tags: ufw
-
-- name: Checkmk plugins. PostgreSQL
-  get_url:
-    url: http://git.oscarnajera.com/ingrid/check_mk/agents/plugins/mk_postgres.py
-    dest: /usr/lib/check_mk_agent/plugins
-    checksum: sha256:16da3907e9360aa232c8d2040b113b5ac110aa737c45f261c2a6c7a7d956d084
-    mode: 0755
+# - name: Checkmk plugins. PostgreSQL
+#   get_url:
+#     url: http://git.oscarnajera.com/ingrid/check_mk/agents/plugins/mk_postgres.py
+#     dest: /usr/lib/check_mk_agent/plugins
+#     checksum: sha256:16da3907e9360aa232c8d2040b113b5ac110aa737c45f261c2a6c7a7d956d084
+#     mode: 0755

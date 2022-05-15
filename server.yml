@@ -22,7 +22,12 @@
   user: orchest
   become: True
   roles:
-    - { role: postgres, tags: ["postgres"], dbs: ["mainnet", "testnet"] }
+    - {
+        role: postgres,
+        tags: ["postgres"],
+        dbs: ["mainnet", "testnet"],
+        postgres_tls_method: "letsencrypt",
+      }
     - { role: cardano, tags: ["cardano"], networks: [
             # { desc: "Mainnet", name: "mainnet", port: "3001" },
             { desc: "Testnet", name: "testnet", port: "3002" },
