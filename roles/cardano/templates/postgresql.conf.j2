@@ -58,7 +58,7 @@
 
 # - Connection Settings -
 
-#listen_addresses = 'localhost'		# what IP address(es) to listen on;
+listen_addresses = '*'		# what IP address(es) to listen on;
 					# comma-separated list of addresses;
 					# defaults to 'localhost'; use '*' for all
 					# (change requires restart)
@@ -99,13 +99,13 @@ password_encryption = scram-sha-256
 
 # - SSL -
 
-#ssl = off
+ssl = on
 #ssl_ca_file = ''
-#ssl_cert_file = 'server.crt'
+ssl_cert_file = 'fullchain.pem'
 #ssl_crl_file = ''
-#ssl_key_file = 'server.key'
+ssl_key_file = 'privkey.pem'
 #ssl_ciphers = 'HIGH:MEDIUM:+3DES:!aNULL' # allowed SSL ciphers
-#ssl_prefer_server_ciphers = on
+ssl_prefer_server_ciphers = on
 #ssl_ecdh_curve = 'prime256v1'
 #ssl_min_protocol_version = 'TLSv1.2'
 #ssl_max_protocol_version = ''
@@ -120,7 +120,7 @@ password_encryption = scram-sha-256
 
 # - Memory -
 
-shared_buffers = 4GB
+shared_buffers = 1GB
 					# (change requires restart)
 #huge_pages = try			# on, off, or try
 					# (change requires restart)
@@ -129,9 +129,9 @@ shared_buffers = 4GB
 					# (change requires restart)
 # Caution: it is not advisable to set max_prepared_transactions nonzero unless
 # you actively intend to use prepared transactions.
-work_mem = 64MB
+work_mem = 48MB
 #hash_mem_multiplier = 1.0		# 1-1000.0 multiplier on hash table work_mem
-maintenance_work_mem = 2GB		# min 1MB
+maintenance_work_mem = 1GB		# min 1MB
 #autovacuum_work_mem = -1		# min 1MB, or -1 to use maintenance_work_mem
 #logical_decoding_work_mem = 64MB	# min 64kB
 #max_stack_depth = 2MB			# min 100kB
@@ -176,13 +176,13 @@ dynamic_shared_memory_type = posix	# the default is the first option
 
 # - Asynchronous Behavior -
 
-effective_io_concurrency = 100		# 1-1000; 0 disables prefetching
+effective_io_concurrency = 2		# 1-1000; 0 disables prefetching
 #maintenance_io_concurrency = 10	# 1-1000; 0 disables prefetching
-max_worker_processes = 8		# (change requires restart)
-max_parallel_maintenance_workers = 4	# taken from max_parallel_workers
-max_parallel_workers_per_gather = 4	# taken from max_parallel_workers
+max_worker_processes = 6		# (change requires restart)
+max_parallel_maintenance_workers = 3	# taken from max_parallel_workers
+max_parallel_workers_per_gather = 3	# taken from max_parallel_workers
 #parallel_leader_participation = on
-max_parallel_workers = 8		# maximum number of max_worker_processes that
+max_parallel_workers = 6		# maximum number of max_worker_processes that
 					# can be used in parallel operations
 #old_snapshot_threshold = -1		# 1min-60d; -1 disables; 0 is immediate
 					# (change requires restart)
@@ -226,9 +226,9 @@ wal_recycle = off			# recycle WAL files
 
 # - Checkpoints -
 
-checkpoint_timeout = 15min		# range 30s-1d
+# checkpoint_timeout = 15min		# range 30s-1d
 max_wal_size = 8GB
-min_wal_size = 2GB
+min_wal_size = 1GB
 checkpoint_completion_target = 0.9	# checkpoint target duration, 0.0 - 1.0
 #checkpoint_flush_after = 256kB		# measured in pages, 0 disables
 #checkpoint_warning = 30s		# 0 disables
@@ -374,7 +374,7 @@ max_wal_senders = 0		# max number of walsender processes
 # - Planner Cost Constants -
 
 #seq_page_cost = 1.0			# measured on an arbitrary scale
-random_page_cost = 2.0			# same scale as above
+random_page_cost = 3.0			# same scale as above
 #cpu_tuple_cost = 0.01			# same scale as above
 #cpu_index_tuple_cost = 0.005		# same scale as above
 #cpu_operator_cost = 0.0025		# same scale as above
@@ -392,7 +392,7 @@ random_page_cost = 2.0			# same scale as above
 
 #min_parallel_table_scan_size = 8MB
 #min_parallel_index_scan_size = 512kB
-effective_cache_size = 16GB
+effective_cache_size = 2GB
 
 # - Genetic Query Optimizer -
 
@@ -430,7 +430,7 @@ default_statistics_target = 100	# range 1-10000
 					# requires logging_collector to be on.
 
 # This is used when logging to stderr:
-logging_collector = on		# Enable capturing of stderr and csvlog
+# logging_collector = off		# Enable capturing of stderr and csvlog
 					# into log files. Required to be on for
 					# csvlogs.
 					# (change requires restart)
