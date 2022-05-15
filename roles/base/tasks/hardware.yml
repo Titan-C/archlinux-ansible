@@ -4,6 +4,9 @@
     name: reiserfsprogs
     state: present
 
+- name: Install usbutils
+  pacman: name=usbutils state=present
+
 - name: Enable fstrim for ssd
   service: name=fstrim.timer enabled=yes
 
