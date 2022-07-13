@@ -63,7 +63,7 @@ listen_addresses = '*'		# what IP address(es) to listen on;
 					# defaults to 'localhost'; use '*' for all
 					# (change requires restart)
 #port = 5432				# (change requires restart)
-max_connections = 60			# (change requires restart)
+max_connections = 80			# (change requires restart)
 #superuser_reserved_connections = 3	# (change requires restart)
 #unix_socket_directories = '/run/postgresql'	# comma-separated list of directories
 					# (change requires restart)
@@ -120,7 +120,7 @@ ssl_prefer_server_ciphers = on
 
 # - Memory -
 
-shared_buffers = 3GB
+shared_buffers = 4GB
 					# (change requires restart)
 #huge_pages = try			# on, off, or try
 					# (change requires restart)
@@ -129,7 +129,7 @@ shared_buffers = 3GB
 					# (change requires restart)
 # Caution: it is not advisable to set max_prepared_transactions nonzero unless
 # you actively intend to use prepared transactions.
-work_mem = 48MB
+work_mem = 18MB
 #hash_mem_multiplier = 1.0		# 1-1000.0 multiplier on hash table work_mem
 maintenance_work_mem = 1GB		# min 1MB
 #autovacuum_work_mem = -1		# min 1MB, or -1 to use maintenance_work_mem
@@ -374,7 +374,7 @@ max_wal_senders = 0		# max number of walsender processes
 # - Planner Cost Constants -
 
 #seq_page_cost = 1.0			# measured on an arbitrary scale
-random_page_cost = 3.0			# same scale as above
+random_page_cost = 4.0			# same scale as above
 #cpu_tuple_cost = 0.01			# same scale as above
 #cpu_index_tuple_cost = 0.005		# same scale as above
 #cpu_operator_cost = 0.0025		# same scale as above
@@ -392,7 +392,7 @@ random_page_cost = 3.0			# same scale as above
 
 #min_parallel_table_scan_size = 8MB
 #min_parallel_index_scan_size = 512kB
-effective_cache_size = 6GB
+effective_cache_size = 10GB
 
 # - Genetic Query Optimizer -
 
@@ -719,9 +719,9 @@ default_text_search_config = 'pg_catalog.english'
 #------------------------------------------------------------------------------
 
 #deadlock_timeout = 1s
-max_locks_per_transaction = 128		# min 10
+max_locks_per_transaction = 512		# min 10
 					# (change requires restart)
-max_pred_locks_per_transaction = 128	# min 10
+max_pred_locks_per_transaction = 512	# min 10
 					# (change requires restart)
 #max_pred_locks_per_relation = -2	# negative values mean
 					# (max_pred_locks_per_transaction
