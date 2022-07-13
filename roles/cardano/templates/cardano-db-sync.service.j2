@@ -7,7 +7,7 @@ Requires=cardano-node-{{ item.name }}.service
 [Service]
 Type=simple
 Environment="PGPASSFILE=/var/lib/{{ cardano_user }}-node/config/pgpass-{{item.name}}"
-ExecStart=cardano-db-sync-extended +RTS -N -RTS \
+ExecStart=cardano-db-sync +RTS -N -RTS \
     --config "/var/lib/{{ cardano_user }}-node/config/{{item.name}}-db-config.yml" \
     --socket-path "/run/{{ cardano_user }}-node-{{ item.name }}/socket" \
     --state-dir "/var/lib/{{ cardano_user }}-node/db-{{ item.name }}/ledger-state" \

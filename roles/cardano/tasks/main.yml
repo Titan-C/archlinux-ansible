@@ -61,7 +61,17 @@
     - /var/lib/{{ cardano_user }}-node/config
     - /var/lib/{{ cardano_user }}-node/db-mainnet
     - /var/lib/{{ cardano_user }}-node/db-testnet
+    - /var/lib/{{ cardano_user }}-node/db-vasil-dev
     - /var/lib/{{ cardano_user }}-node/schema
+
+- name: Cardano network service
+  template:
+    src: cardano-node.service.j2
+    dest: /usr/lib/systemd/system/cardano-node-{{ item.name }}.service
+  with_items: "{{ networks }}"
+  notify:
+    - reload systemd daemon
+    - restart {{ item.name }}
 
 - name: Copy Cardano config files
   copy:
@@ -78,15 +88,6 @@
         "alonzo-genesis",
         "topology",
       ]
-
-- name: Cardano network service
-  template:
-    src: cardano-node.service.j2
-    dest: /usr/lib/systemd/system/cardano-node-{{ item.name }}.service
-  with_items: "{{ networks }}"
-  notify:
-    - reload systemd daemon
-    - restart {{ item.name }}
 
 - name: Enable cardano networks
   service:
@@ -119,7 +120,7 @@
   unarchive:
     src: "{{ ansible_env.HOME }}/cardano-db-sync-{{ db_sync_version }}-linux.tar.gz"
     dest: "{{ ansible_env.HOME }}/cardano-db-sync-{{ db_sync_version }}"
-    creates: "{{ ansible_env.HOME }}/cardano-db-sync-{{ db_sync_version }}/cardano-db-sync-extended"
+    creates: "{{ ansible_env.HOME }}/cardano-db-sync-{{ db_sync_version }}/cardano-db-sync"
     remote_src: yes
 
 - name: Copy cardano-db_sync binaries
@@ -131,7 +132,7 @@
     mode: 0755
     remote_src: yes
   with_items:
-    - cardano-db-sync-extended
+    - cardano-db-sync
 
 - name: Upload cardano-db-sync config
   template:
