@@ -46,6 +46,9 @@
   timezone:
     name: Europe/Berlin
 
+- name: Enable ntpd
+  service: name=ntpd.service enabled=yes state=started
+
 - name: Power saving setup
   include_tasks: power.yml
   when: inventory_hostname in groups['laptop']
