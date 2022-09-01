@@ -64,33 +64,6 @@
     state: started
     enabled: yes
 
-- name: "[PostgreSQL] cardano role is created."
-  postgresql_user:
-    name: "{{ cardano_user }}"
-    password: "{{ cardano_db_pwd }}"
-    encrypted: yes
-    state: present
-    role_attr_flags: CREATEDB
-  become_user: "{{ postgresql_user }}"
-  become: yes
-
-- name: "[PostgreSQL] - Cardano db sync database is created."
-  postgresql_db:
-    name: "{{ item }}"
-    state: present
-    owner: "{{ cardano_user }}"
-  become_user: "{{ postgresql_user }}"
-  become: yes
-  with_items: "{{ dbs }}"
-
-# - name: Vaccum db sync database
-#   postgresql_query:
-#     db: "{{ item }}"
-#     query: VACUUM
-#     autocommit: yes
-#   become_user: "{{ postgresql_user }}"
-#   with_items: "{{ dbs }}"
-
 - name: Set firewall rules for PostgreSQL
   ufw: rule=allow port=5432 src=161.97.138.76
   tags: ufw

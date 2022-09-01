@@ -8,5 +8,5 @@ db_sync_build: 17456051
 db_sync_build_checksum: sha256:c93b07d0bfb7cc3f9c1ed16d37a427865876275dbb4c387b0827d6e1c6ced112
 
 networks:
-  - { desc: "Testnet", name: "testnet", port: "3002" }
+  - { desc: "preview", name: "preview", port: "3002" }
   - { desc: "Mainnet", name: "mainnet", port: "3001" }

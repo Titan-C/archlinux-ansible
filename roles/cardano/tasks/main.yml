@@ -60,23 +60,22 @@
   with_items:
     - /var/lib/{{ cardano_user }}-node/config
     - /var/lib/{{ cardano_user }}-node/db-mainnet
-    - /var/lib/{{ cardano_user }}-node/db-testnet
-    - /var/lib/{{ cardano_user }}-node/db-vasil-dev
+    - /var/lib/{{ cardano_user }}-node/db-preview
     - /var/lib/{{ cardano_user }}-node/schema
 
-- name: Cardano network service
-  template:
-    src: cardano-node.service.j2
-    dest: /usr/lib/systemd/system/cardano-node-{{ item.name }}.service
+- name: Create cardano network config directories
+  file:
+    path: "/var/lib/{{ cardano_user }}-node/config/{{ item.name }}"
+    mode: 0755
+    state: directory
+    owner: "{{ cardano_user }}"
+    group: "{{ cardano_user }}"
   with_items: "{{ networks }}"
-  notify:
-    - reload systemd daemon
-    - restart {{ item.name }}
 
 - name: Copy Cardano config files
   copy:
-    src: "{{ item[0].name }}-{{ item[1] }}.json"
-    dest: "/var/lib/{{ cardano_user }}-node/config/{{ item[0].name }}-{{ item[1] }}.json"
+    src: "{{ item[0].name }}/{{ item[1] }}.json"
+    dest: "/var/lib/{{ cardano_user }}-node/config/{{ item[0].name }}/{{ item[1] }}.json"
     mode: 0644
   notify: restart {{ item[0].name }}
   with_nested:
@@ -88,6 +87,15 @@
         "alonzo-genesis",
         "topology",
       ]
+
+- name: Cardano network service
+  template:
+    src: cardano-node.service.j2
+    dest: /usr/lib/systemd/system/cardano-node-{{ item.name }}.service
+  with_items: "{{ networks }}"
+  notify:
+    - reload systemd daemon
+    - restart {{ item.name }}
 
 - name: Enable cardano networks
   service:
@@ -137,7 +145,7 @@
 - name: Upload cardano-db-sync config
   template:
     src: db-config.yml.j2
-    dest: /var/lib/{{ cardano_user }}-node/config/{{ item.name }}-db-config.yml
+    dest: /var/lib/{{ cardano_user }}-node/config/{{ item.name }}/db-config.yml
     mode: 0644
   with_items: "{{ networks }}"
   tags: sync
@@ -157,12 +165,41 @@
 - name: Create db-pg-pass file
   copy:
     dest: /var/lib/{{ cardano_user }}-node/config/pgpass-{{ item.name }}
-    content: "{{ postgres_host }}:5432:{{ item.name }}:{{ cardano_user }}:{{ cardano_db_pwd }}"
+    content: "/var/run/postgresql:5432:{{ item.name }}:{{ cardano_user }}:{{ cardano_db_pwd }}"
     owner: "{{ cardano_user }}"
     group: "{{ cardano_user }}"
     mode: 0400
   tags: sync
   with_items: "{{ networks }}"
+
+- name: "[PostgreSQL] cardano role is created."
+  postgresql_user:
+    name: "{{ cardano_user }}"
+    password: "{{ cardano_db_pwd }}"
+    encrypted: yes
+    state: present
+    role_attr_flags: CREATEDB
+  become_user: "{{ postgresql_user }}"
+  become: yes
+  tags: postgresql
+
+- name: "[PostgreSQL] - Cardano db sync database is created."
+  postgresql_db:
+    name: "{{ item }}"
+    state: present
+    owner: "{{ cardano_user }}"
+  become_user: "{{ postgresql_user }}"
+  become: yes
+  with_items: "{{ dbs }}"
+  tags: postgresql
+
+# - name: Vaccum db sync database
+#   postgresql_query:
+#     db: "{{ item }}"
+#     query: VACUUM
+#     autocommit: yes
+#   become_user: "{{ postgresql_user }}"
+#   with_items: "{{ dbs }}"
 
 - name: Cardano DB sync service
   template:

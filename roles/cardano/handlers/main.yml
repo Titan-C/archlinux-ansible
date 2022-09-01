@@ -3,14 +3,14 @@
   systemd:
     daemon_reload: yes
 
-- name: restart testnet
+- name: restart preview
   service:
-    name: cardano-node-testnet
+    name: cardano-node-preview
     state: restarted
 
-- name: restart db-sync testnet
+- name: restart db-sync preview
   service:
-    name: cardano-db-sync-testnet
+    name: cardano-db-sync-preview
     state: restarted
 
 - name: restart mainnet
@@ -21,14 +21,4 @@
 - name: restart db-sync mainnet
   service:
     name: cardano-db-sync-mainnet
-    state: restarted
-
-- name: restart vasil-dev
-  service:
-    name: cardano-node-vasil-dev
-    state: restarted
-
-- name: restart db-sync vasil-dev
-  service:
-    name: cardano-db-sync-vasil-dev
     state: restarted

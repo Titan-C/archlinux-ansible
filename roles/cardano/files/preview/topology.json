@@ -15,18 +15,13 @@
       "publicRoots": {
         "accessPoints": [
           {
-      "address": "184.169.196.177",
-      "port": 3001
-          },
-    {
-      "address": "relays-new.cardano-testnet.iohkdev.io",
-      "port": 3001
-    }
-
+            "address": "preview-node.world.dev.cardano.org",
+            "port": 30002
+          }
         ],
         "advertise": false
       }
     }
   ],
-  "useLedgerAfterSlot": 60000
+  "useLedgerAfterSlot": 322000
 }
