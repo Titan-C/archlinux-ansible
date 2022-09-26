@@ -25,14 +25,14 @@
     - {
         role: postgresql,
         tags: ["postgres"],
-        dbs: ["mainnet", "testnet", "vasil-dev"],
         postgres_tls_method: "letsencrypt",
       }
-    - { role: cardano, tags: ["cardano"], networks: [
-            # { desc: "Mainnet", name: "mainnet", port: "3001" },
-            { desc: "Testnet", name: "testnet", port: "3002" },
-            { desc: "Vasil Devnet", name: "vasil-dev", port: "3004" },
-          ] }
+    - {
+        role: cardano,
+        tags: ["cardano"],
+        dbs: ["preview"],
+        networks: [{ desc: "preview", name: "preview", port: "3002" }],
+      }
 
 - hosts: nina
   user: orchest
@@ -41,13 +41,13 @@
     - {
         role: cardano,
         tags: ["cardano"],
+        dbs: ["mainnet"],
         networks: [{ desc: "Mainnet", name: "mainnet", port: "3001" }],
-        postgres_host: "db.arsmagna.xyz",
+        # postgres_host: "db.arsmagna.xyz",
         cardano_db_pwd: "{{ lookup( 'password', 'pass/pgsql_cardano.pwd' ) }}",
       }
     - {
         role: postgresql,
         tags: ["postgres"],
-        dbs: ["mainnet"],
         postgres_tls_method: "self-signed",
       }
