@@ -104,6 +104,12 @@
     state: started
   with_items: "{{ networks }}"
 
+- name: Checkmk cardano agent
+  copy:
+    src: mk_cardano
+    dest: /usr/lib/check_mk_agent/plugins
+    mode: 0755
+
 - name: Install libsodium
   package:
     name:
