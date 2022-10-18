@@ -39,15 +39,15 @@
   become: True
   roles:
     - {
+        role: postgresql,
+        tags: ["postgres"],
+        postgres_tls_method: "self-signed",
+      }
+    - {
         role: cardano,
         tags: ["cardano"],
         dbs: ["mainnet"],
         networks: [{ desc: "Mainnet", name: "mainnet", port: "3001" }],
         # postgres_host: "db.arsmagna.xyz",
         cardano_db_pwd: "{{ lookup( 'password', 'pass/pgsql_cardano.pwd' ) }}",
-      }
-    - {
-        role: postgresql,
-        tags: ["postgres"],
-        postgres_tls_method: "self-signed",
       }

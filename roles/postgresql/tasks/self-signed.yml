@@ -1,0 +1,29 @@
+---
+- name: define private certificate path
+  set_fact: tls_cert_file="/var/lib/postgres/data/fullchain.pem"
+- name: define private key path
+  set_fact: tls_cert_key_file="/var/lib/postgres/data/privkey.pem"
+- name: "[selfsigned TLS] - create self-signed SSL cert"
+  command: >
+    openssl req -new -nodes -x509
+    -subj "/C=US/ST=Oregon/L=Portland/O=IT/CN=darktitan"
+    -days 365
+    -keyout {{ tls_cert_key_file }}
+    -out {{ tls_cert_file }}
+    -extensions v3_ca
+  args:
+    creates: "{{ tls_cert_key_file }}"
+
+- name: "[selfsigned TLS] - check TLS certificate permissions"
+  file:
+    path: "{{ tls_cert_file }}"
+    mode: 0640
+    owner: postgres
+    group: postgres
+
+- name: "[selfsigned TLS] - check TLS key permissions"
+  file:
+    path: "{{ tls_cert_key_file }}"
+    mode: 0600
+    owner: postgres
+    group: postgres
