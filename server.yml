@@ -18,22 +18,6 @@
   roles:
     - { role: bitcoin, tags: ["bitcoin"] }
 
-- hosts: cardano
-  user: orchest
-  become: True
-  roles:
-    - {
-        role: postgresql,
-        tags: ["postgres"],
-        postgres_tls_method: "letsencrypt",
-      }
-    - {
-        role: cardano,
-        tags: ["cardano"],
-        dbs: ["preview"],
-        networks: [{ desc: "preview", name: "preview", port: "3002" }],
-      }
-
 - hosts: nina
   user: orchest
   become: True
@@ -46,8 +30,12 @@
     - {
         role: cardano,
         tags: ["cardano"],
-        dbs: ["mainnet"],
-        networks: [{ desc: "Mainnet", name: "mainnet", port: "3001" }],
+        dbs: ["mainnet", "preview"],
+        networks:
+          [
+            { desc: "Mainnet", name: "mainnet", port: "3001" },
+            { desc: "preview", name: "preview", port: "3002" },
+          ],
         # postgres_host: "db.arsmagna.xyz",
         cardano_db_pwd: "{{ lookup( 'password', 'pass/pgsql_cardano.pwd' ) }}",
       }

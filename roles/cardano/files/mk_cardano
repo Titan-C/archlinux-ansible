@@ -3,3 +3,5 @@
 echo '<<<cardano_node:sep(0)>>>'
 curl -s -H 'Accept: application/json' "http://127.0.0.1:12788/" 2>/dev/null
 echo
+curl -s -H 'Accept: application/json' "http://127.0.0.1:12789/" 2>/dev/null
+echo
