@@ -366,8 +366,8 @@ max_wal_senders = 0		# max number of walsender processes
 #enable_sort = on
 #enable_incremental_sort = on
 #enable_tidscan = on
-#enable_partitionwise_join = off
-#enable_partitionwise_aggregate = off
+enable_partitionwise_join = on
+enable_partitionwise_aggregate = on
 #enable_parallel_hash = on
 #enable_partition_pruning = on
 
@@ -605,7 +605,7 @@ log_timezone = 'Europe/Berlin'
 					# their durations, > 0 logs only
 					# actions running at least this number
 					# of milliseconds.
-autovacuum_max_workers = 10		# max number of autovacuum subprocesses
+autovacuum_max_workers = 4		# max number of autovacuum subprocesses
 					# (change requires restart)
 autovacuum_naptime = 10		# time between autovacuum runs
 #autovacuum_vacuum_threshold = 50	# min number of row updates before

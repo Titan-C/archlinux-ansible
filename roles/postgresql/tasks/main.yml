@@ -64,9 +64,15 @@
     state: started
     enabled: yes
 
-- name: Set firewall rules for PostgreSQL
-  ufw: rule=allow port=5432 src=161.97.138.76
-  tags: ufw
+# - name: Set firewall rules for PostgreSQL
+#   ufw: rule=allow port=5432 src=161.97.138.76
+#   tags: ufw
+
+# Recomendations
+#https://github.com/jfcoz/postgresqltuner
+- name: Memory overcommit
+  sysctl: name=vm.overcommit_memory value=2
+  tags: postgresql
 
 - name: Checkmk plugins. PostgreSQL
   get_url:
