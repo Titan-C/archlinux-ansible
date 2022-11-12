@@ -38,3 +38,22 @@
         tags: ["cardano"],
         networks: [{ desc: "Mainnet", name: "mainnet", port: "3001" }],
       }
+
+    - {
+        role: bitcoin,
+        tags: ["bitcoin"],
+        networks:
+          [
+            { name: "bitcoin", datadir: "/mnt/disk/bitcoind/", extra_args: "" },
+            {
+              name: "testnet",
+              datadir: "/mnt/disk/bitcoind/",
+              extra_args: "-testnet",
+            },
+            {
+              name: "regtest",
+              datadir: "/mnt/disk/bitcoind/",
+              extra_args: "-regtest",
+            },
+          ],
+      }

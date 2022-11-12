@@ -16,7 +16,19 @@
   user: orchest
   become: True
   roles:
-    - { role: bitcoin, tags: ["bitcoin"] }
+    - {
+        role: bitcoin,
+        tags: ["bitcoin"],
+        networks:
+          [
+            { name: "bitcoin", datadir: "/var/lib/bitcoind/", extra_args: "" },
+            {
+              name: "regtest",
+              datadir: "/var/lib/bitcoind/",
+              extra_args: "-regtest",
+            },
+          ],
+      }
 
 - hosts: nina
   user: orchest
