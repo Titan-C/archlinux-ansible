@@ -93,9 +93,10 @@
     src: cardano-node.service.j2
     dest: /usr/lib/systemd/system/cardano-node-{{ item.name }}.service
   with_items: "{{ networks }}"
+  register: cardano_networks
   notify:
     - reload systemd daemon
-    - restart {{ item.name }}
+    - restart cardano node
 
 - name: Enable cardano networks
   service:
@@ -212,9 +213,10 @@
     src: cardano-db-sync.service.j2
     dest: /usr/lib/systemd/system/cardano-db-sync-{{ item.name }}.service
   with_items: "{{ networks }}"
+  register: cardano_db_sync
   notify:
     - reload systemd daemon
-    - restart db-sync {{ item.name }}
+    - restart cardano db-sync
   tags: sync
 
 - name: Cardano DB sync service enable

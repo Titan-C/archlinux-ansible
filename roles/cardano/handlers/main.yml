@@ -1,24 +1,12 @@
 ---
-- name: reload systemd daemon
-  systemd:
-    daemon_reload: yes
-
-- name: restart preview
+- name: restart cardano node
+  loop: "{{ cardano_networks.results | selectattr('changed', 'equalto', true) | map(attribute='item') | map(attribute='name') | list }}"
   service:
-    name: cardano-node-preview
+    name: cardano-node-{{ item }}.service
     state: restarted
 
-- name: restart db-sync preview
+- name: restart cardano db-sync
+  loop: "{{ cardano_db_sync.results | selectattr('changed', 'equalto', true) | map(attribute='item') | map(attribute='name') | list }}"
   service:
-    name: cardano-db-sync-preview
-    state: restarted
-
-- name: restart mainnet
-  service:
-    name: cardano-node-mainnet
-    state: restarted
-
-- name: restart db-sync mainnet
-  service:
-    name: cardano-db-sync-mainnet
+    name: cardano-db-sync-{{ item }}.service
     state: restarted
