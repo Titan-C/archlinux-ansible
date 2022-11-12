@@ -1,5 +1,8 @@
 ---
 # Defines handlers applicable across all machines in the infrastructure.
 
-- name: "restart bitcoind {{ name }}"
-  service: name=bitcoind-{{ name }}.service state=restarted
+- name: restart bitcoind
+  loop: "{{ bitcoin_networks.results | selectattr('changed', 'equalto', true) | map(attribute='item') | map(attribute='name') | list }}"
+  service:
+    name: bitcoind-{{ item }}.service
+    state: restarted

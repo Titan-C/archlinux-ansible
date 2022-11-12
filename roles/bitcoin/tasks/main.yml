@@ -25,9 +25,10 @@
   template:
     src: bitcoind.service.j2
     dest: /usr/lib/systemd/system/bitcoind-{{ item.name }}.service
+  register: bitcoin_networks
   notify:
     - reload systemd daemon
-    - "restart bitcoind {{ item.name }}"
+    - restart bitcoind
   with_items: "{{ networks }}"
 
 - name: Enable Bitcoin networks
@@ -36,6 +37,7 @@
     enabled: yes
     state: started
   with_items: "{{ networks }}"
+  when: false
 
 # Add or modify nofile soft limit
 - pam_limits:
