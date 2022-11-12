@@ -1,5 +1,5 @@
 ---
 # Defines handlers applicable across all machines in the infrastructure.
 
-- name: restart bitcoind
-  service: name=bitcoind.service state=restarted
+- name: "restart bitcoind {{ name }}"
+  service: name=bitcoind-{{ name }}.service state=restarted

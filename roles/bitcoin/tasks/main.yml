@@ -12,17 +12,30 @@
     mode: 0710
     owner: bitcoin
     group: bitcoin
-    path: '{{ item }}'
+    path: "{{ item }}"
   loop:
-      - /var/lib/bitcoind
-      - /etc/bitcoin
+    - /var/lib/bitcoind
+    - /etc/bitcoin
 
 - name: Push Bitcoin daemon configuration file
   template: src=bitcoin.conf.j2 dest=/etc/bitcoin/bitcoin.conf
   notify: restart bitcoind
 
-- name: Enable and start Bitcoin
-  service: name=bitcoind.service enabled=yes state=started
+- name: Bitcoin network service
+  template:
+    src: bitcoind.service.j2
+    dest: /usr/lib/systemd/system/bitcoind-{{ item.name }}.service
+  notify:
+    - reload systemd daemon
+    - "restart bitcoind {{ item.name }}"
+  with_items: "{{ networks }}"
+
+- name: Enable Bitcoin networks
+  service:
+    name: "bitcoind-{{ item.name }}.service"
+    enabled: yes
+    state: started
+  with_items: "{{ networks }}"
 
 # Add or modify nofile soft limit
 - pam_limits:

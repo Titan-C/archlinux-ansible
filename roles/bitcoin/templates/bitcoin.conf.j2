@@ -172,6 +172,11 @@ rpcauth=crazy:2cc94b3d35c9da3f2bedf6b3f361d27c$7e565973edf153009da8e45e68316be6d
 
 # Options only for testnet
 [test]
+rpcworkqueue=100
+zmqpubrawblock=tcp://127.0.0.1:12005
+zmqpubrawtx=tcp://127.0.0.1:12006
+blockfilterindex=1
+peerblockfilters=1
 
 # Options only for regtest
 [regtest]
