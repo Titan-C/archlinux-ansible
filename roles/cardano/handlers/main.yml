@@ -1,4 +1,8 @@
 ---
+- name: reload systemd daemon
+  systemd:
+    daemon_reload: yes
+
 - name: restart cardano node
   loop: "{{ cardano_networks.results | selectattr('changed', 'equalto', true) | map(attribute='item') | map(attribute='name') | list }}"
   service:

@@ -77,7 +77,9 @@
     src: "{{ item[0].name }}/{{ item[1] }}.json"
     dest: "/var/lib/{{ cardano_user }}-node/config/{{ item[0].name }}/{{ item[1] }}.json"
     mode: 0644
-  notify: restart {{ item[0].name }}
+  register: cardano_networks
+  notify:
+    - restart cardano node
   with_nested:
     - "{{ networks }}"
     - [
