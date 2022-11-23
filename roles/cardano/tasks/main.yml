@@ -108,7 +108,7 @@
 - name: Checkmk cardano agent
   copy:
     src: mk_cardano
-    dest: /usr/lib/check_mk_agent/plugins
+    dest: /usr/lib/check_mk_agent/plugins/60
     mode: 0755
 
 - name: Install libsodium

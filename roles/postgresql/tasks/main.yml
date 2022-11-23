@@ -77,6 +77,6 @@
 - name: Checkmk plugins. PostgreSQL
   get_url:
     url: https://git.oscarnajera.com/ingrid/check_mk/agents/plugins/mk_postgres.py
-    dest: /usr/lib/check_mk_agent/plugins
-    checksum: sha256:94c8b4da292f76d59420b4d2bceef5538de705fbfe70f8b1a5689a61b573b0d4
+    dest: /usr/lib/check_mk_agent/plugins/60
+    checksum: sha256:fc644ba5ac28bdd650d2dfe74e9e155d692d4a64f18864eb4119d733fabaff6a
     mode: 0755
