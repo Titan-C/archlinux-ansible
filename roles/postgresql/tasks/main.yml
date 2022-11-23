@@ -71,7 +71,10 @@
 # Recomendations
 #https://github.com/jfcoz/postgresqltuner
 - name: Memory overcommit
-  sysctl: name=vm.overcommit_memory value=2
+  sysctl:
+    name: vm.overcommit_memory
+    value: 2
+    sysctl_file: /etc/sysctl.d/99-sysctl.conf
   tags: postgresql
 
 - name: Checkmk plugins. PostgreSQL
