@@ -11,6 +11,12 @@ def discover_cardano_node(section):
 
 def check_cardano_node(item, section):
     network = 0 if item == "mainnet" else 1
+    if len(section) < network:
+        yield Result(
+            state=State.UNKNOWN,
+            summary="Service is probably down and no information is available",
+        )
+        return
     metrics = json.loads(section[network][0])["cardano"]["node"]["metrics"]
     mem_used = metrics["Mem"]["resident"]["int"]["val"]
     mem_live = metrics["RTS"]["gcLiveBytes"]["int"]["val"]
@@ -22,9 +28,13 @@ def check_cardano_node(item, section):
     chain_density = (
         float(metrics.get("density", {"real": {"val": 0}})["real"]["val"]) * 100
     )
-    yield Metric("chain_density", chain_density, levels=(6, 7), boundaries=(0, 100))
-    # print(metrics)
-    yield Result(state=State.OK, summary="YOUN")
+    yield from check_levels(
+        chain_density,
+        metric_name="chain_density",
+        label="Chain density",
+        levels_lower=(4.5, 4),
+        render_func=render.percent,
+    )
 
 
 register.check_plugin(
