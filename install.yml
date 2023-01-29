@@ -44,16 +44,29 @@
         tags: ["bitcoin"],
         networks:
           [
-            { name: "bitcoin", datadir: "/mnt/disk/bitcoind/", extra_args: "" },
+            {
+              name: "bitcoin",
+              datadir: "/mnt/disk/bitcoind/",
+              extra_args: "",
+              btc_rpc: 8332,
+              electrs_rpc: 50002,
+              electrs_prom: 24225,
+            },
             {
               name: "testnet",
               datadir: "/mnt/disk/bitcoind/",
               extra_args: "-testnet",
+              btc_rpc: 18332,
+              electrs_rpc: 50003,
+              electrs_prom: 24226,
             },
             {
               name: "regtest",
               datadir: "/mnt/disk/bitcoind/",
               extra_args: "-regtest",
+              btc_rpc: 18443,
+              electrs_rpc: 50004,
+              electrs_prom: 24227,
             },
           ],
       }

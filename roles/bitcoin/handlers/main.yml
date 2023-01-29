@@ -6,3 +6,9 @@
   service:
     name: bitcoind-{{ item }}.service
     state: restarted
+
+- name: restart electrs
+  loop: "{{ electrs_networks.results | selectattr('changed', 'equalto', true) | map(attribute='item') | map(attribute='name') | list }}"
+  service:
+    name: electrs-{{ item }}.service
+    state: restarted

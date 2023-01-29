@@ -1,0 +1,20 @@
+# -*- mode: conf-unix; -*-
+{{ ansible_managed | comment }}
+[Unit]
+Description=Electrs {{ item.name }}
+After=bitcoind-{{ item.name }}.service
+Requires=bitcoind-{{ item.name }}.service
+
+[Service]
+WorkingDirectory={{ item.datadir}}electrs/{{ item.name }}
+ExecStart=/usr/bin/electrs --conf electrs-conf.toml
+User=bitcoin
+Group=bitcoin
+Type=simple
+KillMode=process
+TimeoutSec=60
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
