@@ -1,7 +1,7 @@
 ---
 - name: Download cardano-node
   get_url:
-    url: "https://hydra.iohk.io/build/{{ node_build }}/download/1/cardano-node-{{ node_version }}-linux.tar.gz"
+    url: "https://update-cardano-mainnet.iohk.io/cardano-node-releases/cardano-node-{{ node_version }}-linux.tar.gz"
     dest: "{{ ansible_env.HOME }}/cardano-node-{{ node_version }}-linux.tar.gz"
     timeout: 300
     checksum: "{{ node_build_checksum }}"
@@ -123,7 +123,7 @@
 
 - name: Download cardano-db-sync
   get_url:
-    url: "https://hydra.iohk.io/build/{{ db_sync_build }}/download/1/cardano-db-sync-{{ db_sync_version }}-linux.tar.gz"
+    url: "https://update-cardano-mainnet.iohk.io/cardano-db-sync/cardano-db-sync-{{ db_sync_version }}-linux.tar.gz"
     dest: "{{ ansible_env.HOME }}/cardano-db-sync-{{ db_sync_version }}-linux.tar.gz"
     timeout: 300
     checksum: "{{ db_sync_build_checksum }}"

@@ -1,7 +1,6 @@
 ---
 - hosts:
     - backup
-    - cardano
     - nina
   user: orchest
   become: True
