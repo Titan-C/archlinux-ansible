@@ -16,26 +16,28 @@
     - { role: sound, tags: ["sound"] }
     - { role: bluetooth, tags: ["bluetooth"], when: "bluetooth is defined" }
 
-    # User stuff maybe better as dotfiles
-    - { role: office, tags: ["office"] }
-    - { role: browsers, tags: ["browsers"] }
-    - { role: dotfiles, tags: ["dotfiles"] }
-
     # User work stuff
     #- { role: c_cpp, tags: ["c_cpp"] }
     #- { role: numerical, tags: ["numerical"] }
     - { role: languages, tags: ["languages"] }
     - { role: servers, tags: ["servers"] }
     # - { role: arduino, tags: ["arduino"] }
+    - { role: monitoring, tags: ["monitoring"] }
     - {
         role: postgresql,
         tags: ["postgres"],
-        dbs: ["mainnet", "testnet"],
         postgres_tls_method: "self-signed",
       }
+
+    # User stuff maybe better as dotfiles
+    - { role: office, tags: ["office"] }
+    - { role: browsers, tags: ["browsers"] }
+    - { role: dotfiles, tags: ["dotfiles"] }
+
     - {
         role: cardano,
         tags: ["cardano"],
+        dbs: ["mainnet", "testnet"],
         networks: [{ desc: "Mainnet", name: "mainnet", port: "3001" }],
       }
 

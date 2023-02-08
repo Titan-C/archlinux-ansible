@@ -12,11 +12,11 @@
 
 - name: fail2ban
   pacman: name=fail2ban state=present
-  when: inventory_hostname in groups['backup']
+  when: inventory_hostname not in groups['laptop']
 
 - name: Ensure fail2ban is started
   service: name=fail2ban.service state=started
-  when: inventory_hostname in groups['backup']
+  when: inventory_hostname not in groups['laptop']
 
 - name: Copy fail2ban configuration into place
   template:
@@ -24,7 +24,7 @@
     dest: /etc/fail2ban/jail.local
     mode: u=rw,g=r,o=r
   notify: restart fail2ban
-  when: inventory_hostname in groups['backup']
+  when: inventory_hostname not in groups['laptop']
 
 - name: Install wget
   pacman: name=wget state=present

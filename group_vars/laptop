@@ -1,29 +1,33 @@
+# -*- mode: yaml; -*-
 user:
-    name: titan
-    uid: 1000
-    group: users
-    shell: /usr/bin/bash
+  name: titan
+  uid: 1000
+  group: users
+  shell: /usr/bin/bash
 
 editors:
-    - neovim
-    - emacs
-    - the_silver_searcher
-    - ripgrep
-    - fd
+  - neovim
+  - emacs-nativecomp
+  - the_silver_searcher
+  - ripgrep
+  - fd
 
 dotfiles:
-    url: git@github.com:Titan-C/helpful_scripts.git
-    destination: dev/helpful_scripts
+  url: git@github.com:Titan-C/helpful_scripts.git
+  destination: dev/helpful_scripts
 
 bluetooth:
-    disable: False
+  disable: False
 
 backup:
   local:
     pass: borgbackup
     vault: /scratch/Backups/code_dev
-    dirs: '~/dev ~/.mail/ ~/Dropbox/ ~/nextcloud/ /scratch/oscar/MEGA/'
+    dirs: "~/dev ~/.mail/ ~/Dropbox/ ~/nextcloud/ /scratch/oscar/MEGA/"
   remote:
     pass: alina/borgbackup
     vault: /scratch/Backups/smal
     dirs: "/decrypted /var/www /root /home /etc/letsencrypt"
+
+postgresql:
+  enable: True

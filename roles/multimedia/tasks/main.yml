@@ -34,7 +34,6 @@
     state: present
     name:
       - digikam
-      - kipi-plugins
       - enblend-enfuse # for image stacking
       - hugin # panorama stitcher
   tags:

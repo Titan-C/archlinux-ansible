@@ -30,9 +30,6 @@
 - name: Enable lightdm
   service: name=lightdm.service enabled=yes
 
-- name: Install compton
-  pacman: name=compton state=present
-
 - name: Install RedShift and dependencies
   pacman:
     state: present

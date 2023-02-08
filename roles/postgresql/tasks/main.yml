@@ -17,22 +17,10 @@
     state: directory
     mode: 0700
 
-- name: Check if PostgreSQL database is initialized.
-  stat:
-    path: "{{ postgresql_data_dir }}/PG_VERSION"
-  register: pgdata_dir_version
-
-- import_tasks: letsencrypt.yml
-  when: postgres_tls_method == "letsencrypt"
-  tags:
-    - letsencrypt
-
-- import_tasks: self-signed.yml
-  when: postgres_tls_method == "self-signed"
-
 - name: Ensure PostgreSQL database is initialized.
-  command: "initdb --locale=en_US.UTF-8 -E UTF8 -D {{ postgresql_data_dir }}"
-  when: not pgdata_dir_version.stat.exists
+  command: "initdb --locale=en_US.UTF-8 --encoding=UTF8 -D {{ postgresql_data_dir }}"
+  args:
+    creates: "{{ postgresql_data_dir }}/PG_VERSION"
   become: true
   become_user: "{{ postgresql_user }}"
   # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
@@ -58,6 +46,14 @@
   notify: restart postgresql
   when: postgresql_hba_entries | length > 0
 
+- import_tasks: letsencrypt.yml
+  when: postgres_tls_method == "letsencrypt"
+  tags:
+    - letsencrypt
+
+- import_tasks: self-signed.yml
+  when: postgres_tls_method == "self-signed"
+
 - name: Ensure PostgreSQL is started and enabled on boot.
   service:
     name: postgresql.service
@@ -81,5 +77,5 @@
   get_url:
     url: https://git.oscarnajera.com/ingrid/check_mk/agents/plugins/mk_postgres.py
     dest: /usr/lib/check_mk_agent/plugins/60
-    checksum: sha256:fc644ba5ac28bdd650d2dfe74e9e155d692d4a64f18864eb4119d733fabaff6a
+    checksum: sha256:0758cf7ac4fbee4438f9f095ce6c2ace226f4df48437a165c192d10cf4144d7c
     mode: 0755

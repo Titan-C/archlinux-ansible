@@ -26,3 +26,8 @@
     depth: 1
   become: yes
   become_user: "{{ user.name }}"
+
+- name: Create the PostgreSQL user
+  postgresql_user: name={{ user.name }} role_attr_flags=CREATEDB,NOSUPERUSER
+  become_user: "{{ postgresql_user }}"
+  when: postgresql is defined and postgresql.enable is defined and postgresql.enable == True
