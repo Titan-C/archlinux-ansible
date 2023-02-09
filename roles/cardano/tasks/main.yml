@@ -160,15 +160,10 @@
   tags: sync
 
 - name: Upload cardano-db-sync schemas
-  copy:
-    src: "{{ item }}"
-    dest: /var/lib/{{ cardano_user }}-node/schema
-    mode: a+r
-    owner: "{{ cardano_user }}"
-    group: "{{ cardano_user }}"
-    directory_mode: yes
-  with_fileglob:
-    - /home/titan/dev/cardano/cardano-db-sync/schema/*
+  ansible.posix.synchronize:
+    src: /home/titan/dev/cardano/cardano-db-sync/schema/
+    dest: /var/lib/{{ cardano_user }}-node/schema/
+    delete: true
   tags: sync
 
 - name: Create db-pg-pass file
