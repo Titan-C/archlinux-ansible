@@ -20,7 +20,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/usr/bin/bitcoind -daemonwait \
+ExecStart=/usr/bin/bitcoind -printtoconsole \
                             -pid=/run/bitcoind/{{ item.name }}.pid \
                             -conf=/etc/bitcoin/bitcoin.conf \
                             -datadir={{ item.datadir }} {{ item.extra_args }}
@@ -32,7 +32,7 @@ ExecStartPre=/bin/chgrp bitcoin /etc/bitcoin
 # Process management
 ####################
 
-Type=forking
+Type=simple
 PIDFile=/run/bitcoind/{{ item.name }}.pid
 Restart=on-failure
 TimeoutStartSec=infinity
