@@ -1,5 +1,8 @@
 ---
 # Defines handlers applicable across all machines in the infrastructure.
+- name: reload systemd daemon
+  systemd:
+    daemon_reload: yes
 
 - name: restart bitcoind
   loop: "{{ bitcoin_networks.results | selectattr('changed', 'equalto', true) | map(attribute='item') | map(attribute='name') | list }}"

@@ -15,7 +15,7 @@
   when: inventory_hostname not in groups['laptop']
 
 - name: Ensure fail2ban is started
-  service: name=fail2ban.service state=started
+  service: name=fail2ban.service state=started enabled=yes
   when: inventory_hostname not in groups['laptop']
 
 - name: Copy fail2ban configuration into place

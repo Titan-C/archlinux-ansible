@@ -1,7 +1,6 @@
 ---
 - hosts:
     - backup
-    - nina
   user: orchest
   become: True
   roles:
@@ -18,35 +17,32 @@
     - {
         role: bitcoin,
         tags: ["bitcoin"],
+        pruned: 1500,
         networks:
           [
-            { name: "bitcoin", datadir: "/var/lib/bitcoind/", extra_args: "" },
+            {
+              name: "bitcoin",
+              datadir: "/var/lib/bitcoind/",
+              extra_args: "",
+              btc_rpc: 8332,
+              electrs_rpc: 50002,
+              electrs_prom: 24225,
+            },
+            {
+              name: "testnet",
+              datadir: "/var/lib/bitcoind/",
+              extra_args: "-testnet",
+              btc_rpc: 18332,
+              electrs_rpc: 50003,
+              electrs_prom: 24226,
+            },
             {
               name: "regtest",
               datadir: "/var/lib/bitcoind/",
               extra_args: "-regtest",
+              btc_rpc: 18443,
+              electrs_rpc: 50004,
+              electrs_prom: 24227,
             },
           ],
-      }
-
-- hosts: nina
-  user: orchest
-  become: True
-  roles:
-    - {
-        role: postgresql,
-        tags: ["postgres"],
-        postgres_tls_method: "self-signed",
-      }
-    - {
-        role: cardano,
-        tags: ["cardano"],
-        dbs: ["mainnet", "preview"],
-        networks:
-          [
-            { desc: "Mainnet", name: "mainnet", port: "3001" },
-            { desc: "preview", name: "preview", port: "3002" },
-          ],
-        # postgres_host: "db.arsmagna.xyz",
-        cardano_db_pwd: "{{ lookup( 'password', 'pass/pgsql_cardano.pwd' ) }}",
       }

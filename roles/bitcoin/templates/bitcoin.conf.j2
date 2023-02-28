@@ -9,11 +9,13 @@
 # addnode, connect, port, bind, rpcport, rpcbind or wallet, you will also
 # want to read "[Sections]" further down.
 
+{% if pruned == 0 %}
 txindex=1
+{% endif %}
 # Run on the test network instead of the real bitcoin network.
 #testnet=1
 # Initial block download optimizations
-#dbcache=2000
+dbcache=2500
 #blocksonly=1
 
 # Run a regression test network
@@ -151,6 +153,9 @@ rpcauth=crazy:2cc94b3d35c9da3f2bedf6b3f361d27c$7e565973edf153009da8e45e68316be6d
 # 1 = allows manual pruning via RPC.
 # >=550 = target to stay under in MiB.
 #prune=550
+{% if pruned > 0 %}
+prune={{ pruned }}
+{% endif %}
 
 # User interface options
 
@@ -173,6 +178,7 @@ disablewallet=1
 
 # Options only for testnet
 [test]
+disablewallet=1
 rpcworkqueue=100
 zmqpubrawblock=tcp://127.0.0.1:12005
 zmqpubrawtx=tcp://127.0.0.1:12006
