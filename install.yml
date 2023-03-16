@@ -6,7 +6,6 @@
     - { role: base, tags: ["base"] }
     - { role: cron, tags: ["cron"] }
     - { role: networking, tags: ["networking"] }
-    - { role: ssh, tags: ["ssh"] }
     - { role: x, tags: ["x"] }
     - { role: secrets, tags: ["secrets"] }
     - { role: development, tags: ["development"] }

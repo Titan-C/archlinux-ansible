@@ -19,5 +19,5 @@
   pacman: name=mosh state=present
 
 - name: Set firewall rule for mosh
-  ufw: rule=allow port=60000:61000 proto=udp
+  ufw: rule=limit port=60000:61000 proto=udp
   tags: ufw

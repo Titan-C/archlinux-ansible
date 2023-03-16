@@ -28,3 +28,7 @@
 
 - name: Install wget
   pacman: name=wget state=present
+
+- name: Setup ssh
+  import_tasks: ssh.yml
+  tags: ssh
