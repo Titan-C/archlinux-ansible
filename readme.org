@@ -65,18 +65,13 @@ passwd
 pacman -S python
 #+END_SRC
 ** Wifi
-https://blog.stigok.com/2017/06/05/setting-up-wireless-network-on-a-raspberry-pi-3-with-arch-linux-arm-armv7h.html
-put in file /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
-#+BEGIN_SRC bash
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel
-network={
-     ssid="sshowfosho"
-     scan_ssid=1
-     key_mgmt=WPA-PSK
-     psk="yoforeal"
-}
-#+END_SRC
-enable the service
+https://blog.desdelinux.net/en/raspberry-pi-conectar-red-wifi/
+This is an interactive guide
+#+begin_src bash
+pacman -Sy dialog wpa_supplicant linux-firmware
+wifi-menu -o # Then follow the dialog
+netctl enable "created profile"
+#+end_src
 ** SSH
 #+BEGIN_SRC bash
 mkdir ./ssh
