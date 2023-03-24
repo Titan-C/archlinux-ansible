@@ -1,0 +1,19 @@
+# -*- mode: conf-unix; -*-
+{{ ansible_managed | comment }}
+
+[Application Options]
+rpclisten=localhost
+restlisten=localhost:8480
+listen=localhost
+debuglevel=info
+
+[bitcoin]
+bitcoin.active=1
+bitcoin.testnet=1
+bitcoin.node=bitcoind
+
+[bitcoind]
+bitcoind.rpcuser=crazy
+bitcoind.rpcpass={{ lookup( 'password', 'pass/electrs.auth' ).split(":")[1] }}
+bitcoind.zmqpubrawblock=tcp://127.0.0.1:12005
+bitcoind.zmqpubrawtx=tcp://127.0.0.1:12006

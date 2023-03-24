@@ -39,6 +39,9 @@
   with_items: "{{ networks }}"
   when: false
 
+- name: Set firewall rule bitcoin testnet
+  ufw: rule=allow port=18333
+
 # Add or modify nofile soft limit
 - pam_limits:
     domain: bitcoin
@@ -81,3 +84,7 @@
     - reload systemd daemon
   with_items: "{{ networks }}"
   when: pruned == 0
+
+- name: Setup LND
+  import_tasks: lnd.yml
+  tags: lnd

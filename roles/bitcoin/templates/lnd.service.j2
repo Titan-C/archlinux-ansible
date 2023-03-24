@@ -1,0 +1,20 @@
+# -*- mode: conf-unix; -*-
+{{ ansible_managed | comment }}
+[Unit]
+Description=LND
+Requires=bitcoind-testnet.service
+After=bitcoind-testnet.service
+
+[Service]
+WorkingDirectory=/var/lib/lnd
+ExecStart=/usr/bin/lnd --lnddir=/var/lib/lnd
+User=lnd
+Group=lnd
+Type=simple
+KillMode=process
+TimeoutSec=180
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target

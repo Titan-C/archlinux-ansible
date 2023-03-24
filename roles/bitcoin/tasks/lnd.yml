@@ -1,0 +1,41 @@
+---
+- name: Install LND
+  copy:
+    src: "/home/titan/.local/bin/{{ item }}"
+    dest: /usr/bin/
+    mode: 755
+  with_items:
+    - lnd
+    - lncli
+
+- name: Create lnd group
+  group:
+    name: lnd
+    state: present
+    system: yes
+
+- name: Create lnd user
+  user:
+    name: lnd
+    group: lnd
+    system: yes
+    state: present
+    home: /var/lib/lnd
+
+- name: LND configuration file
+  template:
+    src: lnd.conf.j2
+    dest: /var/lib/lnd/lnd.conf
+    owner: lnd
+    group: lnd
+  # notify: restart lnd
+
+- name: LND network service
+  template:
+    src: lnd.service.j2
+    dest: /usr/lib/systemd/system/lnd-testnet.service
+  notify:
+    - reload systemd daemon
+
+- name: Set firewall rules for testnet LND
+  ufw: rule=limit port=9735 src=0.0.0.0/0
