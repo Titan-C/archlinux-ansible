@@ -6,15 +6,20 @@ After=bitcoind-{{ item.name }}.service
 Requires=bitcoind-{{ item.name }}.service
 
 [Service]
+Type=simple
 WorkingDirectory={{ item.datadir}}electrs/{{ item.name }}
 ExecStart=/usr/bin/electrs --conf electrs-conf.toml
 User=bitcoin
 Group=bitcoin
-Type=simple
-KillMode=process
 TimeoutSec=60
-Restart=always
+Restart=on-failure
 RestartSec=600
+
+# Hardening measures
+PrivateTmp=true
+ProtectSystem=full
+NoNewPrivileges=true
+MemoryDenyWriteExecute=true
 
 [Install]
 WantedBy=multi-user.target
