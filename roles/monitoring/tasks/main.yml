@@ -9,6 +9,9 @@
 - name: Configure logwatch
   template: src=logwatch.conf.j2 dest=/etc/logwatch/conf/logwatch.conf
 
+- name: Configure weekly logwatch cronjob
+  cron: special_time=weekly job=/usr/bin/logwatch name=logwatch
+
 - name: Checkmk-agent
   get_url:
     url: http://git.oscarnajera.com/ingrid/check_mk/agents/check_mk_agent.linux
