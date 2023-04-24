@@ -22,14 +22,6 @@
     state: present
     home: /var/lib/lnd
 
-- name: LND configuration file
-  template:
-    src: lnd.conf.j2
-    dest: /var/lib/lnd/lnd.conf
-    owner: lnd
-    group: lnd
-  # notify: restart lnd
-
 - name: LND network service
   template:
     src: lnd.service.j2
@@ -37,5 +29,24 @@
   notify:
     - reload systemd daemon
 
+- name: LND configuration file
+  template:
+    src: lnd.conf.j2
+    dest: /var/lib/lnd/lnd.conf
+    owner: lnd
+    group: lnd
+  notify: restart lnd
+
+- name: LND testnet enable and start
+  service:
+    name: lnd-testnet.service
+    enabled: yes
+    state: started
+
 - name: Set firewall rules for testnet LND
   ufw: rule=limit port=9735 src=0.0.0.0/0
+
+- name: Install tor
+  pacman:
+    state: present
+    name: tor

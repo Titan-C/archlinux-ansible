@@ -15,3 +15,8 @@
   service:
     name: electrs-{{ item }}.service
     state: restarted
+
+- name: restart lnd
+  service:
+    name: lnd-testnet.service
+    state: restarted
