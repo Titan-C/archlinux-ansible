@@ -18,6 +18,13 @@
     state: stopped
   when: not bluetooth.disable
 
+- name: Block the bluetooth service
+  service:
+    name: "rfkill-block@bluetooth.service"
+    enabled: yes
+    state: started
+  when: bluetooth.disable
+
 - name: Enable and start the bluetooth service
   service:
     name: bluetooth.service
@@ -30,11 +37,4 @@
     name: bluetooth.service
     enabled: no
     state: stopped
-  when: bluetooth.disable
-
-- name: Block the bluetooth service
-  service:
-    name: "rfkill-block@bluetooth.service"
-    enabled: yes
-    state: started
   when: bluetooth.disable

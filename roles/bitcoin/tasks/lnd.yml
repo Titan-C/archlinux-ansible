@@ -25,7 +25,7 @@
 - name: LND network service
   template:
     src: lnd.service.j2
-    dest: /usr/lib/systemd/system/lnd-testnet.service
+    dest: /etc/systemd/system/lnd-testnet.service
   notify:
     - reload systemd daemon
 
@@ -42,9 +42,11 @@
     name: lnd-testnet.service
     enabled: yes
     state: started
+  when: inventory_hostname not in groups['laptop']
 
 - name: Set firewall rules for testnet LND
   ufw: rule=limit port=9735 src=0.0.0.0/0
+  when: inventory_hostname not in groups['laptop']
 
 - name: Install tor
   pacman:
