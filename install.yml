@@ -33,16 +33,12 @@
     - { role: browsers, tags: ["browsers"] }
     - { role: dotfiles, tags: ["dotfiles"] }
 
-    - {
-        role: cardano,
-        tags: ["cardano"],
-        dbs: ["mainnet", "testnet"],
-        networks: [{ desc: "Mainnet", name: "mainnet", port: "3001" }],
-      }
+    - { role: cardano, tags: ["cardano"], dbs: ["mainnet", "preview"] }
 
     - {
         role: bitcoin,
         tags: ["bitcoin"],
+        pruned: 0,
         networks:
           [
             {

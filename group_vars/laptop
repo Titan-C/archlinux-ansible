@@ -17,7 +17,7 @@ dotfiles:
   destination: dev/helpful_scripts
 
 bluetooth:
-  disable: False
+  disable: True
 
 backup:
   local:

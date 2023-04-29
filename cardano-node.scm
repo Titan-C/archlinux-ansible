@@ -14,13 +14,13 @@
 (define-public cardano-wallet
   (package
    (name "cardano-wallet")
-   (version "2022-12-14")
+   (version "2023-04-14")
    (source (origin
             (method url-fetch)
-            (uri "https://github.com/input-output-hk/cardano-wallet/releases/download/v2022-12-14/cardano-wallet-v2022-12-14-linux64.tar.gz")
+            (uri "https://github.com/input-output-hk/cardano-wallet/releases/download/v2023-04-14/cardano-wallet-v2023-04-14-linux64.tar.gz")
             (sha256
              (base32
-              "1hahkskd33s939s7ziw88g4xi9lbd9d191vdyik8l06vwydlhhik"))))
+              "11njhfd8bvs3hvmfj9p16qng4m4w4ngi95d9zhfvpq8pld4wzn16"))))
    (build-system copy-build-system)
    (arguments
     '(#:install-plan

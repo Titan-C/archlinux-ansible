@@ -19,8 +19,8 @@
 
 - name: Clone Doom-emacs
   git:
-    repo: https://github.com/hlissner/doom-emacs.git
-    dest: /home/{{ user.name }}/dev/doom-emacs
+    repo: https://github.com/doomemacs/doomemacs
+    dest: /home/{{ user.name }}/dev/doomemacs
     accept_hostkey: yes
     update: no
     depth: 1

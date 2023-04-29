@@ -16,3 +16,10 @@ postgresql_hba_entries:
       address: "127.0.0.1/32",
       auth_method: "scram-sha-256",
     }
+  - {
+      type: hostssl,
+      database: all,
+      user: all,
+      address: "::1/128",
+      auth_method: "scram-sha-256",
+    }

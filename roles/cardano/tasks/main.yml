@@ -219,6 +219,6 @@
 - name: Cardano DB sync service enable
   service:
     name: "cardano-db-sync-{{ item.name }}.service"
-    enabled: yes
-    state: started
+    enabled: no
+    state: stopped
   with_items: "{{ networks }}"
