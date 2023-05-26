@@ -87,6 +87,7 @@
         "byron-genesis",
         "shelley-genesis",
         "alonzo-genesis",
+        "conway-genesis",
         "topology",
       ]
 
