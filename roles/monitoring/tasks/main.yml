@@ -16,7 +16,7 @@
   get_url:
     url: http://git.oscarnajera.com/ingrid/check_mk/agents/check_mk_agent.linux
     dest: /usr/bin/check_mk_agent
-    checksum: sha256:89bb33dc3820eb8c60e81f744a1fc323f9b19f432006d3f24e3364810248da97
+    checksum: sha256:72bc9d545053d963f61e63a8f4acb9e36b630e2b31f90ffc637b9347d7d289b0
     mode: 0755
 
 - name: Create Checkmk dirs
