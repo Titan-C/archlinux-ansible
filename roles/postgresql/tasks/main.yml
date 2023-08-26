@@ -72,10 +72,3 @@
     value: 2
     sysctl_file: /etc/sysctl.d/99-sysctl.conf
   tags: postgresql
-
-- name: Checkmk plugins. PostgreSQL
-  get_url:
-    url: https://git.oscarnajera.com/ingrid/check_mk/agents/plugins/mk_postgres.py
-    dest: /usr/lib/check_mk_agent/plugins/60
-    checksum: sha256:0758cf7ac4fbee4438f9f095ce6c2ace226f4df48437a165c192d10cf4144d7c
-    mode: 0755

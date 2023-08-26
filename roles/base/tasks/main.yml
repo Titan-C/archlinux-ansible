@@ -10,6 +10,9 @@
     update_cache: yes
     upgrade: yes
 
+- name: Populate service facts
+  ansible.builtin.service_facts:
+
 - name: Install shells
   include_tasks: shell.yml
 

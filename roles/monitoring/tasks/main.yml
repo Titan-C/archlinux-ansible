@@ -19,6 +19,15 @@
     checksum: sha256:72bc9d545053d963f61e63a8f4acb9e36b630e2b31f90ffc637b9347d7d289b0
     mode: 0755
 
+- name: PostgreSQL Checkmk agent plugin
+  get_url:
+    url: https://git.oscarnajera.com/ingrid/check_mk/agents/plugins/mk_postgres.py
+    dest: /usr/lib/check_mk_agent/plugins/60
+    checksum: sha256:c856c5205e19168dd55b8660d23c149ef3fa54d107deb555b99b1e73bf7f8b6a
+    mode: 0755
+  tags: postgres
+  when: "'postgresql.service' in services"
+
 - name: Create Checkmk dirs
   file:
     path: "{{ item }}"
