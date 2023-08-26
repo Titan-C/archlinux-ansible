@@ -1,7 +1,8 @@
 # -*- mode: conf-unix; -*-
 {{ ansible_managed | comment }}
-#	$OpenBSD: sshd_config,v 1.104 2021/07/02 05:11:21 dtucker Exp $
-# Following recomendations from https://infosec.mozilla.org/guidelines/openssh
+#
+# Include drop-in configurations
+Include /etc/ssh/sshd_config.d/*.conf
 
 # This is the sshd server system-wide configuration file.  See
 # sshd_config(5) for more information.
@@ -24,6 +25,7 @@ HostKey /etc/ssh/ssh_host_rsa_key
 # Ciphers and keying
 #RekeyLimit default none
 
+# Following recomendations from https://infosec.mozilla.org/guidelines/openssh
 KexAlgorithms curve25519-sha256@libssh.org,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group-exchange-sha256
 
 Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
@@ -39,7 +41,6 @@ LogLevel VERBOSE
 
 LoginGraceTime 1m
 PermitRootLogin forced-commands-only
-#PermitRootLogin prohibit-password
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
@@ -48,7 +49,7 @@ PubkeyAuthentication yes
 
 # The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2
 # but this is overridden so installations will only check .ssh/authorized_keys
-AuthorizedKeysFile	.ssh/authorized_keys
+AuthorizedKeysFile  .ssh/authorized_keys
 
 #AuthorizedPrincipalsFile none
 
@@ -68,7 +69,7 @@ PasswordAuthentication no
 #PermitEmptyPasswords no
 
 # Change to no to disable s/key passwords
-KbdInteractiveAuthentication no
+#KbdInteractiveAuthentication yes
 
 # Kerberos options
 #KerberosAuthentication no
@@ -82,14 +83,14 @@ KbdInteractiveAuthentication no
 
 # Set this to 'yes' to enable PAM authentication, account processing,
 # and session processing. If this is enabled, PAM authentication will
-# be allowed through the ChallengeResponseAuthentication and
+# be allowed through the KbdInteractiveAuthentication and
 # PasswordAuthentication.  Depending on your PAM configuration,
-# PAM authentication via ChallengeResponseAuthentication may bypass
-# the setting of "PermitRootLogin without-password".
+# PAM authentication via KbdInteractiveAuthentication may bypass
+# the setting of "PermitRootLogin prohibit-password".
 # If you just want the PAM account and session checks to run without
 # PAM authentication, then enable this but set PasswordAuthentication
-# and ChallengeResponseAuthentication to 'no'.
-UsePAM yes
+# and KbdInteractiveAuthentication to 'no'.
+#UsePAM no
 
 #AllowAgentForwarding yes
 #AllowTcpForwarding yes
@@ -98,7 +99,7 @@ UsePAM yes
 #X11DisplayOffset 10
 #X11UseLocalhost yes
 #PermitTTY yes
-PrintMotd no # pam does that
+#PrintMotd yes
 #PrintLastLog yes
 #TCPKeepAlive yes
 #PermitUserEnvironment no
