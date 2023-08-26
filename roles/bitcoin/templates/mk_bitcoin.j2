@@ -1,5 +1,10 @@
 #!/usr/bin/env sh
 
+echo '<<<bitcoind:sep(0)>>>'
+{% for network in networks %}
+bitcoin-cli -datadir={{ network.datadir }} {{ network.extra_args }} getblockchaininfo 2>/dev/null | jq -c
+{% endfor%}
+
 echo '<<<lnd:sep(0)>>>'
 curl --silent --insecure \
     -H 'Accept: application/json' \
