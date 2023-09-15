@@ -1,0 +1,23 @@
+---
+- hosts:
+    - lenovo
+  user: oscar
+  become: True
+  gather_facts: True
+  roles:
+    - { role: base, tags: ["base"] }
+    - { role: networking, tags: ["networking"] }
+    - { role: x, tags: ["x"] }
+    - { role: secrets, tags: ["secrets"] }
+    - { role: development, tags: ["development"] }
+    - { role: spell, tags: ["spell"] }
+    - { role: multimedia, tags: ["multimedia"] }
+    - { role: sound, tags: ["sound"] }
+
+    # # User work stuff
+    - role: languages
+      tags: ["languages"]
+      activate:
+        - python
+    - { role: servers, tags: ["servers"] }
+    - { role: office, tags: ["office"] }

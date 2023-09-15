@@ -15,9 +15,16 @@
     - { role: bluetooth, tags: ["bluetooth"], when: "bluetooth is defined" }
 
     # User work stuff
-    #- { role: c_cpp, tags: ["c_cpp"] }
     #- { role: numerical, tags: ["numerical"] }
-    - { role: languages, tags: ["languages"] }
+    - role: languages
+      tags: ["languages"]
+      activate:
+        - python
+        - javascript
+        - clojure
+        - guile
+        - lisp
+
     - { role: servers, tags: ["servers"] }
     # - { role: arduino, tags: ["arduino"] }
     - { role: monitoring, tags: ["monitoring"] }

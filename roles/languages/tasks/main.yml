@@ -8,6 +8,7 @@
       - eslint
       - prettier
   tags: javascript
+  when: "'javascript' in activate"
 
 - name: Install python
   pacman:
@@ -19,6 +20,7 @@
       - python-virtualenvwrapper
       - python-ipdb
   tags: python
+  when: "'python' in activate"
 
 - name: Intall python dev
   pacman:
@@ -31,18 +33,16 @@
       - python-pipenv
       - python-nose
   tags: python
+  when: "'python' in activate"
 
 - name: Install clojure
   pacman:
     state: present
     name:
       - clojure
+      - leiningen
   tags: clojure
-
-- name: Install leiningen
-  pacman:
-    name: leiningen
-  tags: clojure
+  when: "'clojure' in activate"
 
 - name: Install GCC
   pacman: name=gcc state=present
@@ -62,8 +62,8 @@
   pacman:
     name:
       - guile
-      - nyacc
   tags: guile
+  when: "'guile' in activate"
 
 - name: Install shell formatter
   pacman:
@@ -76,3 +76,4 @@
     state: present
     name: sbcl
   tags: common-lisp
+  when: "'lisp' in activate"
