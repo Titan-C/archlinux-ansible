@@ -1,0 +1,7 @@
+editors:
+  - vim
+  - neovim
+  - emacs-nativecomp
+  - the_silver_searcher
+  - ripgrep
+  - fd

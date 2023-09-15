@@ -1,0 +1,6 @@
+# -*- mode: yaml; -*-
+user:
+  name: oscar
+  uid: 1000
+  # group: users
+  shell: /usr/bin/bash

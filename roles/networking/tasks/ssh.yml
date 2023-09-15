@@ -2,6 +2,10 @@
 - name: Install OpenSSH
   pacman: name=openssh state=present
 
+- name: Set firewall rules for SSH
+  ufw: rule=limit app=SSH
+  tags: ufw
+
 - name: Push OpenSSH daemon configuration file
   template:
     src: sshd_config.j2

@@ -32,3 +32,8 @@
 - name: Setup ssh
   import_tasks: ssh.yml
   tags: ssh
+
+- name: Install bittorrent
+  pacman: name=transmission-qt state=present
+  tags:
+    - bittorrent

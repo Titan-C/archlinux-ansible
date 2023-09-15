@@ -10,7 +10,6 @@
     - { role: secrets, tags: ["secrets"] }
     - { role: development, tags: ["development"] }
     - { role: spell, tags: ["spell"] }
-    - { role: fonts, tags: ["fonts"] }
     - { role: multimedia, tags: ["multimedia"] }
     - { role: sound, tags: ["sound"] }
     - { role: bluetooth, tags: ["bluetooth"], when: "bluetooth is defined" }
@@ -30,7 +29,6 @@
 
     # User stuff maybe better as dotfiles
     - { role: office, tags: ["office"] }
-    - { role: browsers, tags: ["browsers"] }
     - { role: dotfiles, tags: ["dotfiles"] }
 
     - { role: cardano, tags: ["cardano"], dbs: ["mainnet", "preview"] }

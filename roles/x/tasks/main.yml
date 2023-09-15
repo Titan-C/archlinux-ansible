@@ -27,7 +27,7 @@
       - xorg-xbacklight
   when: '"GenuineIntel" in ansible_processor'
 
-- name: Install intel video hardware drivers
+- name: Install AMD video hardware drivers
   pacman:
     state: present
     name:

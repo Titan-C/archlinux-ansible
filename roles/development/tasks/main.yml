@@ -27,3 +27,6 @@
   pacman:
     state: present
     name: "{{ editors }}"
+
+- name: Install fonts
+  include_tasks: fonts.yml

@@ -47,5 +47,16 @@
       - nextcloud-client
       - gnome-keyring
 
-- name: Install keybase
-  pacman: name=keybase-gui state=present
+- name: Install Instant messaging
+  pacman:
+    state: present
+    name:
+      - keybase-gui
+      - signal-desktop
+
+- name: Install Browsers
+  pacman:
+    state: present
+    name:
+      - firefox
+      - chromium

@@ -16,3 +16,9 @@
     name:
       - otf-font-awesome
       - ttf-font-awesome
+
+- name: Nerd fonts
+  pacman:
+    state: present
+    name:
+      - nerd-fonts

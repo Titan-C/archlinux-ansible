@@ -39,15 +39,6 @@
       - python-xdg
       - redshift
 
-- name: Configure geoclue to allow redshift
-  blockinfile:
-    path: /etc/geoclue/geoclue.conf
-    block: |
-      [redshift]
-      allowed=true
-      system=false
-      users=
-
 - name: Install filesystem packages
   pacman:
     state: present

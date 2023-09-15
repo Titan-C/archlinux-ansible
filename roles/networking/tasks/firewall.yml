@@ -7,14 +7,10 @@
   ufw: policy=deny
   tags: ufw
 
-- name: Set firewall rules for SSH
-  ufw: rule=limit app=SSH
-  tags: ufw
-
 - name: Enable UFW with logging
   ufw:
     state: enabled
-    logging: 'on'
+    logging: "on"
   tags: ufw
 
 - name: Enable UFW service
