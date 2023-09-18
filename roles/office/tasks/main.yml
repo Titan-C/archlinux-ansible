@@ -32,7 +32,11 @@
   pacman: name=libreoffice-fresh state=present
 
 - name: Install latex
-  pacman: name=texlive-most state=present
+  pacman:
+    state: present
+    name:
+      - texlive-latexrecommended
+      - texlive-fontsrecommended
 
 - name: Install hugo
   pacman: name=hugo state=present
