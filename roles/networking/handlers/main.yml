@@ -6,3 +6,6 @@
 
 - name: restart sshd
   service: name=sshd.service state=restarted
+
+- name: reload sshd
+  service: name=sshd.service state=reloaded

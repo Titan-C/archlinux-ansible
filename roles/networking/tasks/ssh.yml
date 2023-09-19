@@ -13,6 +13,12 @@
     mode: u=rw,g=r,o=r
   notify: restart sshd
 
+- name: SSHD options
+  copy:
+    dest: /etc/ssh/sshd_config.d/50-forwards.conf
+    content: "StreamLocalBindUnlink yes"
+  notify: reload sshd
+
 - name: Enable and start OpenSSH
   service: name=sshd.service enabled=yes state=started
 
