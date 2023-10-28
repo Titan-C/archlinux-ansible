@@ -22,7 +22,7 @@ def discover_bitcoind(section):
 
 
 def check_bitcoind(item, section):
-    data = next(filter(lambda net: net["chain"].upper() == item, section))
+    data = next(filter(lambda net: net["chain"].upper() == item, section), None)
 
     yield Result(state=State.OK if data else State.CRIT, summary="Daemon Running")
 
