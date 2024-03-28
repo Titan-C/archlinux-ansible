@@ -64,3 +64,13 @@
     name:
       - firefox
       - chromium
+
+- name: Install email
+  pacman:
+    state: present
+    name:
+      - isync
+      # - notmuch
+      # - bogofilter
+      - khard
+      - vdirsyncer
