@@ -13,6 +13,8 @@ ignoreip  = 127.0.0.1 {{ ansible_default_ipv4.address }}
 # "bantime" is the number of seconds that a host is banned.
 bantime   = 86400
 
+backend   = systemd
+
 #
 # ACTIONS
 #
@@ -36,8 +38,8 @@ enabled   = true
 maxretry  = 3
 port      = ssh
 banaction = ufw
-backend   = systemd
 
 [pam-generic]
 enabled   = true
 banaction = iptables-allports
+journalmatch = SYSLOG_FACILITY=10
