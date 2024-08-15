@@ -685,6 +685,7 @@ rpcauth=crazy:2cc94b3d35c9da3f2bedf6b3f361d27c$7e565973edf153009da8e45e68316be6d
 # Options for mainnet
 [main]
 disablewallet=1
+dbcache=2048
 
 # Options for testnet
 [test]
@@ -700,3 +701,8 @@ peerblockfilters=1
 
 # Options for regtest
 [regtest]
+zmqpubrawblock=tcp://127.0.0.1:15005
+zmqpubrawtx=tcp://127.0.0.1:15005
+zmqpubhashtx=tcp://127.0.0.1:15005
+zmqpubhashblock=tcp://127.0.0.1:15005
+debug=1
