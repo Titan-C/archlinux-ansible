@@ -11,7 +11,6 @@
       tags: ssh
   roles:
     - { role: base, tags: ["base"] }
-    - { role: cron, tags: ["cron"] }
     - { role: networking, tags: ["networking"] }
     - { role: backup, tags: ["backup"], repo_path: "/media/Backup/" }
     - {

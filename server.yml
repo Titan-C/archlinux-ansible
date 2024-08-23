@@ -5,7 +5,6 @@
   become: True
   roles:
     - { role: base, tags: ["base"] }
-    - { role: cron, tags: ["cron"] }
     - { role: networking, tags: ["networking", "ssh"] }
     - { role: backup, tags: ["backup"], repo_path: "/home/borgbackup/repos/" }
     - { role: monitoring, tags: ["monitoring"] }
