@@ -8,3 +8,4 @@ localhost ansible_connection=local
 192.168.178.128
 [backup]
 173.212.211.30
+45.10.154.226

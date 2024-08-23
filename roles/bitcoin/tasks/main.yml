@@ -5,6 +5,7 @@
     name:
       - bitcoin-daemon
       - bitcoin-cli
+      - jq # for cmk agent
 
 - name: Directory permissions
   file:

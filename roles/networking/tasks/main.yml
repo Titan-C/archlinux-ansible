@@ -3,6 +3,10 @@
   include_tasks: networkmanager.yml
   when: inventory_hostname in groups['laptop']
 
+- name: Setup ssh
+  import_tasks: ssh.yml
+  tags: ssh
+
 - name: Setup firewall
   include_tasks: firewall.yml
   tags: ufw
@@ -28,10 +32,6 @@
 
 - name: Install wget
   pacman: name=wget state=present
-
-- name: Setup ssh
-  import_tasks: ssh.yml
-  tags: ssh
 
 - name: Install bittorrent
   pacman: name=transmission-qt state=present
