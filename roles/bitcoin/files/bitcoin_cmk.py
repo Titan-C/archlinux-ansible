@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from .agent_based_api.v1 import *
 import json
 
@@ -27,6 +25,9 @@ def check_bitcoind(item, section):
     yield Result(state=State.OK if data else State.CRIT, summary="Daemon Running")
 
     if data:
+        yield Result(
+            state=State.OK, summary=f"Verification {data["verificationprogress"]}"
+        )
         for metric in [
             "blocks",
             "headers",
