@@ -20,7 +20,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/usr/bin/bitcoind -printtoconsole \
+ExecStart=/usr/local/bin/bitcoind -printtoconsole \
                             -pid=/run/bitcoind/{{ item.name }}.pid \
                             -conf=/etc/bitcoin/bitcoin.conf \
                             -datadir={{ item.datadir }} {{ item.extra_args }}
@@ -80,5 +80,7 @@ PrivateDevices=true
 # Deny the creation of writable and executable memory mappings.
 MemoryDenyWriteExecute=true
 
+# Restrict ABIs to help ensure MemoryDenyWriteExecute is enforced
+SystemCallArchitectures=native
 [Install]
 WantedBy=multi-user.target
