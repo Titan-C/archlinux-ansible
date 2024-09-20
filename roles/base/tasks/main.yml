@@ -25,9 +25,10 @@
       - python
       - rsync
       - tree
-      - mlocate
+      - plocate
       - htop
       - ntp
+      - less
   tags:
     - packages
 
