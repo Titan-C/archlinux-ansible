@@ -19,8 +19,7 @@
         pruned: 5500,
         lnd_port: 9735,
         lnd_rest_port: 8480,
-        networks:
-          [
+        networks: [
             {
               name: "bitcoin",
               datadir: "/var/lib/bitcoind/",
@@ -32,7 +31,8 @@
             {
               name: "testnet",
               datadir: "/var/lib/bitcoind/",
-              extra_args: "-testnet",
+              #https://github.com/lightningnetwork/lnd/issues/9053#issuecomment-2408658986
+              extra_args: "-testnet -deprecatedrpc=warnings",
               btc_rpc: 18332,
               electrs_rpc: 50003,
               electrs_prom: 24226,
