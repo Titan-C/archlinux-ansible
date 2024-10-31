@@ -49,6 +49,7 @@
 
 - name: Enable ntpd
   service: name=ntpd.service enabled=yes state=started
+  when: inventory_hostname in groups['laptop']
 
 - name: Power saving setup
   include_tasks: power.yml
@@ -56,4 +57,4 @@
 
 - name: Hardware
   include_tasks: hardware.yml
-  when: inventory_hostname in groups['laptop']
+  when: inventory_hostname not in groups['laptop']

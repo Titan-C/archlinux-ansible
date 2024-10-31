@@ -4,6 +4,16 @@
   systemd:
     daemon_reload: yes
 
+- name: restart systemd users
+  service:
+    name: systemd-sysusers.service
+    state: restarted
+
+- name: restart systemd tmpfiles
+  service:
+    name: systemd-tmpfiles-setup.service
+    state: restarted
+
 - name: restart bitcoind
   loop: "{{ bitcoin_networks.results | selectattr('changed', 'equalto', true) | map(attribute='item') | map(attribute='name') | list }}"
   service:

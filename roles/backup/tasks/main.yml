@@ -9,6 +9,14 @@
 - name: Create backup user
   user: name=borgbackup state=present
 
+- name: Backup disk on raspberry
+  ansible.posix.mount:
+    path: "{{ repo_path }}"
+    src: UUID=3b38fbc9-2b23-4803-a3e6-6bf467bbca39
+    fstype: reiserfs
+    state: present
+  when: inventory_hostname in groups['raspberry']
+
 - name: Set authorized key taken from file
   authorized_key:
     user: borgbackup

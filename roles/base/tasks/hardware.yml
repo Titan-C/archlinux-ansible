@@ -9,6 +9,7 @@
 
 - name: Enable fstrim for ssd
   service: name=fstrim.timer enabled=yes
+  when: inventory_hostname in groups['laptop']
 
 - name: Install smartmontools
   pacman: name=smartmontools state=present
@@ -19,4 +20,4 @@
 
 - name: Install AMD microcode
   pacman: name=amd-ucode state=present
-  when: '"AuthenticAMD" in ansible_processor'
+  when: '"AuthenticAMD" in ansible_processor and inventory_hostname in groups["laptop"]'
