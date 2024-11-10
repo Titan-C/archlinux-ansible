@@ -22,7 +22,9 @@ def discover_bitcoind(section):
 def check_bitcoind(item, section):
     data = next(filter(lambda net: net["chain"].upper() == item, section), None)
 
-    yield Result(state=State.OK if data else State.CRIT, summary="Daemon Running")
+    state = State.OK if data else State.CRIT
+    active = "not" if State.CRIT else ""
+    yield Result(state=state, summary=f"Daemon {active} Running")
 
     if data:
         yield Result(
@@ -52,6 +54,10 @@ def discover_lnd(section):
 
 
 def check_lnd(item, section):
+    if len(section) == 0:
+        yield Result(state=State.CRIT, summary="Daemon Not running")
+        return
+
     result = json.loads(section[0][0])
     if result.get("code") == 2:
         yield Result(state=State.CRIT, summary=result.get("message", "Something wrong"))
