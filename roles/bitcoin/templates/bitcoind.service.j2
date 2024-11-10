@@ -20,7 +20,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/usr/local/bin/bitcoind -printtoconsole \
+ExecStart=/usr{{ '/local' if manual else '' }}/bin/bitcoind -printtoconsole \
                             -pid=/run/bitcoind/{{ item.name }}.pid \
                             -conf=/etc/bitcoin/bitcoin.conf \
                             -datadir={{ item.datadir }} {{ item.extra_args }}

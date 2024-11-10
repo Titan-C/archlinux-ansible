@@ -17,6 +17,7 @@
         role: bitcoin,
         tags: ["bitcoin"],
         pruned: 5500,
+        manual: false,
         lnd_port: 9735,
         lnd_rest_port: 8480,
         networks: [

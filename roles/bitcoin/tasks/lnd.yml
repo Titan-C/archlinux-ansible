@@ -53,6 +53,13 @@
     state: present
     name: tor
 
+- name: Install cmk agent dependencies
+  pacman:
+    state: present
+    name:
+      - jq # for cmk agent
+      - vim # for cmk agent xxd
+
 - name: Checkmk lnd agent
   template:
     src: mk_bitcoin.j2

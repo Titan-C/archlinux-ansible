@@ -1,11 +1,14 @@
 ---
-- name: Install bitcoin core
+- name: Install bitcoin core Arch
   pacman:
     state: present
     name:
       - bitcoin-daemon
-      - jq # for cmk agent
-      - vim # for cmk agent xxd
+  when: not manual
+
+- name: Install bitcoin core manually
+  import_tasks: btc-manual.yml
+  when: manual
 
 - name: set swapiness
   sysctl:
