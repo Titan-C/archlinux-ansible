@@ -1,0 +1,40 @@
+---
+- name: Download bitcoin core node
+  get_url:
+    url: "https://bitcoincore.org/bin/bitcoin-core-27.1/bitcoin-27.1-x86_64-linux-gnu.tar.gz"
+    dest: "{{ ansible_env.HOME }}/bitcoin-27.1-x86_64-linux-gnu.tar.gz"
+    timeout: 300
+    checksum: sha256:c9840607d230d65f6938b81deaec0b98fe9cb14c3a41a5b13b2c05d044a48422
+
+- name: Decompress Bitcoin binaries
+  unarchive:
+    src: "{{ ansible_env.HOME }}/bitcoin-27.1-x86_64-linux-gnu.tar.gz"
+    dest: "{{ ansible_env.HOME }}/"
+    creates: "{{ ansible_env.HOME }}/bitcoin-27.1/bin/bitcoin-cli"
+    remote_src: true
+
+- name: Copy Bitcoin binaries
+  copy:
+    src: "{{ ansible_env.HOME }}/bitcoin-27.1/{{ item }}"
+    dest: /usr/local/bin/
+    owner: root
+    group: root
+    mode: 0755
+    remote_src: yes
+  with_items:
+    - bin/bitcoin-cli
+    - bin/bitcoind
+
+- name: Bitcoin user
+  copy:
+    dest: /usr/lib/sysusers.d/bitcoin.conf
+    mode: "0644"
+    content: "u bitcoin - - /var/lib/bitcoind\n"
+
+- name: bitcoin dirs
+  copy:
+    dest: /usr/lib/tmpfiles.d/bitcoin.conf
+    mode: "0644"
+    content: |
+      d /var/lib/bitcoind 0710 bitcoin bitcoin - -
+      d /etc/bitcoin     0710 bitcoin bitcoin - -

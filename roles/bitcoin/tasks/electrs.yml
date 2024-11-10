@@ -1,0 +1,32 @@
+---
+- name: Install electrs
+  copy:
+    src: /home/titan/dev/bitcoin/electrs/target/release/electrs
+    dest: /usr/bin
+    mode: 755
+
+- name: Create electrs dirs
+  file:
+    path: "{{ item.datadir }}/electrs/{{ item.name }}"
+    owner: bitcoin
+    group: bitcoin
+    state: directory
+    mode: 0755
+  with_items: "{{ networks }}"
+
+- name: Push Electrs daemon configuration file
+  template: src=electrs-conf.toml.j2 dest={{ item.datadir }}electrs/{{ item.name }}/{{ item.name }}-conf.toml
+  register: electrs_networks
+  notify:
+    - reload systemd daemon
+    # - restart electrs
+  with_items: "{{ networks }}"
+
+- name: Electrs network service
+  template:
+    src: electrs.service.j2
+    dest: /etc/systemd/system/electrs-{{ item.name }}.service
+  register: elects_networks
+  notify:
+    - reload systemd daemon
+  with_items: "{{ networks }}"
