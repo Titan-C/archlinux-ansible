@@ -17,6 +17,13 @@
     state: present
   when: inventory_hostname in groups['raspberry']
 
+- name: Create repository dir
+  file:
+    path: "/home/borgbackup/repos"
+    state: directory
+    owner: borgbackup
+    group: borgbackup
+
 - name: Set authorized key taken from file
   authorized_key:
     user: borgbackup
