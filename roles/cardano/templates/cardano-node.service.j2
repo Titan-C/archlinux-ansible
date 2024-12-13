@@ -7,6 +7,9 @@ Requires=network.target
 
 [Service]
 Type=simple
+#Environment=LD_LIBRARY_PATH=/opt/local/lib:
+#Environment=PKG_CONFIG_PATH=/opt/local/lib/pkgconfig:
+ExecStartPre=/usr/bin/env
 ExecStart=cardano-node run \
     --database-path "/var/lib/{{ cardano_user }}-node/db-{{ item.name }}" \
     --socket-path "/run/{{ cardano_user }}-node-{{ item.name }}/socket" \

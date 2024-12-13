@@ -1,7 +1,7 @@
 ---
 - name: Download cardano-node
   get_url:
-    url: "https://update-cardano-mainnet.iohk.io/cardano-node-releases/cardano-node-{{ node_version }}-linux.tar.gz"
+    url: "https://github.com/IntersectMBO/cardano-node/releases/download/{{ node_version }}/cardano-node-{{ node_version }}-linux.tar.gz"
     dest: "{{ ansible_env.HOME }}/cardano-node-{{ node_version }}-linux.tar.gz"
     timeout: 300
     checksum: "{{ node_build_checksum }}"
@@ -15,12 +15,12 @@
   unarchive:
     src: "{{ ansible_env.HOME }}/cardano-node-{{ node_version }}-linux.tar.gz"
     dest: "{{ ansible_env.HOME }}/cardano-{{ node_version }}"
-    creates: "{{ ansible_env.HOME }}/cardano-{{ node_version }}/cardano-node"
+    creates: "{{ ansible_env.HOME }}/cardano-{{ node_version }}/bin/cardano-node"
     remote_src: yes
 
 - name: Copy cardano-node binaries
   copy:
-    src: "{{ ansible_env.HOME }}/cardano-{{ node_version }}/{{ item }}"
+    src: "{{ ansible_env.HOME }}/cardano-{{ node_version }}/bin/{{ item }}"
     dest: /usr/bin/
     owner: root
     group: root
@@ -104,8 +104,8 @@
 - name: Enable cardano networks
   service:
     name: "cardano-node-{{ item.name }}.service"
-    enabled: yes
-    state: started
+    enabled: no
+    state: stopped
   with_items: "{{ networks }}"
 
 - name: Checkmk cardano agent
