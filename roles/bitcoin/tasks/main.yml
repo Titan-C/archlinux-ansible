@@ -62,7 +62,7 @@
 - name: Setup Electrs
   import_tasks: electrs.yml
   tags: electrs
-  when: pruned == 0
+  # when: pruned == 0
 
 - name: Setup LND
   import_tasks: lnd.yml

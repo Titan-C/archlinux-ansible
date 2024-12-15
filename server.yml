@@ -1,6 +1,6 @@
 ---
 - hosts:
-    - backup
+    - nina
   user: orchest
   become: True
   roles:
@@ -9,7 +9,7 @@
     - { role: backup, tags: ["backup"], repo_path: "/home/borgbackup/repos/" }
     - { role: monitoring, tags: ["monitoring"] }
 
-- hosts: backup
+- hosts: nina
   user: orchest
   become: True
   roles:

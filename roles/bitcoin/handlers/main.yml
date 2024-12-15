@@ -1,8 +1,8 @@
 ---
 # Defines handlers applicable across all machines in the infrastructure.
 - name: reload systemd daemon
-  systemd:
-    daemon_reload: yes
+  systemd_service:
+    daemon_reload: true
 
 - name: restart systemd users
   service:

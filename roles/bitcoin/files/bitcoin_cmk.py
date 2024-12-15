@@ -37,7 +37,8 @@ def check_bitcoind(item, section):
             "pruneheight",
             "size_on_disk",
         ]:
-            yield Metric(metric, data[metric])
+            if val := data.get(metric):
+                yield Metric(metric, val)
 
 
 register.check_plugin(

@@ -3,7 +3,7 @@
   copy:
     src: /home/titan/dev/bitcoin/electrs/target/release/electrs
     dest: /usr/bin
-    mode: 755
+    mode: 0755
 
 - name: Create electrs dirs
   file:

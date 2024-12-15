@@ -36,6 +36,7 @@ graph_info["blocks_n_headers"] = {
         ("headers", "line"),
         ("pruneheight", "line"),
     ],
+    "optional_metrics": ["pruneheight"],
 }
 
 ## LND

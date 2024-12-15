@@ -120,9 +120,6 @@
 # automatically prune block files to stay under the specified
 # target size in MiB)
 #prune=<n>
-{% if pruned > 0 %}
-prune={{ pruned }}
-{% endif %}
 
 # If enabled, wipe chain state and block index, and rebuild them from
 # blk*.dat files on disk. Also wipe and rebuild other optional
@@ -154,9 +151,6 @@ prune={{ pruned }}
 
 # Maintain a full transaction index, used by the getrawtransaction rpc
 # call (default: 0)
-{% if pruned == 0 %}
-txindex=1
-{% endif %}
 
 # Print version and exit
 #version=1
@@ -689,6 +683,9 @@ dbcache=3048
 {% if pruned > 0 %}
 prune=35000
 {% endif %}
+{% if pruned == 0 %}
+txindex=1
+{% endif %}
 
 # Options for testnet
 [test]
@@ -699,6 +696,12 @@ zmqpubrawtx=tcp://127.0.0.1:12006
 blockfilterindex=1
 peerblockfilters=1
 dbcache=2048
+{% if pruned > 0 %}
+prune={{ pruned }}
+{% endif %}
+{% if pruned == 0 %}
+txindex=1
+{% endif %}
 
 # Options for signet
 [signet]
@@ -710,3 +713,4 @@ zmqpubrawtx=tcp://127.0.0.1:15005
 zmqpubhashtx=tcp://127.0.0.1:15005
 zmqpubhashblock=tcp://127.0.0.1:15005
 debug=1
+txindex=1
