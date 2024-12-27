@@ -19,7 +19,7 @@
 
 - name: Create repository dir
   file:
-    path: "/home/borgbackup/repos"
+    path: "{{ repo_path }}"
     state: directory
     owner: borgbackup
     group: borgbackup
