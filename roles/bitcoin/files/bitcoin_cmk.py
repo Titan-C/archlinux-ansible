@@ -23,7 +23,7 @@ def check_bitcoind(item, section):
     data = next(filter(lambda net: net["chain"].upper() == item, section), None)
 
     state = State.OK if data else State.CRIT
-    active = "not" if State.CRIT else ""
+    active = "not" if state == State.CRIT else ""
     yield Result(state=state, summary=f"Daemon {active} Running")
 
     if data:
