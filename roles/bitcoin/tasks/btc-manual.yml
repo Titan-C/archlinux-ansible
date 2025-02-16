@@ -36,5 +36,5 @@
     dest: /usr/lib/tmpfiles.d/bitcoin.conf
     mode: "0644"
     content: |
-      d /var/lib/bitcoind 0710 bitcoin bitcoin - -
-      d /etc/bitcoin     0710 bitcoin bitcoin - -
+      d {{ datadir }} 0770 bitcoin bitcoin - -
+      d /etc/bitcoin  0770 bitcoin bitcoin - -

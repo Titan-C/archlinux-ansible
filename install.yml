@@ -42,29 +42,32 @@
     - {
         role: bitcoin,
         tags: ["bitcoin"],
-        pruned: 0,
-        networks:
-          [
+        manual: false,
+        datadir: "/mnt/disk/bitcoind/",
+        blocksdir: "/mnt/barra1/btc_blocks/",
+        lnd_port: 9735,
+        lnd_rest_port: 8480,
+        networks: [
             {
               name: "bitcoin",
-              datadir: "/mnt/disk/bitcoind/",
               extra_args: "",
+              daemon_args: "",
               btc_rpc: 8332,
               electrs_rpc: 50002,
               electrs_prom: 24225,
             },
-            {
-              name: "testnet",
-              datadir: "/mnt/disk/bitcoind/",
-              extra_args: "-testnet",
-              btc_rpc: 18332,
-              electrs_rpc: 50003,
-              electrs_prom: 24226,
-            },
+            # {
+            #   name: "testnet",
+            #   extra_args: "-testnet",
+            #   daemon_args: " -deprecatedrpc=warnings",
+            #   btc_rpc: 18332,
+            #   electrs_rpc: 50003,
+            #   electrs_prom: 24226,
+            # },
             {
               name: "regtest",
-              datadir: "/mnt/disk/bitcoind/",
               extra_args: "-regtest",
+              daemon_args: "",
               btc_rpc: 18443,
               electrs_rpc: 50004,
               electrs_prom: 24227,

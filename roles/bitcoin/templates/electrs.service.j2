@@ -7,7 +7,7 @@ Requires=bitcoind-{{ item.name }}.service
 
 [Service]
 Type=simple
-WorkingDirectory={{ item.datadir}}electrs/{{ item.name }}
+WorkingDirectory={{ datadir}}electrs/{{ item.name }}
 ExecStart=/usr/bin/electrs --conf {{ item.name }}-conf.toml
 User=bitcoin
 Group=bitcoin

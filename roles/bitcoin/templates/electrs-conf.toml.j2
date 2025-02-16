@@ -21,7 +21,7 @@ daemon_rpc_addr = "127.0.0.1:{{ item.btc_rpc }}"
 # daemon_p2p_addr = "127.0.0.1:8333"
 
 # Directory where the index should be stored. It should have at least 70GB of free space.
-db_dir = "{{ item.datadir }}electrs/"
+db_dir = "{{ datadir }}electrs/"
 
 # bitcoin means mainnet. Don't set to anything else unless you're a developer.
 network = "{{ item.name }}"

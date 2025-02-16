@@ -18,12 +18,12 @@
 - name: Directory permissions
   file:
     state: directory
-    mode: 0710
+    mode: 0770
     owner: bitcoin
     group: bitcoin
     path: "{{ item }}"
   loop:
-    - /var/lib/bitcoind
+    - "{{ datadir }}"
     - /etc/bitcoin
 
 - name: Bitcoin network service
@@ -33,7 +33,7 @@
   register: bitcoin_networks
   notify:
     - reload systemd daemon
-    # - restart bitcoind
+    - restart bitcoind
   with_items: "{{ networks }}"
 
 - name: Push Bitcoin daemon configuration file
