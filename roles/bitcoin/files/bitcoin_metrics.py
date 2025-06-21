@@ -1,61 +1,59 @@
-from cmk.gui.i18n import _
+from cmk.graphing.v1 import Title
+from cmk.graphing.v1.graphs import Graph
+from cmk.graphing.v1.metrics import Color, DecimalNotation, Metric, Unit
 
-from cmk.gui.plugins.metrics import (
-    metric_info,
-    graph_info,
+metric_info_verificationprogress = Metric(
+    name="verificationprogress",
+    title=Title("Verification Progress"),
+    unit=Unit(DecimalNotation("%")),
+    color=Color.GREEN,
 )
 
-metric_info["verificationprogress"] = {
-    "title": _("Verification Progress"),
-    "unit": "",
-    "color": "16/a",
-}
+metric_info_blocks = Metric(
+    name="blocks",
+    title=Title("Blocks"),
+    unit=Unit(DecimalNotation("")),
+    color=Color.BLUE,
+)
 
-metric_info["blocks"] = {
-    "title": _("Blocks"),
-    "unit": "count",
-    "color": "26/a",
-}
+metric_info_headers = Metric(
+    name="headers",
+    title=Title("Headers"),
+    unit=Unit(DecimalNotation("")),
+    color=Color.LIGHT_GREEN,
+)
 
-metric_info["headers"] = {
-    "title": _("Headers"),
-    "unit": "count",
-    "color": "14/a",
-}
+metric_info_pruneheight = Metric(
+    name="pruneheight",
+    title=Title("Prune Height"),
+    unit=Unit(DecimalNotation("")),
+    color=Color.LIGHT_PURPLE,
+)
 
-metric_info["pruneheight"] = {
-    "title": _("Prune Height"),
-    "unit": "count",
-    "color": "24/a",
-}
+graph_blocks_n_headers = Graph(
+    name="blocks_n_headers",
+    title=Title("Blocks and Headers"),
+    simple_lines=["blocks", "header"],
+    compound_lines=["pruneheight"],
+    optional=["pruneheight"],
+)
 
-graph_info["blocks_n_headers"] = {
-    "title": _("Blocks and Headers"),
-    "metrics": [
-        ("blocks", "area"),
-        ("headers", "line"),
-        ("pruneheight", "line"),
-    ],
-    "optional_metrics": ["pruneheight"],
-}
+metric_info_num_active_channels = Metric(
+    name="num_active_channels",
+    title=Title("Active Channels"),
+    unit=Unit(DecimalNotation("")),
+    color=Color.DARK_YELLOW,
+)
 
-## LND
-metric_info["num_active_channels"] = {
-    "title": _("Active Channels"),
-    "unit": "count",
-    "color": "16/a",
-}
+metric_info_num_peers = Metric(
+    name="num_peers",
+    title=Title("Peers"),
+    unit=Unit(DecimalNotation("")),
+    color=Color.BROWN,
+)
 
-metric_info["num_peers"] = {
-    "title": _("Peers"),
-    "unit": "count",
-    "color": "26/a",
-}
-
-graph_info["channels_n_peers"] = {
-    "title": _("Active Channels and Peers"),
-    "metrics": [
-        ("num_active_channels", "line"),
-        ("num_peers", "line"),
-    ],
-}
+graph_channels_n_peers = Graph(
+    name="channels_n_peers",
+    title=Title("Active Channels and Peers"),
+    simple_lines=["num_active_channels", "num_peers"],
+)

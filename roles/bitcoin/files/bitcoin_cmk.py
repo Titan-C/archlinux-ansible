@@ -1,5 +1,16 @@
-from .agent_based_api.v1 import *
 import json
+
+from cmk.agent_based.v2 import (
+    AgentSection,
+    CheckPlugin,
+    CheckResult,
+    DiscoveryResult,
+    Metric,
+    Result,
+    Service,
+    State,
+    StringTable,
+)
 
 # BITCOIND
 ## <<<bitcoind:sep(0):cached(1693046953,60)>>>
@@ -7,19 +18,16 @@ import json
 ##
 
 
-def parse_bitcoind(string_table):
+def parse_bitcoind(string_table: StringTable):
     return [json.loads(line[0]) for line in string_table]
 
 
-register.agent_section(name="bitcoind", parse_function=parse_bitcoind)
-
-
-def discover_bitcoind(section):
+def discover_bitcoind(section) -> DiscoveryResult:
     for network in section:
         yield Service(item=network["chain"].upper())
 
 
-def check_bitcoind(item, section):
+def check_bitcoind(item, section) -> CheckResult:
     data = next(filter(lambda net: net["chain"].upper() == item, section), None)
 
     state = State.OK if data else State.CRIT
@@ -41,7 +49,8 @@ def check_bitcoind(item, section):
                 yield Metric(metric, val)
 
 
-register.check_plugin(
+agent_section_bitcoin = AgentSection(name="bitcoind", parse_function=parse_bitcoind)
+check_plugin_bitcoin = CheckPlugin(
     name="bitcoind",
     service_name="Bitcoind %s",
     discovery_function=discover_bitcoind,
@@ -54,7 +63,7 @@ def discover_lnd(section):
     yield Service(item="Testnet")
 
 
-def check_lnd(item, section):
+def check_lnd(item, section) -> CheckResult:
     if len(section) == 0:
         yield Result(state=State.CRIT, summary="Daemon Not running")
         return
@@ -77,7 +86,7 @@ def check_lnd(item, section):
     )
 
 
-register.check_plugin(
+check_plugin_lnd = CheckPlugin(
     name="lnd",
     service_name="LND %s",
     discovery_function=discover_lnd,
