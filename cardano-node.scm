@@ -14,7 +14,7 @@
 (define-public cardano-wallet
   (package
    (name "cardano-wallet")
-   (version "v2024-03-01")
+   (version "v2025-03-31")
    (source (origin
             (method url-fetch)
             (uri
@@ -23,7 +23,7 @@
               version "/cardano-wallet-" version "-linux64.tar.gz"))
             (sha256
              (base32
-              "0z17fg87z6mpavc71fwjhwrzmpi0ya54r4hqbfkz3pdvg0f045vk"))))
+              "1d5cracjigidh25c8ibhz7fshd2scad5kmwxmsk7yayr2g5z1cxr"))))
    (build-system copy-build-system)
    (arguments
     '(#:install-plan
