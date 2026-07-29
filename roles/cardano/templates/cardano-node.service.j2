@@ -10,13 +10,17 @@ Type=simple
 #Environment=LD_LIBRARY_PATH=/opt/local/lib:
 #Environment=PKG_CONFIG_PATH=/opt/local/lib/pkgconfig:
 ExecStartPre=/usr/bin/env
-ExecStart=cardano-node run \
+ExecStart=cardano-node run +RTS -N4 -A64m -RTS \
+    --config "/var/lib/{{ cardano_user }}-node/config/{{ item.name }}/config.json"  \
+    --topology "/var/lib/{{ cardano_user }}-node/config/{{ item.name }}/topology.json" \
     --database-path "/var/lib/{{ cardano_user }}-node/db-{{ item.name }}" \
     --socket-path "/run/{{ cardano_user }}-node-{{ item.name }}/socket" \
-    --port {{ item.port }} \
-    --config "/var/lib/{{ cardano_user }}-node/config/{{ item.name }}/config.json"  \
-    --topology "/var/lib/{{ cardano_user }}-node/config/{{ item.name }}/topology.json"
+    --port {{ item.port }}
+ExecReload=pkill -HUP cardano-node
 KillSignal=SIGINT
+RestartKillSignal=SIGINT
+TimeoutStopSec=300
+LimitNOFILE=131072
 Restart=always
 RestartSec=60
 TimeoutStopSec=600
@@ -31,7 +35,7 @@ Group={{ cardano_user }}
 
 # /run/{{ cardano_user }}
 RuntimeDirectory={{ cardano_user }}-node-{{ item.name }}
-RuntimeDirectoryMode=0710
+RuntimeDirectoryMode=0755
 
 # /var/lib/{{ cardano_user }}
 StateDirectory={{ cardano_user }}-node

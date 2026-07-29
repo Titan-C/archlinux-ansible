@@ -1,6 +1,6 @@
 cardano_user: cardano
-node_version: 10.5.1
-node_build_checksum: sha256:de8f1cc0f3aec0520040786c122b585354378143196013afa6560285d36f0420.
+node_version: 11.0.1
+node_build_checksum: sha256:40e88a543564251338c4888ef79fde51d2306c18b48ac308c9eab3220e3a13f0
 
 db_sync_version: 13.1.0.0
 db_sync_build_checksum: sha256:03e4014e85701762f5bcfa917edbee47a6f6513d800d262262caf5e1765c783f

@@ -1,26 +1,26 @@
 ---
 - name: Download cardano-node
   get_url:
-    url: "https://github.com/IntersectMBO/cardano-node/releases/download/{{ node_version }}/cardano-node-{{ node_version }}-linux.tar.gz"
-    dest: "{{ ansible_env.HOME }}/cardano-node-{{ node_version }}-linux.tar.gz"
+    url: "https://github.com/IntersectMBO/cardano-node/releases/download/{{ node_version }}/cardano-node-{{ node_version }}-linux-amd64.tar.gz"
+    dest: "{{ ansible_facts.user_dir }}/cardano-node-{{ node_version }}-linux.tar.gz"
     timeout: 300
     checksum: "{{ node_build_checksum }}"
 
 - name: Create directory to unpack
   file:
-    path: "{{ ansible_env.HOME }}/cardano-{{ node_version }}"
+    path: "{{ ansible_facts.user_dir }}/cardano-{{ node_version }}"
     state: directory
 
 - name: Decompress cardano-node source
   unarchive:
-    src: "{{ ansible_env.HOME }}/cardano-node-{{ node_version }}-linux.tar.gz"
-    dest: "{{ ansible_env.HOME }}/cardano-{{ node_version }}"
-    creates: "{{ ansible_env.HOME }}/cardano-{{ node_version }}/bin/cardano-node"
+    src: "{{ ansible_facts.user_dir }}/cardano-node-{{ node_version }}-linux.tar.gz"
+    dest: "{{ ansible_facts.user_dir }}/cardano-{{ node_version }}"
+    creates: "{{ ansible_facts.user_dir }}/cardano-{{ node_version }}/bin/cardano-node"
     remote_src: yes
 
 - name: Copy cardano-node binaries
   copy:
-    src: "{{ ansible_env.HOME }}/cardano-{{ node_version }}/bin/{{ item }}"
+    src: "{{ ansible_facts.user_dir }}/cardano-{{ node_version }}/bin/{{ item }}"
     dest: /usr/bin/
     owner: root
     group: root
@@ -89,12 +89,13 @@
         "alonzo-genesis",
         "conway-genesis",
         "topology",
+        "checkpoints",
       ]
 
 - name: Cardano network service
   template:
     src: cardano-node.service.j2
-    dest: /usr/lib/systemd/system/cardano-node-{{ item.name }}.service
+    dest: /etc/systemd/system/cardano-node-{{ item.name }}.service
   with_items: "{{ networks }}"
   register: cardano_networks
   notify:
@@ -125,25 +126,25 @@
 - name: Download cardano-db-sync
   get_url:
     url: "https://update-cardano-mainnet.iohk.io/cardano-db-sync/cardano-db-sync-{{ db_sync_version }}-linux.tar.gz"
-    dest: "{{ ansible_env.HOME }}/cardano-db-sync-{{ db_sync_version }}-linux.tar.gz"
+    dest: "{{ ansible_facts.user_dir }}/cardano-db-sync-{{ db_sync_version }}-linux.tar.gz"
     timeout: 300
     checksum: "{{ db_sync_build_checksum }}"
 
 - name: Create directory to unpack
   file:
-    path: "{{ ansible_env.HOME }}/cardano-db-sync-{{ db_sync_version }}"
+    path: "{{ ansible_facts.user_dir }}/cardano-db-sync-{{ db_sync_version }}"
     state: directory
 
 - name: Decompress cardano-db-sync source
   unarchive:
-    src: "{{ ansible_env.HOME }}/cardano-db-sync-{{ db_sync_version }}-linux.tar.gz"
-    dest: "{{ ansible_env.HOME }}/cardano-db-sync-{{ db_sync_version }}"
-    creates: "{{ ansible_env.HOME }}/cardano-db-sync-{{ db_sync_version }}/cardano-db-sync"
+    src: "{{ ansible_facts.user_dir }}/cardano-db-sync-{{ db_sync_version }}-linux.tar.gz"
+    dest: "{{ ansible_facts.user_dir }}/cardano-db-sync-{{ db_sync_version }}"
+    creates: "{{ ansible_facts.user_dir }}/cardano-db-sync-{{ db_sync_version }}/cardano-db-sync"
     remote_src: yes
 
 - name: Copy cardano-db_sync binaries
   copy:
-    src: "{{ ansible_env.HOME }}/cardano-db-sync-{{ db_sync_version }}/{{ item }}"
+    src: "{{ ansible_facts.user_dir }}/cardano-db-sync-{{ db_sync_version }}/{{ item }}"
     dest: /usr/bin/
     owner: root
     group: root
